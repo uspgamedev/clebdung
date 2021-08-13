@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Icone-Player.png-3b81f3fc83e2d4c260d15cf36e0d943c.stex"
+path="res://.import/Luz-Sprite.jpg-a66beea76bcccd7d9e65ec4fd401be3f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Fase 1/Icone-Player.png"
-dest_files=[ "res://.import/Icone-Player.png-3b81f3fc83e2d4c260d15cf36e0d943c.stex" ]
+source_file="res://Assets/Luz-Sprite.jpg"
+dest_files=[ "res://.import/Luz-Sprite.jpg-a66beea76bcccd7d9e65ec4fd401be3f.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/p_101_spriteTex_gradient.jpg-5ef26db2534607ebbf11ab5e26abae53.stex"
+path="res://.import/Icone-Player.png-a12b0cbb9aba233090eba92780249edc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://p_101_spriteTex_gradient.jpg"
-dest_files=[ "res://.import/p_101_spriteTex_gradient.jpg-5ef26db2534607ebbf11ab5e26abae53.stex" ]
+source_file="res://Assets/Icone-Player.png"
+dest_files=[ "res://.import/Icone-Player.png-a12b0cbb9aba233090eba92780249edc.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
