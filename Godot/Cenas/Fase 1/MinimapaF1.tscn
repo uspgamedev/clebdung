@@ -65,7 +65,6 @@ __meta__ = {
 }
 
 [node name="Mapa-Tile" type="TileMap" parent="."]
-visible = false
 tile_set = SubResource( 1 )
 cell_size = Vector2( 2, 2 )
 format = 1
