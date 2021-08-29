@@ -11,20 +11,45 @@ extents = Vector2( 24, 24 )
 script = ExtResource( 3 )
 
 [node name="PlayerSprite" type="Sprite" parent="."]
+light_mask = 4
 texture = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
+light_mask = 3
 current = true
 zoom = Vector2( 0.45, 0.45 )
 smoothing_enabled = true
 
-[node name="PlayerLight" type="Light2D" parent="."]
-light_mask = 2
+[node name="PlayerLight_Shadow" type="Light2D" parent="."]
+modulate = Color( 1, 1, 1, 0 )
 texture = ExtResource( 1 )
 texture_scale = 1.4
 color = Color( 0.709804, 0.643137, 0.486275, 1 )
 energy = 1.4
+range_item_cull_mask = 3
 shadow_enabled = true
+shadow_item_cull_mask = 3
+
+[node name="PlayerLight" type="Light2D" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( -504, -24 )
+texture = ExtResource( 1 )
+offset = Vector2( 504, 24 )
+texture_scale = 1.4
+color = Color( 0.709804, 0.643137, 0.486275, 1 )
+energy = 1.4
+range_item_cull_mask = 6
+shadow_item_cull_mask = 0
+
+[node name="PlayerLight2" type="Light2D" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( -504, -48 )
+texture = ExtResource( 1 )
+offset = Vector2( 504, 24 )
+texture_scale = 1.4
+color = Color( 0.709804, 0.643137, 0.486275, 1 )
+energy = 0.7
+shadow_item_cull_mask = 0
 
 [node name="PlayerRayCast" type="RayCast2D" parent="."]
 enabled = true
