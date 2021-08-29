@@ -1,6 +1,57 @@
-[gd_resource type="TileSet" load_steps=2 format=2]
+[gd_resource type="TileSet" load_steps=19 format=2]
 
 [ext_resource path="res://Assets/Fase 1/TileMap.png" type="Texture" id=1]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=6]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=7]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=8]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=9]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=10]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=11]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=12]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=13]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=14]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=15]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=16]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=17]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
 [resource]
 0/name = "Canto Sup Esq"
@@ -139,9 +190,16 @@
 9/navigation_offset = Vector2( 0, 0 )
 9/shape_offset = Vector2( 0, 0 )
 9/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+9/shape = SubResource( 17 )
 9/shape_one_way = false
-9/shape_one_way_margin = 0.0
-9/shapes = [  ]
+9/shape_one_way_margin = 1.0
+9/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 17 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 9/z_index = 0
 10/name = "Parede 2"
 10/texture = ExtResource( 1 )
@@ -153,9 +211,16 @@
 10/navigation_offset = Vector2( 0, 0 )
 10/shape_offset = Vector2( 0, 0 )
 10/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+10/shape = SubResource( 1 )
 10/shape_one_way = false
-10/shape_one_way_margin = 0.0
-10/shapes = [  ]
+10/shape_one_way_margin = 1.0
+10/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 1 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 10/z_index = 0
 11/name = "Parede 3"
 11/texture = ExtResource( 1 )
@@ -167,9 +232,16 @@
 11/navigation_offset = Vector2( 0, 0 )
 11/shape_offset = Vector2( 0, 0 )
 11/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+11/shape = SubResource( 2 )
 11/shape_one_way = false
-11/shape_one_way_margin = 0.0
-11/shapes = [  ]
+11/shape_one_way_margin = 1.0
+11/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 2 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 11/z_index = 0
 12/name = "L Sup Esq"
 12/texture = ExtResource( 1 )
@@ -181,9 +253,16 @@
 12/navigation_offset = Vector2( 0, 0 )
 12/shape_offset = Vector2( 0, 0 )
 12/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+12/shape = SubResource( 3 )
 12/shape_one_way = false
-12/shape_one_way_margin = 0.0
-12/shapes = [  ]
+12/shape_one_way_margin = 1.0
+12/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 3 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 12/z_index = 0
 13/name = "L Sup Dir"
 13/texture = ExtResource( 1 )
@@ -195,9 +274,16 @@
 13/navigation_offset = Vector2( 0, 0 )
 13/shape_offset = Vector2( 0, 0 )
 13/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+13/shape = SubResource( 4 )
 13/shape_one_way = false
-13/shape_one_way_margin = 0.0
-13/shapes = [  ]
+13/shape_one_way_margin = 1.0
+13/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 4 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 13/z_index = 0
 14/name = "L Inf Esq"
 14/texture = ExtResource( 1 )
@@ -209,9 +295,16 @@
 14/navigation_offset = Vector2( 0, 0 )
 14/shape_offset = Vector2( 0, 0 )
 14/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+14/shape = SubResource( 5 )
 14/shape_one_way = false
-14/shape_one_way_margin = 0.0
-14/shapes = [  ]
+14/shape_one_way_margin = 1.0
+14/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 5 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 14/z_index = 0
 15/name = "L Inf Dir"
 15/texture = ExtResource( 1 )
@@ -223,9 +316,16 @@
 15/navigation_offset = Vector2( 0, 0 )
 15/shape_offset = Vector2( 0, 0 )
 15/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+15/shape = SubResource( 6 )
 15/shape_one_way = false
-15/shape_one_way_margin = 0.0
-15/shapes = [  ]
+15/shape_one_way_margin = 1.0
+15/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 6 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 15/z_index = 0
 16/name = "Parede Cima 1"
 16/texture = ExtResource( 1 )
@@ -265,9 +365,16 @@
 18/navigation_offset = Vector2( 0, 0 )
 18/shape_offset = Vector2( 0, 0 )
 18/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+18/shape = SubResource( 7 )
 18/shape_one_way = false
-18/shape_one_way_margin = 0.0
-18/shapes = [  ]
+18/shape_one_way_margin = 1.0
+18/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 7 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 18/z_index = 0
 19/name = "Parede C Esq 2"
 19/texture = ExtResource( 1 )
@@ -279,9 +386,16 @@
 19/navigation_offset = Vector2( 0, 0 )
 19/shape_offset = Vector2( 0, 0 )
 19/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+19/shape = SubResource( 8 )
 19/shape_one_way = false
-19/shape_one_way_margin = 0.0
-19/shapes = [  ]
+19/shape_one_way_margin = 1.0
+19/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 8 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 19/z_index = 0
 20/name = "Parede C Dir 1"
 20/texture = ExtResource( 1 )
@@ -293,9 +407,16 @@
 20/navigation_offset = Vector2( 0, 0 )
 20/shape_offset = Vector2( 0, 0 )
 20/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+20/shape = SubResource( 9 )
 20/shape_one_way = false
-20/shape_one_way_margin = 0.0
-20/shapes = [  ]
+20/shape_one_way_margin = 1.0
+20/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 9 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 20/z_index = 0
 21/name = "Parede C Dir 2"
 21/texture = ExtResource( 1 )
@@ -307,9 +428,16 @@
 21/navigation_offset = Vector2( 0, 0 )
 21/shape_offset = Vector2( 0, 0 )
 21/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+21/shape = SubResource( 10 )
 21/shape_one_way = false
-21/shape_one_way_margin = 0.0
-21/shapes = [  ]
+21/shape_one_way_margin = 1.0
+21/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 10 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 21/z_index = 0
 22/name = "Parede Costa Esq"
 22/texture = ExtResource( 1 )
@@ -321,9 +449,16 @@
 22/navigation_offset = Vector2( 0, 0 )
 22/shape_offset = Vector2( 0, 0 )
 22/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+22/shape = SubResource( 11 )
 22/shape_one_way = false
-22/shape_one_way_margin = 0.0
-22/shapes = [  ]
+22/shape_one_way_margin = 1.0
+22/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 11 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 22/z_index = 0
 23/name = "Parede Costa Centro"
 23/texture = ExtResource( 1 )
@@ -335,9 +470,16 @@
 23/navigation_offset = Vector2( 0, 0 )
 23/shape_offset = Vector2( 0, 0 )
 23/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+23/shape = SubResource( 12 )
 23/shape_one_way = false
-23/shape_one_way_margin = 0.0
-23/shapes = [  ]
+23/shape_one_way_margin = 1.0
+23/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 12 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 23/z_index = 0
 24/name = "Parede Costa Dir"
 24/texture = ExtResource( 1 )
@@ -349,9 +491,16 @@
 24/navigation_offset = Vector2( 0, 0 )
 24/shape_offset = Vector2( 0, 0 )
 24/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+24/shape = SubResource( 13 )
 24/shape_one_way = false
-24/shape_one_way_margin = 0.0
-24/shapes = [  ]
+24/shape_one_way_margin = 1.0
+24/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 13 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 24/z_index = 0
 25/name = "TileMap.png 25"
 25/texture = ExtResource( 1 )
@@ -377,9 +526,16 @@
 26/navigation_offset = Vector2( 0, 0 )
 26/shape_offset = Vector2( 0, 0 )
 26/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+26/shape = SubResource( 14 )
 26/shape_one_way = false
-26/shape_one_way_margin = 0.0
-26/shapes = [  ]
+26/shape_one_way_margin = 1.0
+26/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 14 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 26/z_index = 0
 27/name = "Obs 2"
 27/texture = ExtResource( 1 )
@@ -391,9 +547,16 @@
 27/navigation_offset = Vector2( 0, 0 )
 27/shape_offset = Vector2( 0, 0 )
 27/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+27/shape = SubResource( 15 )
 27/shape_one_way = false
-27/shape_one_way_margin = 0.0
-27/shapes = [  ]
+27/shape_one_way_margin = 1.0
+27/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 15 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 27/z_index = 0
 28/name = "Obs 3"
 28/texture = ExtResource( 1 )
@@ -405,7 +568,14 @@
 28/navigation_offset = Vector2( 0, 0 )
 28/shape_offset = Vector2( 0, 0 )
 28/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+28/shape = SubResource( 16 )
 28/shape_one_way = false
-28/shape_one_way_margin = 0.0
-28/shapes = [  ]
+28/shape_one_way_margin = 1.0
+28/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 16 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 28/z_index = 0

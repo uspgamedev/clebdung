@@ -1,4 +1,4 @@
-extends Sprite
+extends KinematicBody2D
 
 var speed = 100
 var tile_size = 32
@@ -14,8 +14,13 @@ func _ready():
 	target_position = position
 
 func _process(delta):
-	#MOVER-SE
-	if position != target_position:
+	#MOVENDO
+	if $PlayerRayCast.is_colliding():
+		#COLIDIU
+		position = last_position
+		target_position = position
+	else:
+		#MOVER-SE
 		position += speed * direction * delta
 		
 		if position.distance_to(last_position) >= tile_size - speed* delta:
@@ -41,4 +46,8 @@ func set_direction():
 	#IMPEDIR MOVIMENTO DIAGONAL
 	if direction.x != 0 && direction.y != 0:
 		direction = Vector2(0,0)
+	
+	#APONTAR RAYCAST
+	if direction != Vector2():
+		$PlayerRayCast.cast_to = direction * 1.8*tile_size
 	
