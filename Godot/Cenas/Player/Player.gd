@@ -9,7 +9,10 @@ var target_position = Vector2()
 
 func _ready():
 	
-	#RESETAR VARIÁVEIS
+	#Play animação luz
+	$AnimationPlayer.play("Light")
+	
+	#Resetar variáveis
 	last_position = position
 	target_position = position
 
@@ -20,13 +23,13 @@ func _process(delta):
 		position = last_position
 		target_position = position
 	else:
-		#MOVER-SE
+		#Mover-se
 		position += speed * direction * delta
 		
 		if position.distance_to(last_position) >= tile_size - speed* delta:
 			position = target_position
 	
-	#PARADO
+	#Parado
 	if position == target_position:
 		set_direction()
 		last_position = position
@@ -34,7 +37,7 @@ func _process(delta):
 	
 
 func set_direction():
-	#DETERMINAR DIREÇÃO	
+	#Determinar direção
 	var UP = Input.is_action_pressed("ui_up")
 	var DOWN = Input.is_action_pressed("ui_down")
 	var LEFT = Input.is_action_pressed("ui_left")
@@ -43,11 +46,11 @@ func set_direction():
 	direction.x = int(RIGHT) - int(LEFT)
 	direction.y = int(DOWN) - int(UP)
 	
-	#IMPEDIR MOVIMENTO DIAGONAL
+	#Impedir movimento diagonal
 	if direction.x != 0 && direction.y != 0:
 		direction = Vector2(0,0)
 	
-	#APONTAR RAYCAST
+	#Apontar Raycast
 	if direction != Vector2():
 		$PlayerRayCast.cast_to = direction * 1.8*tile_size
 	
