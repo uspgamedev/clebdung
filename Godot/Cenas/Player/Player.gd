@@ -12,7 +12,7 @@ func _ready():
 	#Play animação luz
 	$AnimationPlayer.play("Light")
 	
-	#Resetar variáveis
+	#Inicializar variáveis
 	last_position = position
 	target_position = position
 
@@ -53,4 +53,6 @@ func set_direction():
 	#Apontar Raycast
 	if direction != Vector2():
 		$PlayerRayCast.cast_to = direction * 1.8*tile_size
+		
+
 	

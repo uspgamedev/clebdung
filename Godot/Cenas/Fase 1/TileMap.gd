@@ -21,25 +21,6 @@ func _ready():
 	var walkable_cells_list = astar_add_walkable_cells(obstacles)
 	astar_connect_walkable_cells(walkable_cells_list)
 
-"""
-func _draw():
-	if not _point_path:
-		return
-	var point_start = _point_path[0]
-	var point_end = _point_path[len(_point_path) - 1]
-
-	set_cell(point_start.x, point_start.y, 1)
-	set_cell(point_end.x, point_end.y, 2)
-
-	var last_point = map_to_world(Vector2(point_start.x, point_start.y)) + _half_cell_size
-	for index in range(1, len(_point_path)):
-		var current_point = map_to_world(Vector2(_point_path[index].x, _point_path[index].y)) + _half_cell_size
-		draw_line(last_point, current_point, DRAW_COLOR, BASE_LINE_WIDTH, true)
-		draw_circle(current_point, BASE_LINE_WIDTH * 2.0, DRAW_COLOR)
-		last_point = current_point
-"""
-
-
 # Loops through all cells within the map's bounds and
 # adds all points to the astar_node, except the obstacles.
 func astar_add_walkable_cells(obstacle_list = []):
@@ -59,7 +40,6 @@ func astar_add_walkable_cells(obstacle_list = []):
 			# coordinates from and to Vector3s.
 			astar_node.add_point(point_index, Vector3(point.x, point.y, 0.0))
 	return points_array
-
 
 # Once you added all points to the AStar node, you've got to connect them.
 # The points don't have to be on a grid: you can use this class
@@ -96,7 +76,6 @@ func calculate_point_index(point):
 func is_outside_map_bounds(point):
 	return point.x < 0 or point.y < 0 or point.x >= map_size.x or point.y >= map_size.y
 
-
 func get_astar_path(world_start, world_end):
 	self.path_start_position = world_to_map(world_start)
 	self.path_end_position = world_to_map(world_end)
@@ -107,14 +86,12 @@ func get_astar_path(world_start, world_end):
 		path_world.append(point_world)
 	return path_world
 
-
 func _recalculate_path():
 	var start_point_index = calculate_point_index(path_start_position)
 	var end_point_index = calculate_point_index(path_end_position)
 	# This method gives us an array of points. Note you need the start and
 	# end points' indices as input.
 	_point_path = astar_node.get_point_path(start_point_index, end_point_index)
-
 
 # Setters for the start and end path values.
 func _set_path_start_position(value):
@@ -125,7 +102,6 @@ func _set_path_start_position(value):
 	path_start_position = value
 	if path_end_position and path_end_position != path_start_position:
 		_recalculate_path()
-
 
 func _set_path_end_position(value):
 	if value in obstacles:

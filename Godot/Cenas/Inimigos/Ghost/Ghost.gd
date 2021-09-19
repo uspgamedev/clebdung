@@ -11,24 +11,43 @@ var tile_size = 32
 var direction = Vector2()
 var last_position = Vector2()
 var target_position = Vector2()
+var k = 0
 
 func _ready():
-	$AnimationPlayer.play("Left")
-
+	#Inicializar variáveis e estados
 	last_position = position
 	target_position = position
 
 
 func _process(delta):
+	#Atualizar a posição com base na direção a ser seguida (tile origem -> tile destino)
 	global_position += speed * direction * delta
-		
+	#Atualizar a posição para o destino, caso se distancie "X" do tile origem
 	if position.distance_to(last_position) >= tile_size - speed * delta:
 		position = target_position
-	
+	#Caso chegue ao tile destino, atualizar a direção e obter o próximo tile destino
 	if position == target_position:
 		set_direction()
 		last_position = position
 		target_position += direction * tile_size
+		print(direction)
+	animation()
+	
+	#Animação luz
+	#Se o fantasma estava dentro do raio (k = 1) e saiu, tocar FadeOut
+	if global_position.distance_to(player.global_position) >= 100 && k == 1:
+		get_node("AnimationPlayerL").play("Light_FadeOut")
+		yield(get_node("AnimationPlayerL"), "animation_finished")
+		k = 0
+	#Se o fantasma estava fora do raio (k = 0) e entrou, tocar FadeIn
+	elif global_position.distance_to(player.global_position) < 100 && k == 0:
+		get_node("AnimationPlayerL").play("Light_FadeIn")
+		yield(get_node("AnimationPlayerL"), "animation_finished")
+		k = 1
+	#Se o fantasma permanece dentro do raio (k = 1), tocar Light animação padrão
+	elif global_position.distance_to(player.global_position) < 100 && k == 1:
+		get_node("AnimationPlayerL").play("Light")
+		
 
 func set_direction():
 	_update_navigation_path(global_position, player.global_position)
@@ -38,14 +57,33 @@ func set_direction():
 		direction = Vector2(0,0)
 
 func _update_navigation_path(start_position, end_position):
-	# It returns a PoolVector2Array of points that lead you
-	# from the start_position to the end_position.
+	# Retorna um PoolVector2Array de pontos que te levam de start_position 
+	# até end_position
 	path = astar.get_astar_path(start_position, end_position)
-	# The first point is always the start_position.
-	# We don't need it in this example as it corresponds to the character's position.
-	#path.remove(0)
+	# Caso o caminho seja nulo, retorne
 	if len(path) == 0:
 		return
-	#print(path)
-	set_process(true)
+
+func animation():
+	var anim_direc
+	var anim_modo
+	var animation
+	
+	match direction:
+		Vector2(0,-1):
+			anim_direc = "Up"
+		Vector2(0,1):
+			anim_direc = "Down"
+		Vector2(-1,0):
+			anim_direc = "Left"
+		Vector2(1,0):
+			anim_direc = "Right"
+	
+	if direction != Vector2(0,0):
+		anim_modo = "Walk"
+	else:
+		anim_modo = "Idle"
+		
+	animation = anim_direc + "_" + anim_modo 
+	get_node("AnimationPlayer").play(animation)
 

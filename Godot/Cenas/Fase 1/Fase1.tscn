@@ -56,3 +56,7 @@ rect_scale = Vector2( 3, 3 )
 
 [node name="Ghost" parent="." instance=ExtResource( 3 )]
 position = Vector2( 48, 496 )
+scale = Vector2( 0.95, 0.95 )
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 8, 496 )
