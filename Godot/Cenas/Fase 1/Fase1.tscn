@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Assets/Fase 1/Mapa-base.tres" type="TileSet" id=1]
 [ext_resource path="res://Cenas/Player/Player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,11 @@
 [ext_resource path="res://Cenas/Fase 1/Astar.tres" type="TileSet" id=4]
 [ext_resource path="res://Cenas/Fase 1/MinimapaF1.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Cenas/Fase 1/TileMap.gd" type="Script" id=6]
+[ext_resource path="res://Cenas/Cristal/crystal.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Cenas/Cristal/crystal4.gd" type="Script" id=8]
+[ext_resource path="res://Cenas/Cristal/crystal2.gd" type="Script" id=9]
+[ext_resource path="res://Cenas/Cristal/crystal3.gd" type="Script" id=10]
+[ext_resource path="res://Cenas/Cristal/crystal5.gd" type="Script" id=11]
 
 [node name="Fase1" type="Node2D"]
 
@@ -34,11 +39,37 @@ tile_data = PoolIntArray( 131083, 4, 0, 131084, 5, 0, 131085, 7, 0, 131086, 8, 0
 
 [node name="YSort" type="YSort" parent="."]
 
+[node name="crystal" parent="YSort" instance=ExtResource( 7 )]
+
+[node name="crystal2" parent="YSort" instance=ExtResource( 7 )]
+position = Vector2( 16, 0 )
+scale = Vector2( 0.65, 0.65 )
+script = ExtResource( 9 )
+
+[node name="crystal3" parent="YSort" instance=ExtResource( 7 )]
+position = Vector2( 32, 0 )
+scale = Vector2( 0.8, 0.7 )
+script = ExtResource( 10 )
+
+[node name="crystal4" parent="YSort" instance=ExtResource( 7 )]
+position = Vector2( 48, 0 )
+scale = Vector2( 0.72, 0.8 )
+script = ExtResource( 8 )
+
+[node name="crystal5" parent="YSort" instance=ExtResource( 7 )]
+position = Vector2( 217.591, 489.636 )
+script = ExtResource( 11 )
+
+[node name="Ghost" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 48, 496 )
+scale = Vector2( 0.95, 0.95 )
+
 [node name="Player" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 112, 496 )
+position = Vector2( 16, 496 )
 scale = Vector2( 0.3, 0.3 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
 color = Color( 0, 0, 0, 1 )
 
 [node name="HUD" type="CanvasLayer" parent="."]
@@ -54,9 +85,5 @@ margin_right = -139.0
 margin_bottom = -139.0
 rect_scale = Vector2( 3, 3 )
 
-[node name="Ghost" parent="." instance=ExtResource( 3 )]
-position = Vector2( 48, 496 )
-scale = Vector2( 0.95, 0.95 )
-
 [node name="Position2D" type="Position2D" parent="."]
-position = Vector2( 8, 496 )
+position = Vector2( 176, 144 )

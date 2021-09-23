@@ -296,7 +296,7 @@ tracks/4/keys = {
 "values": [ 1.1, 1.2 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 resource_name = "Light"
 loop = true
 tracks/0/type = "value"
@@ -324,9 +324,9 @@ tracks/1/keys = {
 "values": [ 1.1, 1.2 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=6]
 resource_name = "Light_FadeIn"
-length = 0.5
+length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Light2D:energy")
 tracks/0/interp = 1
@@ -334,13 +334,13 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
+"times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0.0, 1.1 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=7]
 resource_name = "Light_FadeOut"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Light2D:energy")
@@ -355,7 +355,7 @@ tracks/0/keys = {
 "values": [ 1.1, 0.0 ]
 }
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 11.5, 14.05 )
 
 [node name="Ghost" type="KinematicBody2D"]
@@ -365,12 +365,13 @@ script = ExtResource( 3 )
 light_mask = 4
 texture = ExtResource( 1 )
 offset = Vector2( 0, -16 )
+flip_h = true
 hframes = 4
 vframes = 3
-frame = 8
+frame = 7
 
 [node name="Light2D" type="Light2D" parent="."]
-position = Vector2( 0.1, -25.014 )
+position = Vector2( 0.688, -25.205 )
 texture = ExtResource( 2 )
 texture_scale = 0.06
 color = Color( 0.761719, 0.140317, 0, 1 )
@@ -384,11 +385,11 @@ anims/Right_Walk = SubResource( 3 )
 anims/Up_Walk = SubResource( 4 )
 
 [node name="AnimationPlayerL" type="AnimationPlayer" parent="."]
-anims/Light = SubResource( 6 )
-anims/Light_FadeIn = SubResource( 7 )
-anims/Light_FadeOut = SubResource( 8 )
+anims/Light = SubResource( 5 )
+anims/Light_FadeIn = SubResource( 6 )
+anims/Light_FadeOut = SubResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -16 )
-shape = SubResource( 5 )
+shape = SubResource( 8 )
 disabled = true

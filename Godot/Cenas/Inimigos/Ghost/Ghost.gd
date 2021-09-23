@@ -30,22 +30,21 @@ func _process(delta):
 		set_direction()
 		last_position = position
 		target_position += direction * tile_size
-		print(direction)
 	animation()
 	
 	#Animação luz
 	#Se o fantasma estava dentro do raio (k = 1) e saiu, tocar FadeOut
-	if global_position.distance_to(player.global_position) >= 100 && k == 1:
+	if global_position.distance_to(player.global_position) >= 98 && k == 1:
 		get_node("AnimationPlayerL").play("Light_FadeOut")
 		yield(get_node("AnimationPlayerL"), "animation_finished")
 		k = 0
 	#Se o fantasma estava fora do raio (k = 0) e entrou, tocar FadeIn
-	elif global_position.distance_to(player.global_position) < 100 && k == 0:
+	elif global_position.distance_to(player.global_position) < 98 && k == 0:
 		get_node("AnimationPlayerL").play("Light_FadeIn")
 		yield(get_node("AnimationPlayerL"), "animation_finished")
 		k = 1
 	#Se o fantasma permanece dentro do raio (k = 1), tocar Light animação padrão
-	elif global_position.distance_to(player.global_position) < 100 && k == 1:
+	elif global_position.distance_to(player.global_position) < 98 && k == 1:
 		get_node("AnimationPlayerL").play("Light")
 		
 
@@ -78,6 +77,8 @@ func animation():
 			anim_direc = "Left"
 		Vector2(1,0):
 			anim_direc = "Right"
+		Vector2(0,0):
+			anim_direc = "Null"
 	
 	if direction != Vector2(0,0):
 		anim_modo = "Walk"

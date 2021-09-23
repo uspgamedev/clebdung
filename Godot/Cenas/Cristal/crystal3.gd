@@ -1,43 +1,26 @@
 extends Sprite
 
-var matrix = [[2, 3], [6,9], [14,14], [14,2], [6,4], [8,12], [17,15], [13,10]]
-# matrix Axy = [0][0] = 32
-# matrix Axy = [0][1] = 32
+onready var astar = get_tree().get_root().get_node("Fase1").get_node("A*")
+var LimitsI = Vector2(16,21)
+var LimitsJ = Vector2(30,31)
+var x_rand = Vector2()
+var y_rand = Vector2()
 
-# matrix Axy = [1][0] = 48
-# matrix Axy = [1][1] = 32
-
-# matrix Axy = [2][0] = 48
-# matrix Axy = [2][1] = 48
-
-# matrix Axy = [3][0] = 64
-# matrix Axy = [3][1] = 32
-
-# matrix Axy = [4][0] = 80
-# matrix Axy = [4][1] = 32
-
-# matrix Axy = [5][0] = 48
-# matrix Axy = [5][1] = 60
-
-
-#  x   y
-#  32 32
-#  48 32
-#  48 48
-#  64 32
-
+var rng = RandomNumberGenerator.new()
 
 func _ready():
-	randomize()
 	$AnimationPlayer.play('crystal')
-	var x_rand = (randi() % 8)
-	var rnd_position = Vector2(32 * matrix[x_rand][0] + 16, 32 * matrix[x_rand][1] + 16)
-	print(rnd_position)
-	$".".position = rnd_position
+	generate()
+	while astar.get_cell(x_rand,y_rand) != 0:
+		generate()
+	global_position = astar.map_to_world(Vector2(x_rand,y_rand)) + Vector2(12,12)
 	
-	
+func generate():
+	rng.randomize()
+	x_rand = int(rng.randf_range(LimitsI.x, LimitsJ.x))
+	y_rand = int(rng.randf_range(LimitsI.y, LimitsJ.y))
 
 func _on_Area2D_body_entered(body):
 	if body.get_name() == "Player":
-		get_parent().score += 1
+		#get_parent().score += 1
 		queue_free()

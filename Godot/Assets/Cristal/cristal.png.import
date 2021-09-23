@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cristal.png-38d753006ff72a4cf69d9a10b2141dca.stex"
+path="res://.import/cristal.png-312f307d02ce3ef4d00702ea7c6fd580.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Cenas/Cristal/cristal.png"
-dest_files=[ "res://.import/cristal.png-38d753006ff72a4cf69d9a10b2141dca.stex" ]
+source_file="res://Assets/Cristal/cristal.png"
+dest_files=[ "res://.import/cristal.png-312f307d02ce3ef4d00702ea7c6fd580.stex" ]
 
 [params]
 
