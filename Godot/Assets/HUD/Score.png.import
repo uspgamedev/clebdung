@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Icone-Player.png-a12b0cbb9aba233090eba92780249edc.stex"
+path="res://.import/Score.png-a9eb149b87e5594763c65e042c511ad8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Icone-Player.png"
-dest_files=[ "res://.import/Icone-Player.png-a12b0cbb9aba233090eba92780249edc.stex" ]
+source_file="res://Assets/HUD/Score.png"
+dest_files=[ "res://.import/Score.png-a9eb149b87e5594763c65e042c511ad8.stex" ]
 
 [params]
 

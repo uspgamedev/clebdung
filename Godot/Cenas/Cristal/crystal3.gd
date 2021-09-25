@@ -1,6 +1,7 @@
 extends Sprite
 
 onready var astar = get_tree().get_root().get_node("Fase1").get_node("A*")
+onready var score = get_tree().get_root().get_node("Fase1").get_node("HUD/Score")
 var LimitsI = Vector2(16,21)
 var LimitsJ = Vector2(30,31)
 var x_rand = Vector2()
@@ -22,5 +23,5 @@ func generate():
 
 func _on_Area2D_body_entered(body):
 	if body.get_name() == "Player":
-		#get_parent().score += 1
+		score.update_score()
 		queue_free()

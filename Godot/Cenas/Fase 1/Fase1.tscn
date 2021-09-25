@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Assets/Fase 1/Mapa-base.tres" type="TileSet" id=1]
 [ext_resource path="res://Cenas/Player/Player.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Cenas/Cristal/crystal2.gd" type="Script" id=9]
 [ext_resource path="res://Cenas/Cristal/crystal3.gd" type="Script" id=10]
 [ext_resource path="res://Cenas/Cristal/crystal5.gd" type="Script" id=11]
+[ext_resource path="res://Cenas/HUD/Score.tscn" type="PackedScene" id=12]
 
 [node name="Fase1" type="Node2D"]
 
@@ -69,7 +70,6 @@ position = Vector2( 16, 496 )
 scale = Vector2( 0.3, 0.3 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
 color = Color( 0, 0, 0, 1 )
 
 [node name="HUD" type="CanvasLayer" parent="."]
@@ -84,6 +84,8 @@ margin_top = -208.0
 margin_right = -139.0
 margin_bottom = -139.0
 rect_scale = Vector2( 3, 3 )
+
+[node name="Score" parent="HUD" instance=ExtResource( 12 )]
 
 [node name="Position2D" type="Position2D" parent="."]
 position = Vector2( 176, 144 )
