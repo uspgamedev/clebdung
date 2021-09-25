@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Score.png-a9eb149b87e5594763c65e042c511ad8.stex"
+path="res://.import/Cristal_Spritesheet.png-c10a539656a2a4799b25a0303afb7f29.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/HUD/Score.png"
-dest_files=[ "res://.import/Score.png-a9eb149b87e5594763c65e042c511ad8.stex" ]
+source_file="res://Assets/Cristal/Cristal_Spritesheet.png"
+dest_files=[ "res://.import/Cristal_Spritesheet.png-c10a539656a2a4799b25a0303afb7f29.stex" ]
 
 [params]
 
