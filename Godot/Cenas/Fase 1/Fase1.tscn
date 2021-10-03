@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Assets/Fase 1/Mapa-base.tres" type="TileSet" id=1]
 [ext_resource path="res://Cenas/Player/Player.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Cenas/Cristal/crystal3.gd" type="Script" id=10]
 [ext_resource path="res://Cenas/Cristal/crystal5.gd" type="Script" id=11]
 [ext_resource path="res://Cenas/HUD/Score.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Cenas/Fase 1/TimerGhost.gd" type="Script" id=13]
 
 [node name="Fase1" type="Node2D"]
 
@@ -62,14 +63,32 @@ position = Vector2( 217.591, 489.636 )
 script = ExtResource( 11 )
 
 [node name="Ghost" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 48, 496 )
+position = Vector2( 336, 400 )
 scale = Vector2( 0.95, 0.95 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 16, 496 )
 scale = Vector2( 0.3, 0.3 )
 
+[node name="Positions" type="Node2D" parent="."]
+position = Vector2( 336, 144 )
+
+[node name="A" type="Position2D" parent="Positions"]
+
+[node name="B" type="Position2D" parent="Positions"]
+position = Vector2( -128, 0 )
+
+[node name="R1" type="Position2D" parent="Positions"]
+position = Vector2( 352, 0 )
+
+[node name="R2" type="Position2D" parent="Positions"]
+position = Vector2( -96, 512 )
+
+[node name="R3" type="Position2D" parent="Positions"]
+position = Vector2( 160, 320 )
+
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
 color = Color( 0, 0, 0, 1 )
 
 [node name="HUD" type="CanvasLayer" parent="."]
@@ -87,5 +106,14 @@ rect_scale = Vector2( 3, 3 )
 
 [node name="Score" parent="HUD" instance=ExtResource( 12 )]
 
-[node name="Position2D" type="Position2D" parent="."]
-position = Vector2( 176, 144 )
+[node name="TimerGhost" type="Label" parent="HUD"]
+margin_right = 40.0
+margin_bottom = 14.0
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="HUD/TimerGhost"]
+wait_time = 30.0
+autostart = true

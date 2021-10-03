@@ -142,6 +142,7 @@ tracks/1/keys = {
 }
 
 [node name="Player" type="KinematicBody2D"]
+collision_layer = 2
 script = ExtResource( 3 )
 
 [node name="PlayerSprite" type="Sprite" parent="."]
@@ -156,7 +157,6 @@ frame = 6
 [node name="Camera2D" type="Camera2D" parent="."]
 light_mask = 3
 current = true
-zoom = Vector2( 0.5, 0.5 )
 smoothing_enabled = true
 
 [node name="PlayerLight_Shadow" type="Light2D" parent="."]
@@ -192,7 +192,7 @@ shadow_item_cull_mask = 0
 
 [node name="PlayerRayCast" type="RayCast2D" parent="."]
 enabled = true
-cast_to = Vector2( 57.6, 0 )
+cast_to = Vector2( 64, 0 )
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

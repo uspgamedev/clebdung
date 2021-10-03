@@ -23,8 +23,8 @@ func _process(_delta):
 	var playerpos_tile = world_to_map(player_marker.position)
 	
 	#Deletar tiles próximos
-	for x in range(playerpos_tile.x-3, playerpos_tile.x+4):
-		for y in range (playerpos_tile.y-3, playerpos_tile.y+4):
+	for x in range(playerpos_tile.x-2, playerpos_tile.x+3):
+		for y in range (playerpos_tile.y-2, playerpos_tile.y+3):
 				set_cell(x, y, -1)
 	
 	

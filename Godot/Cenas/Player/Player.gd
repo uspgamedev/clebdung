@@ -26,7 +26,7 @@ func _process(delta):
 		#Mover-se
 		position += speed * direction * delta
 		
-		if position.distance_to(last_position) >= tile_size - speed* delta:
+		if position.distance_to(last_position) >= tile_size - speed * delta:
 			position = target_position
 	
 	#Parado
@@ -34,7 +34,7 @@ func _process(delta):
 		set_direction()
 		last_position = position
 		target_position += direction * tile_size
-	animation()
+	#animation()
 
 func set_direction():
 	#Determinar direção
@@ -52,21 +52,21 @@ func set_direction():
 	
 	#Apontar Raycast
 	if direction != Vector2():
-		$PlayerRayCast.cast_to = direction * 1.8*tile_size
+		$PlayerRayCast.cast_to = direction * tile_size * 1.8
 		
 func animation():
 	var anim_direc
 	var anim_modo
 	var animation
 	
-	match $PlayerRayCast.cast_to:
-		Vector2(0,-57.6):
+	match $PlayerRayCast.cast_to.normalized():
+		Vector2(0,-1):
 			anim_direc = "Up"
-		Vector2(0,57.6):
+		Vector2(0,1):
 			anim_direc = "Down"
-		Vector2(-57.6,0):
+		Vector2(-1,0):
 			anim_direc = "Left"
-		Vector2(57.6,0):
+		Vector2(1,0):
 			anim_direc = "Right"
 		Vector2(0,0):
 			anim_direc = "Null"
