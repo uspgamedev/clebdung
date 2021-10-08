@@ -74,9 +74,13 @@ scale = Vector2( 0.3, 0.3 )
 position = Vector2( 336, 144 )
 
 [node name="A" type="Position2D" parent="Positions"]
+position = Vector2( -256, -32 )
 
 [node name="B" type="Position2D" parent="Positions"]
-position = Vector2( -128, 0 )
+position = Vector2( -160, 0 )
+
+[node name="C" type="Position2D" parent="Positions"]
+position = Vector2( -224, 32 )
 
 [node name="R1" type="Position2D" parent="Positions"]
 position = Vector2( 352, 0 )

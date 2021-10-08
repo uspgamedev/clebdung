@@ -150,6 +150,7 @@ light_mask = 4
 position = Vector2( 0, -40 )
 scale = Vector2( 3.4, 3.4 )
 texture = ExtResource( 2 )
+flip_h = true
 hframes = 6
 vframes = 2
 frame = 6
@@ -157,6 +158,7 @@ frame = 6
 [node name="Camera2D" type="Camera2D" parent="."]
 light_mask = 3
 current = true
+zoom = Vector2( 0.7, 0.7 )
 smoothing_enabled = true
 
 [node name="PlayerLight_Shadow" type="Light2D" parent="."]
