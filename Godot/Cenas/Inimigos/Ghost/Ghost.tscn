@@ -299,7 +299,7 @@ tracks/0/keys = {
 extents = Vector2( 11.5, 14.05 )
 
 [sub_resource type="CircleShape2D" id=10]
-radius = 96.0
+radius = 112.0
 
 [node name="Ghost" type="KinematicBody2D"]
 collision_layer = 2
@@ -360,9 +360,8 @@ wait_time = 160.0
 autostart = true
 
 [node name="Delay" type="Timer" parent="TimerRandom"]
-wait_time = 30.0
+wait_time = 10.0
 one_shot = true
-autostart = true
 
 [node name="TimerDoubt" type="Timer" parent="."]
 wait_time = 1.7

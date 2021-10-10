@@ -3,12 +3,17 @@ extends KinematicBody2D
 onready var astar = get_tree().get_root().get_node("Fase1").get_node("A*")
 onready var player = get_tree().get_root().get_node("Fase1").get_node("YSort/Player")
 
-onready var posA = get_tree().get_root().get_node("Fase1").get_node("Positions/N/A")
-onready var posB = get_tree().get_root().get_node("Fase1").get_node("Positions/N/B")
-onready var posC = get_tree().get_root().get_node("Fase1").get_node("Positions/N/C")
-onready var ran1 = get_tree().get_root().get_node("Fase1").get_node("Positions/N/R1")
-onready var ran2 = get_tree().get_root().get_node("Fase1").get_node("Positions/N/R2")
-onready var ran3 = get_tree().get_root().get_node("Fase1").get_node("Positions/N/R3")
+export(Texture) var ghostsprite
+export(NodePath) var positionset
+export(int) var speed
+export(int) var delayrandom
+
+onready var posA = get_node(str(positionset)+"/A")
+onready var posB = get_node(str(positionset)+"/B")
+onready var posC = get_node(str(positionset)+"/C")
+onready var ran1 = get_node(str(positionset)+"/R1")
+onready var ran2 = get_node(str(positionset)+"/R2")
+onready var ran3 = get_node(str(positionset)+"/R3")
 
 onready var RC = get_node("RayCast")
 onready var RC2 = get_node("RayCast2")
@@ -27,7 +32,6 @@ var state = States.PATROL
 var last_state
 
 var path = []
-export var speed = 60
 var tile_size = 32
 var direction = Vector2()
 var last_position = Vector2()
@@ -41,6 +45,12 @@ func _ready():
 	#Inicializar variáveis e estados
 	last_position = position
 	target_position = position
+	
+	get_node("TimerRandom/Delay").set_wait_time(delayrandom)
+	get_node("TimerRandom/Delay").start()
+	
+	get_node("GhostSprite").texture = ghostsprite
+	
 
 func _process(delta):
 	#Atualizar a posição com base na direção a ser seguida (tile origem -> tile destino)
@@ -217,15 +227,13 @@ func _on_TimerRandom_timeout():
 	last_state = state
 	state = States.RANDOM
 
+func _on_Delay_timeout():
+	get_node("TimerRandom").start()
+	_on_TimerRandom_timeout()
+	print("Random")
 
 func _on_TimerDoubt_timeout():
 	#Ao fim do timer de DOUBT, caso não houve interrupção, retornar à patrulha
 	if state == States.DOUBT:
 		last_state = state
 		state = States.PATROL
-
-
-func _on_Delay_timeout():
-	get_node("TimerRandom").start()
-	_on_TimerRandom_timeout()
-	print("Random")

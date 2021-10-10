@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Assets/Fase 1/Mapa-base.tres" type="TileSet" id=1]
 [ext_resource path="res://Cenas/Player/Player.tscn" type="PackedScene" id=2]
@@ -13,9 +13,8 @@
 [ext_resource path="res://Cenas/Cristal/crystal5.gd" type="Script" id=11]
 [ext_resource path="res://Cenas/HUD/Score.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Cenas/Fase 1/TimerGhost.gd" type="Script" id=13]
-[ext_resource path="res://Cenas/Inimigos/Ghost/GhostB.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Cenas/Inimigos/Ghost/GhostR.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Cenas/Inimigos/Ghost/GhostY.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Assets/Inimigos/Ghost/Ghost_Spritesheet.png" type="Texture" id=19]
+[ext_resource path="res://Assets/Inimigos/Ghost/Ghost_Spritesheet_R.png" type="Texture" id=20]
 
 [node name="Fase1" type="Node2D"]
 
@@ -66,24 +65,19 @@ position = Vector2( 217.591, 489.636 )
 script = ExtResource( 11 )
 
 [node name="Ghost" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 496, 496 )
+position = Vector2( 336, 272 )
 scale = Vector2( 0.95, 0.95 )
+ghostsprite = ExtResource( 19 )
+positionset = NodePath("../../Positions/N")
 speed = 65
+delayrandom = 50
 
-[node name="GhostB" parent="YSort" instance=ExtResource( 14 )]
-position = Vector2( 496, 496 )
-scale = Vector2( 0.95, 0.95 )
-speed = 70
-
-[node name="GhostR" parent="YSort" instance=ExtResource( 15 )]
-position = Vector2( 496, 496 )
-scale = Vector2( 0.95, 0.95 )
-speed = 75
-
-[node name="GhostY" parent="YSort" instance=ExtResource( 16 )]
-position = Vector2( 496, 496 )
-scale = Vector2( 0.95, 0.95 )
-speed = 60
+[node name="Ghost2" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 912, 144 )
+ghostsprite = ExtResource( 20 )
+positionset = NodePath("../../Positions/B")
+speed = 80
+delayrandom = 30
 
 [node name="Player" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 16, 496 )
@@ -97,19 +91,30 @@ scale = Vector2( 0.3, 0.3 )
 position = Vector2( 80, 112 )
 
 [node name="B" type="Position2D" parent="Positions/N"]
-position = Vector2( 496, 80 )
+position = Vector2( 368, 144 )
 
 [node name="C" type="Position2D" parent="Positions/N"]
-position = Vector2( 240, 528 )
+position = Vector2( 240, 496 )
 
 [node name="R1" type="Position2D" parent="Positions/N"]
-position = Vector2( 496, 528 )
+position = Vector2( 752, 272 )
 
 [node name="R2" type="Position2D" parent="Positions/N"]
-position = Vector2( 880, 272 )
+position = Vector2( 496, 528 )
 
 [node name="R3" type="Position2D" parent="Positions/N"]
-position = Vector2( 240, 848 )
+position = Vector2( 240, 816 )
+
+[node name="G" type="Node" parent="Positions"]
+
+[node name="A" type="Position2D" parent="Positions/G"]
+position = Vector2( 496, 80 )
+
+[node name="B" type="Position2D" parent="Positions/G"]
+position = Vector2( 656, 272 )
+
+[node name="C" type="Position2D" parent="Positions/G"]
+position = Vector2( 464, 496 )
 
 [node name="B" type="Node" parent="Positions"]
 
@@ -117,19 +122,19 @@ position = Vector2( 240, 848 )
 position = Vector2( 944, 144 )
 
 [node name="B" type="Position2D" parent="Positions/B"]
-position = Vector2( 880, 496 )
+position = Vector2( 976, 464 )
 
 [node name="C" type="Position2D" parent="Positions/B"]
-position = Vector2( 592, 272 )
+position = Vector2( 688, 272 )
 
 [node name="R1" type="Position2D" parent="Positions/B"]
-position = Vector2( 528, 464 )
+position = Vector2( 368, 80 )
 
 [node name="R2" type="Position2D" parent="Positions/B"]
-position = Vector2( 848, 912 )
+position = Vector2( 528, 464 )
 
 [node name="R3" type="Position2D" parent="Positions/B"]
-position = Vector2( 368, 80 )
+position = Vector2( 816, 816 )
 
 [node name="Y" type="Node" parent="Positions"]
 
@@ -137,39 +142,50 @@ position = Vector2( 368, 80 )
 position = Vector2( 48, 1008 )
 
 [node name="B" type="Position2D" parent="Positions/Y"]
-position = Vector2( 48, 656 )
+position = Vector2( 48, 592 )
 
 [node name="C" type="Position2D" parent="Positions/Y"]
-position = Vector2( 496, 816 )
+position = Vector2( 336, 784 )
 
 [node name="R1" type="Position2D" parent="Positions/Y"]
-position = Vector2( 496, 464 )
+position = Vector2( 368, 336 )
 
 [node name="R2" type="Position2D" parent="Positions/Y"]
-position = Vector2( 208, 304 )
+position = Vector2( 496, 464 )
 
 [node name="R3" type="Position2D" parent="Positions/Y"]
-position = Vector2( 880, 816 )
+position = Vector2( 720, 816 )
+
+[node name="P" type="Node" parent="Positions"]
+
+[node name="A" type="Position2D" parent="Positions/P"]
+position = Vector2( 656, 560 )
+
+[node name="B" type="Position2D" parent="Positions/P"]
+position = Vector2( 592, 1008 )
+
+[node name="C" type="Position2D" parent="Positions/P"]
+position = Vector2( 336, 1008 )
 
 [node name="R" type="Node" parent="Positions"]
 
 [node name="A" type="Position2D" parent="Positions/R"]
-position = Vector2( 848, 592 )
+position = Vector2( 848, 528 )
 
 [node name="B" type="Position2D" parent="Positions/R"]
-position = Vector2( 688, 848 )
+position = Vector2( 720, 880 )
 
 [node name="C" type="Position2D" parent="Positions/R"]
 position = Vector2( 976, 1008 )
 
 [node name="R1" type="Position2D" parent="Positions/R"]
-position = Vector2( 528, 528 )
+position = Vector2( 848, 272 )
 
 [node name="R2" type="Position2D" parent="Positions/R"]
-position = Vector2( 240, 1008 )
+position = Vector2( 528, 528 )
 
 [node name="R3" type="Position2D" parent="Positions/R"]
-position = Vector2( 944, 336 )
+position = Vector2( 304, 944 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 visible = false
