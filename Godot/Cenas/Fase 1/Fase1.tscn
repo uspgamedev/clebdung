@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Assets/Fase 1/Mapa-base.tres" type="TileSet" id=1]
 [ext_resource path="res://Cenas/Player/Player.tscn" type="PackedScene" id=2]
@@ -13,6 +13,9 @@
 [ext_resource path="res://Cenas/Cristal/crystal5.gd" type="Script" id=11]
 [ext_resource path="res://Cenas/HUD/Score.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Cenas/Fase 1/TimerGhost.gd" type="Script" id=13]
+[ext_resource path="res://Cenas/Inimigos/Ghost/GhostB.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Cenas/Inimigos/Ghost/GhostR.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Cenas/Inimigos/Ghost/GhostY.tscn" type="PackedScene" id=16]
 
 [node name="Fase1" type="Node2D"]
 
@@ -63,33 +66,110 @@ position = Vector2( 217.591, 489.636 )
 script = ExtResource( 11 )
 
 [node name="Ghost" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 336, 400 )
+position = Vector2( 496, 496 )
 scale = Vector2( 0.95, 0.95 )
+speed = 65
+
+[node name="GhostB" parent="YSort" instance=ExtResource( 14 )]
+position = Vector2( 496, 496 )
+scale = Vector2( 0.95, 0.95 )
+speed = 70
+
+[node name="GhostR" parent="YSort" instance=ExtResource( 15 )]
+position = Vector2( 496, 496 )
+scale = Vector2( 0.95, 0.95 )
+speed = 75
+
+[node name="GhostY" parent="YSort" instance=ExtResource( 16 )]
+position = Vector2( 496, 496 )
+scale = Vector2( 0.95, 0.95 )
+speed = 60
 
 [node name="Player" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 16, 496 )
 scale = Vector2( 0.3, 0.3 )
 
-[node name="Positions" type="Node2D" parent="."]
-position = Vector2( 336, 144 )
+[node name="Positions" type="Node" parent="."]
 
-[node name="A" type="Position2D" parent="Positions"]
-position = Vector2( -256, -32 )
+[node name="N" type="Node" parent="Positions"]
 
-[node name="B" type="Position2D" parent="Positions"]
-position = Vector2( -160, 0 )
+[node name="A" type="Position2D" parent="Positions/N"]
+position = Vector2( 80, 112 )
 
-[node name="C" type="Position2D" parent="Positions"]
-position = Vector2( -224, 32 )
+[node name="B" type="Position2D" parent="Positions/N"]
+position = Vector2( 496, 80 )
 
-[node name="R1" type="Position2D" parent="Positions"]
-position = Vector2( 352, 0 )
+[node name="C" type="Position2D" parent="Positions/N"]
+position = Vector2( 240, 528 )
 
-[node name="R2" type="Position2D" parent="Positions"]
-position = Vector2( -96, 512 )
+[node name="R1" type="Position2D" parent="Positions/N"]
+position = Vector2( 496, 528 )
 
-[node name="R3" type="Position2D" parent="Positions"]
-position = Vector2( 160, 320 )
+[node name="R2" type="Position2D" parent="Positions/N"]
+position = Vector2( 880, 272 )
+
+[node name="R3" type="Position2D" parent="Positions/N"]
+position = Vector2( 240, 848 )
+
+[node name="B" type="Node" parent="Positions"]
+
+[node name="A" type="Position2D" parent="Positions/B"]
+position = Vector2( 944, 144 )
+
+[node name="B" type="Position2D" parent="Positions/B"]
+position = Vector2( 880, 496 )
+
+[node name="C" type="Position2D" parent="Positions/B"]
+position = Vector2( 592, 272 )
+
+[node name="R1" type="Position2D" parent="Positions/B"]
+position = Vector2( 528, 464 )
+
+[node name="R2" type="Position2D" parent="Positions/B"]
+position = Vector2( 848, 912 )
+
+[node name="R3" type="Position2D" parent="Positions/B"]
+position = Vector2( 368, 80 )
+
+[node name="Y" type="Node" parent="Positions"]
+
+[node name="A" type="Position2D" parent="Positions/Y"]
+position = Vector2( 48, 1008 )
+
+[node name="B" type="Position2D" parent="Positions/Y"]
+position = Vector2( 48, 656 )
+
+[node name="C" type="Position2D" parent="Positions/Y"]
+position = Vector2( 496, 816 )
+
+[node name="R1" type="Position2D" parent="Positions/Y"]
+position = Vector2( 496, 464 )
+
+[node name="R2" type="Position2D" parent="Positions/Y"]
+position = Vector2( 208, 304 )
+
+[node name="R3" type="Position2D" parent="Positions/Y"]
+position = Vector2( 880, 816 )
+
+[node name="R" type="Node" parent="Positions"]
+
+[node name="A" type="Position2D" parent="Positions/R"]
+position = Vector2( 848, 592 )
+
+[node name="B" type="Position2D" parent="Positions/R"]
+position = Vector2( 688, 848 )
+
+[node name="C" type="Position2D" parent="Positions/R"]
+position = Vector2( 976, 1008 )
+
+[node name="R1" type="Position2D" parent="Positions/R"]
+position = Vector2( 528, 528 )
+
+[node name="R2" type="Position2D" parent="Positions/R"]
+position = Vector2( 240, 1008 )
+
+[node name="R3" type="Position2D" parent="Positions/R"]
+position = Vector2( 944, 336 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 visible = false
@@ -118,6 +198,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Timer" type="Timer" parent="HUD/TimerGhost"]
-wait_time = 30.0
-autostart = true
+[node name="Camera2D" type="Camera2D" parent="HUD"]
+offset = Vector2( 510, 510 )
+current = true
+zoom = Vector2( 1.5, 1.8 )

@@ -3,12 +3,12 @@ extends KinematicBody2D
 onready var astar = get_tree().get_root().get_node("Fase1").get_node("A*")
 onready var player = get_tree().get_root().get_node("Fase1").get_node("YSort/Player")
 
-onready var posA = get_tree().get_root().get_node("Fase1").get_node("Positions/N/A")
-onready var posB = get_tree().get_root().get_node("Fase1").get_node("Positions/N/B")
-onready var posC = get_tree().get_root().get_node("Fase1").get_node("Positions/N/C")
-onready var ran1 = get_tree().get_root().get_node("Fase1").get_node("Positions/N/R1")
-onready var ran2 = get_tree().get_root().get_node("Fase1").get_node("Positions/N/R2")
-onready var ran3 = get_tree().get_root().get_node("Fase1").get_node("Positions/N/R3")
+onready var posA = get_tree().get_root().get_node("Fase1").get_node("Positions/B/A")
+onready var posB = get_tree().get_root().get_node("Fase1").get_node("Positions/B/B")
+onready var posC = get_tree().get_root().get_node("Fase1").get_node("Positions/B/C")
+onready var ran1 = get_tree().get_root().get_node("Fase1").get_node("Positions/B/R1")
+onready var ran2 = get_tree().get_root().get_node("Fase1").get_node("Positions/B/R2")
+onready var ran3 = get_tree().get_root().get_node("Fase1").get_node("Positions/B/R3")
 
 onready var RC = get_node("RayCast")
 onready var RC2 = get_node("RayCast2")
@@ -207,7 +207,7 @@ func _on_Area2D_body_exited(body):
 
 
 func _on_TimerRandom_timeout():
-	print("Random")
+	print("RandomB")
 	#Cancelar ida à posição aleatória caso esteja seguindo o jogador
 	if state == States.FOLLOW:
 		return
@@ -228,4 +228,4 @@ func _on_TimerDoubt_timeout():
 func _on_Delay_timeout():
 	get_node("TimerRandom").start()
 	_on_TimerRandom_timeout()
-	print("Random")
+	print("RandomB")
