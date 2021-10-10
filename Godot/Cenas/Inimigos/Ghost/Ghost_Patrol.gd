@@ -3,31 +3,29 @@ extends KinematicBody2D
 onready var astar = get_tree().get_root().get_node("Fase1").get_node("A*")
 onready var player = get_tree().get_root().get_node("Fase1").get_node("YSort/Player")
 
-onready var posA = get_tree().get_root().get_node("Fase1").get_node("Positions/Y/A")
-onready var posB = get_tree().get_root().get_node("Fase1").get_node("Positions/Y/B")
-onready var posC = get_tree().get_root().get_node("Fase1").get_node("Positions/Y/C")
-onready var ran1 = get_tree().get_root().get_node("Fase1").get_node("Positions/Y/R1")
-onready var ran2 = get_tree().get_root().get_node("Fase1").get_node("Positions/Y/R2")
-onready var ran3 = get_tree().get_root().get_node("Fase1").get_node("Positions/Y/R3")
+export(Texture) var ghostsprite
+export(NodePath) var positionset
+export(int) var speed
+
+onready var posA = get_node(str(positionset)+"/A")
+onready var posB = get_node(str(positionset)+"/B")
+onready var posC = get_node(str(positionset)+"/C")
 
 onready var RC = get_node("RayCast")
 onready var RC2 = get_node("RayCast2")
 onready var RC3 = get_node("RayCast3")
 onready var RC4 = get_node("RayCast4")
 
-enum States { FOLLOW, DOUBT, RANDOM, PATROL }
+enum States { FOLLOW, DOUBT, PATROL }
 #ESTADOS:
 # Follow = Seguindo jogador incessantemente
 # Doubt = Estava seguindo, mas o jogador saiu do campo de visão. Vai até o
 # último local em que o jogador foi visto, espera um tempo. Volta à patrulha.
 # Patrol = Patrulha em ciclo (A -> B -> C -> A -> B -> C...)
-# Random = De 30 em 30s, escolhe uma posição aleatória entre {ran1,ran2,ran3} 
-# e vai até ela (caso não esteja seguindo). Ao fim, volta a patrulhar.
 var state = States.PATROL
 var last_state
 
 var path = []
-export var speed = 40
 var tile_size = 32
 var direction = Vector2()
 var last_position = Vector2()
@@ -38,9 +36,16 @@ var in_sight = false
 
 
 func _ready():
-	#Inicializar variáveis e estados
+	#Inicializar variáveis
 	last_position = position
 	target_position = position
+	
+	#Delete o timer de RANDOM já que não será usado
+	get_node("TimerRandom").queue_free()
+	
+	#Atualiza o sprite de acordo com a variável exportada
+	get_node("GhostSprite").texture = ghostsprite
+	
 
 func _process(delta):
 	#Atualizar a posição com base na direção a ser seguida (tile origem -> tile destino)
@@ -118,26 +123,6 @@ func action():
 				_update_navigation_path(global_position, posA.global_position)
 			return
 			
-		States.RANDOM:
-			#Caso não estivesse em modo aleatório, escolher um destino aleatoriamente
-			if last_state != States.RANDOM:
-				rng.randomize()
-				var p = rng.randi_range(1, 3)
-				match p:
-					1:
-						_update_navigation_path(global_position, (ran1.global_position))
-					2:
-						_update_navigation_path(global_position, (ran2.global_position))
-					3:
-						_update_navigation_path(global_position, (ran3.global_position))
-				last_state = States.RANDOM
-				return
-			#Caso tenha chegado ao destino aleatório, retornar à patrulha
-			elif len(path) == 0:
-				last_state = state
-				state = States.PATROL
-			return
-			
 func set_direction():
 	#Se ainda existir caminho, calcular a direção do próximo ponto
 	#e excluir esse ponto do caminho.
@@ -147,7 +132,6 @@ func set_direction():
 	#Se não existir caminho, não há direção.
 	else:
 		direction = Vector2(0,0)
-	
 
 func _update_navigation_path(start_position, end_position):
 	# Retorna um PoolVector2Array de pontos que te levam de start_position 
@@ -160,9 +144,9 @@ func _update_navigation_path(start_position, end_position):
 
 func animation():
 	#Animação fantasma
+	#
 	var anim_direc
-	var animation
-	
+	#Seleciona animação correta com base na direção
 	match direction:
 		Vector2(0,-1):
 			anim_direc = "Up"
@@ -174,9 +158,8 @@ func animation():
 			anim_direc = "Right"
 		Vector2(0,0):
 			return
-	
-	animation = anim_direc + "_Walk"
-	get_node("AnimationPlayer").play(animation)
+	#Toca animação correspondente
+	get_node("AnimationPlayer").play(anim_direc + "_Walk")
 	
 	#Animação luz
 	#Se o fantasma estava dentro do raio (k = 1) e saiu, tocar FadeOut
@@ -195,37 +178,20 @@ func animation():
 
 
 func _on_Area2D_body_entered(body):
+	#Jogador entrou na Area2D. Pode ser visto (in_sight)
 	if body.get_name() == "Player":
 		in_sight = true
 
 func _on_Area2D_body_exited(body):
+	#Jogador saiu da Area2D. Entrar em DOUBT caso estivesse seguindo
 	if body.get_name() == "Player":
 		in_sight = false
 		if state == States.FOLLOW:
 			last_state = state
 			state = States.DOUBT
 
-
-func _on_TimerRandom_timeout():
-	print("RandomY")
-	#Cancelar ida à posição aleatória caso esteja seguindo o jogador
-	if state == States.FOLLOW:
-		return
-	#Caso o fantasma esteja em DOUBT, aguardar o fim do timer
-	elif state == States.DOUBT:
-		yield(get_node("TimerDoubt"), "timeout")
-	last_state = state
-	state = States.RANDOM
-
-
 func _on_TimerDoubt_timeout():
 	#Ao fim do timer de DOUBT, caso não houve interrupção, retornar à patrulha
 	if state == States.DOUBT:
 		last_state = state
 		state = States.PATROL
-
-
-func _on_Delay_timeout():
-	get_node("TimerRandom").start()
-	_on_TimerRandom_timeout()
-	print("RandomY")

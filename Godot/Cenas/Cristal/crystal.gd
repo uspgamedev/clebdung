@@ -2,8 +2,9 @@ extends Sprite
 
 onready var astar = get_tree().get_root().get_node("Fase1").get_node("A*")
 onready var score = get_tree().get_root().get_node("Fase1").get_node("HUD/Score")
-var LimitsI = Vector2(2,2)
-var LimitsJ = Vector2(13,10)
+export(Vector2) var LimitsI
+export(Vector2) var LimitsJ
+export(Vector2) var Offset
 var x_rand = Vector2()
 var y_rand = Vector2()
 
@@ -16,7 +17,7 @@ func _ready():
 	while astar.get_cell(x_rand,y_rand) != 0: 
 		generate()
 	# Posição final do cristal:
-	global_position = astar.map_to_world(Vector2(x_rand,y_rand)) + Vector2(14,12)
+	global_position = astar.map_to_world(Vector2(x_rand,y_rand)) + Offset
 
 func generate():
 	# Escolhe aleatoriamente um tile aleatório dentro dos limites predefinidos:

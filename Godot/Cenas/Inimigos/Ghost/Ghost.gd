@@ -42,13 +42,15 @@ var in_sight = false
 
 
 func _ready():
-	#Inicializar variáveis e estados
+	#Inicializar variáveis
 	last_position = position
 	target_position = position
 	
+	#Estabelece o tempo de delay para o RANDOM iniciar, e inicia o timer de delay
 	get_node("TimerRandom/Delay").set_wait_time(delayrandom)
 	get_node("TimerRandom/Delay").start()
 	
+	#Atualiza o sprite de acordo com a variável exportada
 	get_node("GhostSprite").texture = ghostsprite
 	
 
@@ -170,9 +172,9 @@ func _update_navigation_path(start_position, end_position):
 
 func animation():
 	#Animação fantasma
+	#
 	var anim_direc
-	var animation
-	
+	#Seleciona animação correta com base na direção
 	match direction:
 		Vector2(0,-1):
 			anim_direc = "Up"
@@ -184,9 +186,8 @@ func animation():
 			anim_direc = "Right"
 		Vector2(0,0):
 			return
-	
-	animation = anim_direc + "_Walk"
-	get_node("AnimationPlayer").play(animation)
+	#Toca animação correspondente
+	get_node("AnimationPlayer").play(anim_direc + "_Walk")
 	
 	#Animação luz
 	#Se o fantasma estava dentro do raio (k = 1) e saiu, tocar FadeOut
@@ -205,16 +206,17 @@ func animation():
 
 
 func _on_Area2D_body_entered(body):
+	#Jogador entrou na Area2D. Pode ser visto (in_sight)
 	if body.get_name() == "Player":
 		in_sight = true
 
 func _on_Area2D_body_exited(body):
+	#Jogador saiu da Area2D. Entrar em DOUBT caso estivesse seguindo
 	if body.get_name() == "Player":
 		in_sight = false
 		if state == States.FOLLOW:
 			last_state = state
 			state = States.DOUBT
-
 
 func _on_TimerRandom_timeout():
 	print("Random")
@@ -228,9 +230,9 @@ func _on_TimerRandom_timeout():
 	state = States.RANDOM
 
 func _on_Delay_timeout():
+	#Ao fim do delay, iniciar timer de RANDOM e entrar no próprio estado RANDOM
 	get_node("TimerRandom").start()
 	_on_TimerRandom_timeout()
-	print("Random")
 
 func _on_TimerDoubt_timeout():
 	#Ao fim do timer de DOUBT, caso não houve interrupção, retornar à patrulha

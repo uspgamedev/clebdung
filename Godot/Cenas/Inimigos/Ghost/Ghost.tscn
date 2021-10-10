@@ -307,6 +307,7 @@ script = ExtResource( 3 )
 
 [node name="GhostSprite" type="Sprite" parent="."]
 light_mask = 4
+scale = Vector2( 0.95, 0.95 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, -16 )
 hframes = 4
