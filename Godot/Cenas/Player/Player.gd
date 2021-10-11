@@ -34,7 +34,7 @@ func _process(delta):
 		set_direction()
 		last_position = position
 		target_position += direction * tile_size
-	#animation()
+	animation()
 
 func set_direction():
 	#Determinar direção
