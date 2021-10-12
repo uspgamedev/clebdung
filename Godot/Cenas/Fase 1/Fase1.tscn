@@ -78,7 +78,6 @@ position = Vector2( 217.591, 489.636 )
 script = ExtResource( 8 )
 
 [node name="Ghost" parent="YSort" instance=ExtResource( 3 )]
-visible = false
 position = Vector2( 464, 464 )
 ghostsprite = ExtResource( 19 )
 positionset = NodePath("../../Positions/N")
@@ -86,7 +85,6 @@ speed = 68
 delayrandom = 30
 
 [node name="GhostG" parent="YSort" instance=ExtResource( 3 )]
-visible = false
 position = Vector2( 496, 496 )
 script = ExtResource( 9 )
 ghostsprite = ExtResource( 15 )
@@ -94,7 +92,6 @@ positionset = NodePath("../../Positions/G")
 speed = 65
 
 [node name="GhostB" parent="YSort" instance=ExtResource( 3 )]
-visible = false
 position = Vector2( 560, 464 )
 ghostsprite = ExtResource( 11 )
 positionset = NodePath("../../Positions/B")
@@ -102,7 +99,6 @@ speed = 69
 delayrandom = 70
 
 [node name="GhostY" parent="YSort" instance=ExtResource( 3 )]
-visible = false
 position = Vector2( 464, 560 )
 ghostsprite = ExtResource( 14 )
 positionset = NodePath("../../Positions/Y")
@@ -110,7 +106,6 @@ speed = 60
 delayrandom = 110
 
 [node name="GhostP" parent="YSort" instance=ExtResource( 3 )]
-visible = false
 position = Vector2( 528, 528 )
 script = ExtResource( 9 )
 ghostsprite = ExtResource( 10 )
@@ -118,7 +113,6 @@ positionset = NodePath("../../Positions/P")
 speed = 65
 
 [node name="GhostR" parent="YSort" instance=ExtResource( 3 )]
-visible = false
 position = Vector2( 560, 560 )
 ghostsprite = ExtResource( 20 )
 positionset = NodePath("../../Positions/R")
@@ -260,7 +254,6 @@ position = Vector2( 80, 976 )
 position = Vector2( 944, 1008 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
 color = Color( 0, 0, 0, 1 )
 
 [node name="HUD" type="CanvasLayer" parent="."]
