@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var speed = 85
+export(int) var speed = 85
 var tile_size = 32
 
 var direction = Vector2()

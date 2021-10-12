@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Assets/Fase 1/Mapa-base.tres" type="TileSet" id=1]
 [ext_resource path="res://Cenas/Player/Player.tscn" type="PackedScene" id=2]
@@ -15,6 +15,8 @@
 [ext_resource path="res://Cenas/Fase 1/TimerGhost.gd" type="Script" id=13]
 [ext_resource path="res://Assets/Inimigos/Ghost/Ghost_Spritesheet_Y.png" type="Texture" id=14]
 [ext_resource path="res://Assets/Inimigos/Ghost/Ghost_Spritesheet_G.png" type="Texture" id=15]
+[ext_resource path="res://Cenas/Inimigos/Ghost/Ghost_RandomPatrol.gd" type="Script" id=16]
+[ext_resource path="res://Assets/Inimigos/Ghost/Ghost_Spritesheet_O.png" type="Texture" id=17]
 [ext_resource path="res://Assets/Inimigos/Ghost/Ghost_Spritesheet.png" type="Texture" id=19]
 [ext_resource path="res://Assets/Inimigos/Ghost/Ghost_Spritesheet_R.png" type="Texture" id=20]
 
@@ -46,29 +48,29 @@ tile_data = PoolIntArray( 131083, 4, 0, 131084, 5, 0, 131085, 7, 0, 131086, 8, 0
 [node name="YSort" type="YSort" parent="."]
 
 [node name="crystal" parent="YSort" instance=ExtResource( 7 )]
-LimitsI = Vector2( 2, 2 )
+LimitsI = Vector2( 2, 3 )
 LimitsJ = Vector2( 13, 10 )
 Offset = Vector2( 14, 12 )
 
 [node name="crystal2" parent="YSort" instance=ExtResource( 7 )]
 position = Vector2( 16, 0 )
 scale = Vector2( 0.65, 0.65 )
-LimitsI = Vector2( 16, 3 )
-LimitsJ = Vector2( 31, 17 )
+LimitsI = Vector2( 19, 3 )
+LimitsJ = Vector2( 30, 13 )
 Offset = Vector2( 20, 14 )
 
 [node name="crystal3" parent="YSort" instance=ExtResource( 7 )]
 position = Vector2( 32, 0 )
 scale = Vector2( 0.8, 0.7 )
-LimitsI = Vector2( 16, 21 )
-LimitsJ = Vector2( 30, 31 )
+LimitsI = Vector2( 1, 22 )
+LimitsJ = Vector2( 13, 31 )
 Offset = Vector2( 12, 12 )
 
 [node name="crystal4" parent="YSort" instance=ExtResource( 7 )]
 position = Vector2( 48, 0 )
 scale = Vector2( 0.72, 0.8 )
-LimitsI = Vector2( 1, 20 )
-LimitsJ = Vector2( 13, 31 )
+LimitsI = Vector2( 20, 16 )
+LimitsJ = Vector2( 30, 31 )
 Offset = Vector2( 16, 18 )
 
 [node name="crystalConst" parent="YSort" instance=ExtResource( 7 )]
@@ -76,6 +78,7 @@ position = Vector2( 217.591, 489.636 )
 script = ExtResource( 8 )
 
 [node name="Ghost" parent="YSort" instance=ExtResource( 3 )]
+visible = false
 position = Vector2( 464, 464 )
 ghostsprite = ExtResource( 19 )
 positionset = NodePath("../../Positions/N")
@@ -83,6 +86,7 @@ speed = 68
 delayrandom = 30
 
 [node name="GhostG" parent="YSort" instance=ExtResource( 3 )]
+visible = false
 position = Vector2( 496, 496 )
 script = ExtResource( 9 )
 ghostsprite = ExtResource( 15 )
@@ -90,13 +94,15 @@ positionset = NodePath("../../Positions/G")
 speed = 65
 
 [node name="GhostB" parent="YSort" instance=ExtResource( 3 )]
+visible = false
 position = Vector2( 560, 464 )
 ghostsprite = ExtResource( 11 )
 positionset = NodePath("../../Positions/B")
-speed = 70
+speed = 69
 delayrandom = 70
 
 [node name="GhostY" parent="YSort" instance=ExtResource( 3 )]
+visible = false
 position = Vector2( 464, 560 )
 ghostsprite = ExtResource( 14 )
 positionset = NodePath("../../Positions/Y")
@@ -104,6 +110,7 @@ speed = 60
 delayrandom = 110
 
 [node name="GhostP" parent="YSort" instance=ExtResource( 3 )]
+visible = false
 position = Vector2( 528, 528 )
 script = ExtResource( 9 )
 ghostsprite = ExtResource( 10 )
@@ -111,15 +118,25 @@ positionset = NodePath("../../Positions/P")
 speed = 65
 
 [node name="GhostR" parent="YSort" instance=ExtResource( 3 )]
+visible = false
 position = Vector2( 560, 560 )
 ghostsprite = ExtResource( 20 )
 positionset = NodePath("../../Positions/R")
-speed = 73
+speed = 72
 delayrandom = 150
+
+[node name="GhostO" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 528, 592 )
+script = ExtResource( 16 )
+ghostsprite = ExtResource( 17 )
+positionset = NodePath("../../Positions/O")
+speed = 52
+radius = 300
 
 [node name="Player" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 16, 496 )
 scale = Vector2( 0.3, 0.3 )
+speed = 83
 
 [node name="Positions" type="Node" parent="."]
 
@@ -225,7 +242,25 @@ position = Vector2( 528, 528 )
 [node name="R3" type="Position2D" parent="Positions/R"]
 position = Vector2( 304, 944 )
 
+[node name="O" type="Node" parent="Positions"]
+
+[node name="R1" type="Position2D" parent="Positions/O"]
+position = Vector2( 528, 496 )
+
+[node name="R2" type="Position2D" parent="Positions/O"]
+position = Vector2( 944, 240 )
+
+[node name="R3" type="Position2D" parent="Positions/O"]
+position = Vector2( 112, 176 )
+
+[node name="R4" type="Position2D" parent="Positions/O"]
+position = Vector2( 80, 976 )
+
+[node name="R5" type="Position2D" parent="Positions/O"]
+position = Vector2( 944, 1008 )
+
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
 color = Color( 0, 0, 0, 1 )
 
 [node name="HUD" type="CanvasLayer" parent="."]
@@ -236,12 +271,13 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -208.0
-margin_top = -208.0
+margin_top = -260.0
 margin_right = -139.0
 margin_bottom = -139.0
 rect_scale = Vector2( 3, 3 )
 
 [node name="Score" parent="HUD" instance=ExtResource( 12 )]
+margin_top = 504.0
 
 [node name="TimerGhost" type="Label" parent="HUD"]
 margin_right = 40.0

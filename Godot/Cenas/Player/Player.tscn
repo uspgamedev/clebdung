@@ -84,7 +84,7 @@ tracks/5/keys = {
 "values": [ 0.7, 0.65, 0.68, 0.63, 0.68, 0.63 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=3]
 resource_name = "Left_Idle"
 length = 0.5
 loop = true
@@ -113,8 +113,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "Left_Walk"
+[sub_resource type="Animation" id=4]
 length = 0.5
 loop = true
 tracks/0/type = "value"
@@ -142,7 +141,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=5]
 resource_name = "Right_Idle"
 length = 0.5
 loop = true
@@ -171,7 +170,7 @@ tracks/1/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=6]
 length = 0.5
 loop = true
 tracks/0/type = "value"
@@ -199,7 +198,7 @@ tracks/1/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=7]
 resource_name = "Up_Idle"
 length = 0.65
 loop = true
@@ -217,9 +216,8 @@ tracks/0/keys = {
 "values": [ 18, 19, 20, 21 ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "Up_Walk"
-length = 1.05
+[sub_resource type="Animation" id=8]
+length = 1.2
 loop = true
 step = 0.2
 tracks/0/type = "value"
@@ -244,13 +242,13 @@ light_mask = 4
 position = Vector2( 0, -40 )
 scale = Vector2( 3.4, 3.4 )
 texture = ExtResource( 2 )
+flip_h = true
 hframes = 6
-vframes = 4
-frame = 20
+vframes = 2
+frame = 10
 
 [node name="Camera2D" type="Camera2D" parent="."]
 light_mask = 3
-current = true
 zoom = Vector2( 0.5, 0.5 )
 smoothing_enabled = true
 
@@ -296,9 +294,9 @@ shape = SubResource( 1 )
 anims/Light = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Left_Idle = SubResource( 6 )
-anims/Left_Walk = SubResource( 3 )
-anims/Right_Idle = SubResource( 7 )
-anims/Right_Walk = SubResource( 4 )
-anims/Up_Idle = SubResource( 8 )
-anims/Up_Walk = SubResource( 5 )
+anims/Left_Idle = SubResource( 3 )
+anims/Left_Walk = SubResource( 4 )
+anims/Right_Idle = SubResource( 5 )
+anims/Right_Walk = SubResource( 6 )
+anims/Up_Idle = SubResource( 7 )
+anims/Up_Walk = SubResource( 8 )

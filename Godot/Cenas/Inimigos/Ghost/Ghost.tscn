@@ -299,7 +299,7 @@ tracks/0/keys = {
 extents = Vector2( 11.5, 14.05 )
 
 [sub_resource type="CircleShape2D" id=10]
-radius = 112.0
+radius = 104.0
 
 [node name="Ghost" type="KinematicBody2D"]
 collision_layer = 2
