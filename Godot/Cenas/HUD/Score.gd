@@ -7,10 +7,8 @@ func _ready():
 	yield(get_tree().create_timer(0.5), "timeout")
 	get_node("AnimationPlayer").play("Score_0")
 
-func _process(_delta):
-	if score == 5:
-		print("Ganhou")
-
 func update_score():
 	score += 1
 	get_node("AnimationPlayer").play("Score_" + str(score))
+	if score == 5:
+		get_tree().call_group("Ghosts","enter_chaos")

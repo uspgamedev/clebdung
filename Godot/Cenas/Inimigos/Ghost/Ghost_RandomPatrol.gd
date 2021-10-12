@@ -14,6 +14,11 @@ onready var ran3 = get_node(str(positionset)+"/R3")
 onready var ran4 = get_node(str(positionset)+"/R4")
 onready var ran5 = get_node(str(positionset)+"/R5")
 
+onready var RC = get_node("RayCast")
+onready var RC2 = get_node("RayCast2")
+onready var RC3 = get_node("RayCast3")
+onready var RC4 = get_node("RayCast4")
+
 enum States { FOLLOW, DOUBT, PATROL }
 #ESTADOS:
 # Follow = Seguindo jogador incessantemente
@@ -31,6 +36,8 @@ var last_position = Vector2()
 var target_position = Vector2()
 var k = 1
 var rng = RandomNumberGenerator.new()
+var in_sight = false
+var chaos = false
 
 
 func _ready():
@@ -38,12 +45,8 @@ func _ready():
 	last_position = position
 	target_position = position
 	
-	#Deleta o timer de RANDOM e os raycasts já que não serão usados
+	#Delete o timer de RANDOM já que não será usado
 	get_node("TimerRandom").queue_free()
-	get_node("RayCast").queue_free()
-	get_node("RayCast2").queue_free()
-	get_node("RayCast3").queue_free()
-	get_node("RayCast4").queue_free()
 	
 	#Atualiza o sprite de acordo com a variável exportada
 	get_node("GhostSprite").texture = ghostsprite
@@ -59,6 +62,10 @@ func _ready():
 	
 
 func _process(delta):
+	#Caos ao coletar todos os cristais
+	if chaos:
+		state = States.FOLLOW
+	
 	#Atualizar a posição com base na direção a ser seguida (tile origem -> tile destino)
 	global_position += speed * direction * delta
 	#Atualizar a posição para o destino, caso se distancie "X" do tile origem
@@ -74,17 +81,33 @@ func _process(delta):
 		target_position = position + (direction * tile_size)
 	animation()
 
+	#Se o jogador estiver dentro da área 2D
+	if in_sight:
+		#Lançar 4 raycasts em volta do jogador
+		RC.cast_to =  player.global_position - global_position + Vector2(14,14)
+		RC2.cast_to =  player.global_position - global_position + Vector2(14,-14)
+		RC3.cast_to =  player.global_position - global_position + Vector2(-14,14)
+		RC4.cast_to =  player.global_position - global_position + Vector2(-14,-14)
+		#Caso algum dos raycasts não colida (tem visão do jogador), seguir o jogador 
+		if !RC.is_colliding() or !RC2.is_colliding() or !RC3.is_colliding() or !RC4.is_colliding():
+			last_state = state
+			state = States.FOLLOW
+			#Caso o timer de DOUBT esteja em curso, cancelá-lo.
+			if !get_node("TimerDoubt").is_stopped():
+				get_node("TimerDoubt").stop()
+
 #Decide o que fazer no próximo frame, baseado nos possíveis estados
 func action():
 	match state:
 		States.DOUBT:
-			#Apaga o caminho atual
-			path = []
-			#Toca a animação de dúvida
-			get_node("AnimationPlayer").play("Doubt")
-			#Iniciar o timer para voltar à patrulha
-			if get_node("TimerDoubt").is_stopped():   #Impede início em loop
-				get_node("TimerDoubt").start()
+			#Terminar caminho até o jogador. Se terminado, espera um 
+			#tempo e retorna à patrulha
+			if len(path) == 0:
+				#Toca a animação de dúvida
+				get_node("AnimationPlayer").play("Doubt")
+				#Iniciar o timer para voltar à patrulha
+				if get_node("TimerDoubt").is_stopped():   #Impede início em loop
+					get_node("TimerDoubt").start()
 			return
 			
 		States.FOLLOW:
@@ -111,7 +134,7 @@ func action():
 						_update_navigation_path(global_position, (ran5.global_position))
 				last_state = States.PATROL
 			return
-
+			
 func set_direction():
 	#Se ainda existir caminho, calcular a direção do próximo ponto
 	#e excluir esse ponto do caminho.
@@ -121,7 +144,6 @@ func set_direction():
 	#Se não existir caminho, não há direção.
 	else:
 		direction = Vector2(0,0)
-	
 
 func _update_navigation_path(start_position, end_position):
 	# Retorna um PoolVector2Array de pontos que te levam de start_position 
@@ -152,6 +174,9 @@ func animation():
 	get_node("AnimationPlayer").play(anim_direc + "_Walk")
 	
 	#Animação luz
+	#Animação caos
+	if chaos:
+		get_node("AnimationPlayerL").play("Light_Chaos")
 	#Se o fantasma estava dentro do raio (k = 1) e saiu, tocar FadeOut
 	if global_position.distance_to(player.global_position) >= 98 && k == 1:
 		get_node("AnimationPlayerL").play("Light_FadeOut")
@@ -168,22 +193,23 @@ func animation():
 
 
 func _on_Area2D_body_entered(body):
-	#Jogador entrou na Area2D: Segui-lo.
+	#Jogador entrou na Area2D. Pode ser visto (in_sight)
 	if body.get_name() == "Player":
-		last_state = state
-		state = States.FOLLOW
-		#Caso o timer de DOUBT esteja em curso, cancelá-lo.
-		if !get_node("TimerDoubt").is_stopped():
-			get_node("TimerDoubt").stop()
+		in_sight = true
 
 func _on_Area2D_body_exited(body):
-	#Jogador saiu da Area2D. Entrar em DOUBT.
+	#Jogador saiu da Area2D. Entrar em DOUBT caso estivesse seguindo
 	if body.get_name() == "Player":
-		last_state = state
-		state = States.DOUBT
+		in_sight = false
+		if state == States.FOLLOW:
+			last_state = state
+			state = States.DOUBT
 
 func _on_TimerDoubt_timeout():
-	#Ao fim do timer de DOUBT, caso não houve interrupção, retornar à patrulha.
+	#Ao fim do timer de DOUBT, caso não houve interrupção, retornar à patrulha
 	if state == States.DOUBT:
 		last_state = state
 		state = States.PATROL
+
+func enter_chaos():
+	chaos = true

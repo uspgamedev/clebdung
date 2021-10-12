@@ -77,55 +77,69 @@ Offset = Vector2( 16, 18 )
 position = Vector2( 217.591, 489.636 )
 script = ExtResource( 8 )
 
-[node name="Ghost" parent="YSort" instance=ExtResource( 3 )]
+[node name="Ghost" parent="YSort" groups=[
+"Ghosts",
+] instance=ExtResource( 3 )]
 position = Vector2( 464, 464 )
 ghostsprite = ExtResource( 19 )
 positionset = NodePath("../../Positions/N")
-speed = 68
+speed = 66
 delayrandom = 30
 
-[node name="GhostG" parent="YSort" instance=ExtResource( 3 )]
+[node name="GhostG" parent="YSort" groups=[
+"Ghosts",
+] instance=ExtResource( 3 )]
 position = Vector2( 496, 496 )
 script = ExtResource( 9 )
 ghostsprite = ExtResource( 15 )
 positionset = NodePath("../../Positions/G")
 speed = 65
 
-[node name="GhostB" parent="YSort" instance=ExtResource( 3 )]
+[node name="GhostB" parent="YSort" groups=[
+"Ghosts",
+] instance=ExtResource( 3 )]
 position = Vector2( 560, 464 )
 ghostsprite = ExtResource( 11 )
 positionset = NodePath("../../Positions/B")
-speed = 69
+speed = 68
 delayrandom = 70
 
-[node name="GhostY" parent="YSort" instance=ExtResource( 3 )]
+[node name="GhostY" parent="YSort" groups=[
+"Ghosts",
+] instance=ExtResource( 3 )]
 position = Vector2( 464, 560 )
 ghostsprite = ExtResource( 14 )
 positionset = NodePath("../../Positions/Y")
 speed = 60
 delayrandom = 110
 
-[node name="GhostP" parent="YSort" instance=ExtResource( 3 )]
+[node name="GhostP" parent="YSort" groups=[
+"Ghosts",
+] instance=ExtResource( 3 )]
 position = Vector2( 528, 528 )
 script = ExtResource( 9 )
 ghostsprite = ExtResource( 10 )
 positionset = NodePath("../../Positions/P")
 speed = 65
 
-[node name="GhostR" parent="YSort" instance=ExtResource( 3 )]
+[node name="GhostR" parent="YSort" groups=[
+"Ghosts",
+] instance=ExtResource( 3 )]
 position = Vector2( 560, 560 )
 ghostsprite = ExtResource( 20 )
 positionset = NodePath("../../Positions/R")
-speed = 72
+speed = 70
 delayrandom = 150
 
-[node name="GhostO" parent="YSort" instance=ExtResource( 3 )]
+[node name="GhostO" parent="YSort" groups=[
+"Ghosts",
+] instance=ExtResource( 3 )]
 position = Vector2( 528, 592 )
 script = ExtResource( 16 )
 ghostsprite = ExtResource( 17 )
 positionset = NodePath("../../Positions/O")
-speed = 52
-radius = 300
+speed = 54
+radius = 150
 
 [node name="Player" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 16, 496 )
@@ -242,16 +256,16 @@ position = Vector2( 304, 944 )
 position = Vector2( 528, 496 )
 
 [node name="R2" type="Position2D" parent="Positions/O"]
-position = Vector2( 944, 240 )
+position = Vector2( 688, 176 )
 
 [node name="R3" type="Position2D" parent="Positions/O"]
-position = Vector2( 112, 176 )
+position = Vector2( 208, 240 )
 
 [node name="R4" type="Position2D" parent="Positions/O"]
-position = Vector2( 80, 976 )
+position = Vector2( 240, 1008 )
 
 [node name="R5" type="Position2D" parent="Positions/O"]
-position = Vector2( 944, 1008 )
+position = Vector2( 816, 1008 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0, 0, 0, 1 )
@@ -263,14 +277,21 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -208.0
-margin_top = -260.0
-margin_right = -139.0
-margin_bottom = -139.0
+margin_left = -240.0
+margin_top = -250.0
+margin_right = -160.0
+margin_bottom = -167.0
 rect_scale = Vector2( 3, 3 )
 
 [node name="Score" parent="HUD" instance=ExtResource( 12 )]
-margin_top = 504.0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -304.0
+margin_top = -96.0
+margin_right = 0.0
+margin_bottom = 0.0
 
 [node name="TimerGhost" type="Label" parent="HUD"]
 margin_right = 40.0

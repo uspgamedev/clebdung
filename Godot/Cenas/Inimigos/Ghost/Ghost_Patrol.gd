@@ -33,6 +33,7 @@ var target_position = Vector2()
 var k = 1
 var rng = RandomNumberGenerator.new()
 var in_sight = false
+var chaos = false
 
 
 func _ready():
@@ -48,6 +49,10 @@ func _ready():
 	
 
 func _process(delta):
+	#Caos ao coletar todos os cristais
+	if chaos:
+		state = States.FOLLOW
+	
 	#Atualizar a posição com base na direção a ser seguida (tile origem -> tile destino)
 	global_position += speed * direction * delta
 	#Atualizar a posição para o destino, caso se distancie "X" do tile origem
@@ -162,6 +167,9 @@ func animation():
 	get_node("AnimationPlayer").play(anim_direc + "_Walk")
 	
 	#Animação luz
+	#Animação caos
+	if chaos:
+		get_node("AnimationPlayerL").play("Light_Chaos")
 	#Se o fantasma estava dentro do raio (k = 1) e saiu, tocar FadeOut
 	if global_position.distance_to(player.global_position) >= 98 && k == 1:
 		get_node("AnimationPlayerL").play("Light_FadeOut")
@@ -195,3 +203,7 @@ func _on_TimerDoubt_timeout():
 	if state == States.DOUBT:
 		last_state = state
 		state = States.PATROL
+
+func enter_chaos():
+	chaos = true
+

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Assets/Inimigos/Ghost/Ghost_Spritesheet.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Inimigos/Ghost/Ghost_Light.png" type="Texture" id=2]
@@ -266,8 +266,38 @@ tracks/1/keys = {
 "values": [ 1.1, 1.2 ]
 }
 
+[sub_resource type="Animation" id=11]
+resource_name = "Light_Chaos"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Light2D:texture_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.06, 0.08, 0.06 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Light2D:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6, 1, 1.6, 2, 2.6, 3, 3.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.7, 0.0, 1.5, 0.0, 2.0, 0.0, 1.8 ]
+}
+
 [sub_resource type="Animation" id=7]
-length = 0.2
+length = 0.15
+step = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("Light2D:energy")
 tracks/0/interp = 1
@@ -275,7 +305,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
+"times": PoolRealArray( 0, 0.149 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0.0, 1.1 ]
@@ -317,9 +347,9 @@ frame = 12
 [node name="Light2D" type="Light2D" parent="."]
 position = Vector2( 1, -25.868 )
 texture = ExtResource( 2 )
-texture_scale = 0.06
+texture_scale = 0.0606865
 color = Color( 0.761719, 0.140317, 0, 1 )
-energy = 1.1
+energy = 0.308929
 range_item_cull_mask = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -331,6 +361,7 @@ anims/Up_Walk = SubResource( 5 )
 
 [node name="AnimationPlayerL" type="AnimationPlayer" parent="."]
 anims/Light = SubResource( 6 )
+anims/Light_Chaos = SubResource( 11 )
 anims/Light_FadeIn = SubResource( 7 )
 anims/Light_FadeOut = SubResource( 8 )
 

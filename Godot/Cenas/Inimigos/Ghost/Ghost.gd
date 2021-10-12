@@ -39,7 +39,9 @@ var target_position = Vector2()
 var k = 1
 var rng = RandomNumberGenerator.new()
 var in_sight = false
-
+var chaos = false
+#Chaos: Ao coletar todos os cristais, os fantasmas entram em modo
+#"caos" e seguem o jogador até que ele escape do cenário.
 
 func _ready():
 	#Inicializar variáveis
@@ -52,9 +54,12 @@ func _ready():
 	
 	#Atualiza o sprite de acordo com a variável exportada
 	get_node("GhostSprite").texture = ghostsprite
-	
 
 func _process(delta):
+	#Caos ao coletar todos os cristais
+	if chaos:
+		state = States.FOLLOW
+	
 	#Atualizar a posição com base na direção a ser seguida (tile origem -> tile destino)
 	global_position += speed * direction * delta
 	#Atualizar a posição para o destino, caso se distancie "X" do tile origem
@@ -69,7 +74,7 @@ func _process(delta):
 		last_position = position
 		target_position = position + (direction * tile_size)
 	animation()
-
+	
 	#Se o jogador estiver dentro da área 2D
 	if in_sight:
 		#Lançar 4 raycasts em volta do jogador
@@ -190,8 +195,11 @@ func animation():
 	get_node("AnimationPlayer").play(anim_direc + "_Walk")
 	
 	#Animação luz
+	#Animação caos
+	if chaos:
+		get_node("AnimationPlayerL").play("Light_Chaos")
 	#Se o fantasma estava dentro do raio (k = 1) e saiu, tocar FadeOut
-	if global_position.distance_to(player.global_position) >= 98 && k == 1:
+	elif global_position.distance_to(player.global_position) >= 98 && k == 1:
 		get_node("AnimationPlayerL").play("Light_FadeOut")
 		yield(get_node("AnimationPlayerL"), "animation_finished")
 		k = 0
@@ -239,3 +247,6 @@ func _on_TimerDoubt_timeout():
 	if state == States.DOUBT:
 		last_state = state
 		state = States.PATROL
+
+func enter_chaos():
+	chaos = true
