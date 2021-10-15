@@ -8,7 +8,6 @@ var last_position = Vector2()
 var target_position = Vector2()
 
 func _ready():
-	
 	#Play animação luz
 	$AnimationPlayerL.play("Light")
 	
@@ -16,15 +15,18 @@ func _ready():
 	last_position = position
 	target_position = position
 
-func _process(delta):
+func _process(_delta):
+	animation()
+	
+func _physics_process(delta):
 	#MOVENDO
+	#Colisão
 	if $PlayerRayCast.is_colliding():
-		#COLIDIU
 		position = last_position
 		target_position = position
 	else:
 		#Mover-se
-		position += speed * direction * delta
+		move_and_collide(speed * direction * delta)
 		
 		if position.distance_to(last_position) >= tile_size - speed * delta:
 			position = target_position
@@ -34,7 +36,6 @@ func _process(delta):
 		set_direction()
 		last_position = position
 		target_position += direction * tile_size
-	animation()
 
 func set_direction():
 	#Determinar direção

@@ -3,7 +3,6 @@ extends KinematicBody2D
 onready var astar = get_tree().get_root().get_node("Fase1").get_node("A*")
 onready var player = get_tree().get_root().get_node("Fase1").get_node("YSort/Player")
 
-export(Texture) var ghostsprite
 export(NodePath) var positionset
 export(int) var speed
 export(int) var radius
@@ -48,24 +47,22 @@ func _ready():
 	#Delete o timer de RANDOM já que não será usado
 	get_node("TimerRandom").queue_free()
 	
-	#Atualiza o sprite de acordo com a variável exportada
-	get_node("GhostSprite").texture = ghostsprite
-	
 	#Deleta a CollisionShape2D padrão (caso contrário, buga) e adiciona
 	#uma nova com raio maior 'radius'
-	get_node("Area2D/CollisionShape2D").queue_free()
+	get_node("Vision/CollisionShape2D").queue_free()
 	var shape = CircleShape2D.new()
 	shape.radius = radius
 	var collision = CollisionShape2D.new()
 	collision.set_shape(shape)
-	get_node("Area2D").add_child(collision)
+	get_node("Vision").add_child(collision)
 	
-
-func _process(delta):
+func _process(_delta):
 	#Caos ao coletar todos os cristais
 	if chaos:
 		state = States.FOLLOW
+	animation()
 	
+func _physics_process(delta):
 	#Atualizar a posição com base na direção a ser seguida (tile origem -> tile destino)
 	global_position += speed * direction * delta
 	#Atualizar a posição para o destino, caso se distancie "X" do tile origem
@@ -79,8 +76,7 @@ func _process(delta):
 		set_direction()
 		last_position = position
 		target_position = position + (direction * tile_size)
-	animation()
-
+	
 	#Se o jogador estiver dentro da área 2D
 	if in_sight:
 		#Lançar 4 raycasts em volta do jogador
@@ -192,12 +188,12 @@ func animation():
 		get_node("AnimationPlayerL").play("Light")
 
 
-func _on_Area2D_body_entered(body):
+func _on_Vision_body_entered(body):
 	#Jogador entrou na Area2D. Pode ser visto (in_sight)
 	if body.get_name() == "Player":
 		in_sight = true
 
-func _on_Area2D_body_exited(body):
+func _on_Vision_body_exited(body):
 	#Jogador saiu da Area2D. Entrar em DOUBT caso estivesse seguindo
 	if body.get_name() == "Player":
 		in_sight = false
@@ -213,3 +209,7 @@ func _on_TimerDoubt_timeout():
 
 func enter_chaos():
 	chaos = true
+
+func _on_AreaCollision_body_entered(body):
+	if body.get_name() == "Player":
+		print("Perdeu")

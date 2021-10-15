@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Assets/Fase 1/Mapa-base.tres" type="TileSet" id=1]
 [ext_resource path="res://Cenas/Player/Player.tscn" type="PackedScene" id=2]
@@ -9,16 +9,9 @@
 [ext_resource path="res://Cenas/Cristal/crystal.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Cenas/Cristal/crystalConst.gd" type="Script" id=8]
 [ext_resource path="res://Cenas/Inimigos/Ghost/Ghost_Patrol.gd" type="Script" id=9]
-[ext_resource path="res://Assets/Inimigos/Ghost/Ghost_Spritesheet_P.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Inimigos/Ghost/Ghost_Spritesheet_B.png" type="Texture" id=11]
 [ext_resource path="res://Cenas/HUD/Score.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Cenas/Fase 1/TimerGhost.gd" type="Script" id=13]
-[ext_resource path="res://Assets/Inimigos/Ghost/Ghost_Spritesheet_Y.png" type="Texture" id=14]
-[ext_resource path="res://Assets/Inimigos/Ghost/Ghost_Spritesheet_G.png" type="Texture" id=15]
+[ext_resource path="res://Cenas/Fase 1/Relógio.gd" type="Script" id=13]
 [ext_resource path="res://Cenas/Inimigos/Ghost/Ghost_RandomPatrol.gd" type="Script" id=16]
-[ext_resource path="res://Assets/Inimigos/Ghost/Ghost_Spritesheet_O.png" type="Texture" id=17]
-[ext_resource path="res://Assets/Inimigos/Ghost/Ghost_Spritesheet.png" type="Texture" id=19]
-[ext_resource path="res://Assets/Inimigos/Ghost/Ghost_Spritesheet_R.png" type="Texture" id=20]
 
 [node name="Fase1" type="Node2D"]
 
@@ -81,7 +74,6 @@ script = ExtResource( 8 )
 "Ghosts",
 ] instance=ExtResource( 3 )]
 position = Vector2( 464, 464 )
-ghostsprite = ExtResource( 19 )
 positionset = NodePath("../../Positions/N")
 speed = 66
 delayrandom = 30
@@ -89,17 +81,17 @@ delayrandom = 30
 [node name="GhostG" parent="YSort" groups=[
 "Ghosts",
 ] instance=ExtResource( 3 )]
+modulate = Color( 0.901961, 1, 0.862745, 1 )
 position = Vector2( 496, 496 )
 script = ExtResource( 9 )
-ghostsprite = ExtResource( 15 )
 positionset = NodePath("../../Positions/G")
 speed = 65
 
 [node name="GhostB" parent="YSort" groups=[
 "Ghosts",
 ] instance=ExtResource( 3 )]
+modulate = Color( 0.768627, 0.792157, 1, 1 )
 position = Vector2( 560, 464 )
-ghostsprite = ExtResource( 11 )
 positionset = NodePath("../../Positions/B")
 speed = 68
 delayrandom = 70
@@ -107,8 +99,8 @@ delayrandom = 70
 [node name="GhostY" parent="YSort" groups=[
 "Ghosts",
 ] instance=ExtResource( 3 )]
+modulate = Color( 1, 0.960784, 0.619608, 1 )
 position = Vector2( 464, 560 )
-ghostsprite = ExtResource( 14 )
 positionset = NodePath("../../Positions/Y")
 speed = 60
 delayrandom = 110
@@ -116,17 +108,17 @@ delayrandom = 110
 [node name="GhostP" parent="YSort" groups=[
 "Ghosts",
 ] instance=ExtResource( 3 )]
+modulate = Color( 1, 0.811765, 0.996078, 1 )
 position = Vector2( 528, 528 )
 script = ExtResource( 9 )
-ghostsprite = ExtResource( 10 )
 positionset = NodePath("../../Positions/P")
 speed = 65
 
 [node name="GhostR" parent="YSort" groups=[
 "Ghosts",
 ] instance=ExtResource( 3 )]
+modulate = Color( 1, 0.721569, 0.721569, 1 )
 position = Vector2( 560, 560 )
-ghostsprite = ExtResource( 20 )
 positionset = NodePath("../../Positions/R")
 speed = 70
 delayrandom = 150
@@ -134,15 +126,15 @@ delayrandom = 150
 [node name="GhostO" parent="YSort" groups=[
 "Ghosts",
 ] instance=ExtResource( 3 )]
+modulate = Color( 1, 0.835294, 0.639216, 1 )
 position = Vector2( 528, 592 )
 script = ExtResource( 16 )
-ghostsprite = ExtResource( 17 )
 positionset = NodePath("../../Positions/O")
 speed = 54
 radius = 150
 
 [node name="Player" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 16, 496 )
+position = Vector2( 80, 496 )
 scale = Vector2( 0.3, 0.3 )
 speed = 83
 
@@ -222,7 +214,7 @@ position = Vector2( 720, 816 )
 [node name="P" type="Node" parent="Positions"]
 
 [node name="A" type="Position2D" parent="Positions/P"]
-position = Vector2( 656, 560 )
+position = Vector2( 656, 528 )
 
 [node name="B" type="Position2D" parent="Positions/P"]
 position = Vector2( 592, 1008 )
@@ -293,7 +285,7 @@ margin_top = -96.0
 margin_right = 0.0
 margin_bottom = 0.0
 
-[node name="TimerGhost" type="Label" parent="HUD"]
+[node name="Relógio" type="Label" parent="HUD"]
 margin_right = 40.0
 margin_bottom = 14.0
 script = ExtResource( 13 )
