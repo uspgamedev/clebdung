@@ -203,7 +203,3 @@ func _on_TimerDoubt_timeout():
 
 func enter_chaos():
 	chaos = true
-
-func _on_AreaCollision_body_entered(body):
-	if body.get_name() == "Player":
-		print("Perdeu")

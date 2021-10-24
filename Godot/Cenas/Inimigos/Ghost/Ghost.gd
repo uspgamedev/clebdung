@@ -225,7 +225,6 @@ func _on_Vision_body_exited(body):
 			state = States.DOUBT
 
 func _on_TimerRandom_timeout():
-	print("Random")
 	#Cancelar ida à posição aleatória caso esteja seguindo o jogador
 	if state == States.FOLLOW:
 		return
@@ -248,7 +247,3 @@ func _on_TimerDoubt_timeout():
 
 func enter_chaos():
 	chaos = true
-
-func _on_AreaCollision_body_entered(body):
-	if body.get_name() == "Player":
-		print("Perdeu")

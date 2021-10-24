@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Assets/Inimigos/Ghost/Ghost_Spritesheet.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Inimigos/Ghost/Ghost_Light.png" type="Texture" id=2]
@@ -326,17 +326,14 @@ tracks/0/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 5.72034, 14.2996 )
-
-[sub_resource type="RectangleShape2D" id=11]
-extents = Vector2( 8, 8 )
+extents = Vector2( 7.125, 14.2996 )
 
 [sub_resource type="CircleShape2D" id=12]
 radius = 104.0
 
 [node name="Ghost" type="KinematicBody2D"]
 collision_layer = 2
-collision_mask = 2
+collision_mask = 0
 script = ExtResource( 3 )
 
 [node name="GhostSprite" type="Sprite" parent="."]
@@ -372,14 +369,6 @@ anims/Light_FadeOut = SubResource( 9 )
 [node name="GhostCollision" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -14.3405 )
 shape = SubResource( 10 )
-disabled = true
-
-[node name="AreaCollision" type="Area2D" parent="."]
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaCollision"]
-position = Vector2( 0, -8 )
-shape = SubResource( 11 )
 
 [node name="RayCast" type="RayCast2D" parent="."]
 enabled = true
@@ -394,6 +383,7 @@ enabled = true
 enabled = true
 
 [node name="Vision" type="Area2D" parent="."]
+collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Vision"]
@@ -411,7 +401,6 @@ one_shot = true
 wait_time = 1.7
 one_shot = true
 
-[connection signal="body_entered" from="AreaCollision" to="." method="_on_AreaCollision_body_entered"]
 [connection signal="body_entered" from="Vision" to="." method="_on_Vision_body_entered"]
 [connection signal="body_exited" from="Vision" to="." method="_on_Vision_body_exited"]
 [connection signal="timeout" from="TimerRandom" to="." method="_on_TimerRandom_timeout"]
