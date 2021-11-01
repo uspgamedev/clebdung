@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Luz-Sprite.png-1b2e85b15a4ac13190462c2ca3c3f856.stex"
+path="res://.import/Luz-Sprite_SF.png-9b484c5959197c1a711606efb41388ea.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Luz-Sprite.png"
-dest_files=[ "res://.import/Luz-Sprite.png-1b2e85b15a4ac13190462c2ca3c3f856.stex" ]
+source_file="res://Assets/Luz-Sprite_SF.png"
+dest_files=[ "res://.import/Luz-Sprite_SF.png-9b484c5959197c1a711606efb41388ea.stex" ]
 
 [params]
 

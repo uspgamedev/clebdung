@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Luz-Sprite_SF.png-9b484c5959197c1a711606efb41388ea.stex"
+path="res://.import/TochaC.png-15fbbebd9e5cef8ffd7eb18377388074.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Luz-Sprite_SF.png"
-dest_files=[ "res://.import/Luz-Sprite_SF.png-9b484c5959197c1a711606efb41388ea.stex" ]
+source_file="res://Assets/Fase 1/TochaC.png"
+dest_files=[ "res://.import/TochaC.png-15fbbebd9e5cef8ffd7eb18377388074.stex" ]
 
 [params]
 

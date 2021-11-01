@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 onready var astar = get_tree().get_root().get_node("Fase1").get_node("A*")
 onready var player = get_tree().get_root().get_node("Fase1").get_node("YSort/Player")
+onready var animplayerL = get_node("AnimationPlayerL")
 
 
 export(NodePath) var positionset
@@ -34,7 +35,8 @@ var k = 1
 var rng = RandomNumberGenerator.new()
 var in_sight = false
 var chaos = false
-
+#Chaos: Ao coletar todos os cristais, os fantasmas entram em modo
+#"caos" e seguem o jogador até que ele escape do cenário.
 
 func _ready():
 	#Inicializar variáveis
@@ -67,11 +69,15 @@ func _physics_process(delta):
 
 	#Se o jogador estiver dentro da área 2D
 	if in_sight:
-		#Lançar 4 raycasts em volta do jogador
+		#Lançar 4 raycasts em volta do jogador e atualiza as informações de colisão
 		RC.cast_to =  player.global_position - global_position + Vector2(14,14)
 		RC2.cast_to =  player.global_position - global_position + Vector2(14,-14)
 		RC3.cast_to =  player.global_position - global_position + Vector2(-14,14)
 		RC4.cast_to =  player.global_position - global_position + Vector2(-14,-14)
+		RC.force_raycast_update()
+		RC2.force_raycast_update()
+		RC3.force_raycast_update()
+		RC4.force_raycast_update()
 		#Caso algum dos raycasts não colida (tem visão do jogador), seguir o jogador 
 		if !RC.is_colliding() or !RC2.is_colliding() or !RC3.is_colliding() or !RC4.is_colliding():
 			last_state = state
@@ -166,21 +172,21 @@ func animation():
 	#Animação luz
 	#Animação caos
 	if chaos:
-		get_node("AnimationPlayerL").play("Light_Chaos")
-	#Se o fantasma estava dentro do raio (k = 1) e saiu, tocar FadeOut
-	if global_position.distance_to(player.global_position) >= 98 && k == 1:
-		get_node("AnimationPlayerL").play("Light_FadeOut")
-		yield(get_node("AnimationPlayerL"), "animation_finished")
-		k = 0
-	#Se o fantasma estava fora do raio (k = 0) e entrou, tocar FadeIn
-	elif global_position.distance_to(player.global_position) < 98 && k == 0:
-		get_node("AnimationPlayerL").play("Light_FadeIn")
-		yield(get_node("AnimationPlayerL"), "animation_finished")
-		k = 1
-	#Se o fantasma permanece dentro do raio (k = 1), tocar Light animação padrão
-	elif global_position.distance_to(player.global_position) < 98 && k == 1:
-		get_node("AnimationPlayerL").play("Light")
-
+		animplayerL.play("Light_Chaos")
+		return
+		
+	if state == States.FOLLOW:
+		if last_state != States.FOLLOW:
+			#Caso o fantasma começado a seguir agora, "iniciar" luz
+			k = 1
+			animplayerL.play("Light_FadeIn")
+			animplayerL.animation_set_next("Light_FadeIn", "Light")
+	else:
+		if last_state == States.FOLLOW:
+			#Caso o fantasma tenha parado de seguir, "retirar" luz
+			if k == 1:
+				k = 0
+				animplayerL.play("Light_FadeOut")
 
 func _on_Vision_body_entered(body):
 	#Jogador entrou na Area2D. Pode ser visto (in_sight)

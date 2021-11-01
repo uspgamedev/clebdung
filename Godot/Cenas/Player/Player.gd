@@ -53,7 +53,7 @@ func set_direction():
 	
 	#Apontar Raycast
 	if direction != Vector2():
-		$PlayerRayCast.cast_to = direction * tile_size * 1.8
+		$PlayerRayCast.cast_to = direction * tile_size/2
 		
 func animation():
 	var anim_direc
@@ -80,6 +80,6 @@ func animation():
 	animation = anim_direc + "_" + anim_modo 
 	get_node("AnimationPlayer").play(animation)
 	
-func _on_PlayerArea2D_body_entered(body):
-	if body.get_name().begins_with("Ghost"):
-		print("Perdeu")
+#func _on_PlayerArea2D_body_entered(body):
+#	if body.get_name().begins_with("Ghost"):
+#		print("Perdeu")
