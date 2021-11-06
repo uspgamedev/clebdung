@@ -18,7 +18,7 @@ func _ready():
 func _process(_delta):
 	animation()
 	
-func _physics_process(delta):
+func _physics_process(delta): 
 	#MOVENDO
 	#Colisão
 	if $PlayerRayCast.is_colliding():
@@ -80,6 +80,6 @@ func animation():
 	animation = anim_direc + "_" + anim_modo 
 	get_node("AnimationPlayer").play(animation)
 	
-#func _on_PlayerArea2D_body_entered(body):
-#	if body.get_name().begins_with("Ghost"):
-#		print("Perdeu")
+func _on_PlayerArea2D_body_entered(body):
+	if body.get_name().begins_with("Ghost"):
+		print("Perdeu")

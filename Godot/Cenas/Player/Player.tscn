@@ -236,11 +236,12 @@ light_mask = 3
 current = true
 zoom = Vector2( 0.35, 0.35 )
 smoothing_enabled = true
+smoothing_speed = 3.0
 
 [node name="PlayerLight_Shadow" type="Light2D" parent="."]
 modulate = Color( 1, 1, 1, 0 )
 texture = ExtResource( 1 )
-texture_scale = 1.4
+texture_scale = 0.4
 color = Color( 0.733333, 0.54902, 0.309804, 1 )
 energy = 1.4
 mode = 2
@@ -251,7 +252,7 @@ shadow_item_cull_mask = 3
 [node name="PlayerLight" type="Light2D" parent="."]
 modulate = Color( 1, 1, 1, 0 )
 texture = ExtResource( 1 )
-texture_scale = 1.4
+texture_scale = 0.4
 color = Color( 0.733333, 0.54902, 0.309804, 1 )
 energy = 1.4
 mode = 2
@@ -261,7 +262,7 @@ shadow_item_cull_mask = 0
 [node name="PlayerLight2" type="Light2D" parent="."]
 modulate = Color( 1, 1, 1, 0 )
 texture = ExtResource( 1 )
-texture_scale = 1.4
+texture_scale = 0.4
 color = Color( 0.733333, 0.54902, 0.309804, 1 )
 energy = 0.7
 shadow_item_cull_mask = 0

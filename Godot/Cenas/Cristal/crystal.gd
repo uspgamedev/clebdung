@@ -2,6 +2,7 @@ extends Sprite
 
 onready var astar = get_tree().get_root().get_node("Fase1").get_node("A*")
 onready var score = get_tree().get_root().get_node("Fase1").get_node("HUD/Score")
+onready var player = get_tree().get_root().get_node("Fase1").get_node("YSort/Player")
 export(Vector2) var LimitsI
 export(Vector2) var LimitsJ
 export(Vector2) var Offset
