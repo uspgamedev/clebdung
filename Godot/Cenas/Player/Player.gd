@@ -7,13 +7,17 @@ var direction = Vector2()
 var last_position = Vector2()
 var target_position = Vector2()
 
+var input_enabled = false
+
 func _ready():
-	#Play animação luz
-	$AnimationPlayerL.play("Light")
-	
 	#Inicializar variáveis
 	last_position = position
-	target_position = position
+	target_position = position + Vector2(32,0)
+	
+	#Bloqueia temporariamente input do jogador e simula caminhar à direita
+	direction = Vector2(1,0)
+	yield(get_tree().create_timer(3.5), "timeout")
+	input_enabled = true
 
 func _process(_delta):
 	animation()
@@ -44,8 +48,9 @@ func set_direction():
 	var LEFT = Input.is_action_pressed("ui_left")
 	var RIGHT = Input.is_action_pressed("ui_right")
 
-	direction.x = int(RIGHT) - int(LEFT)
-	direction.y = int(DOWN) - int(UP)
+	if input_enabled:
+		direction.x = int(RIGHT) - int(LEFT)
+		direction.y = int(DOWN) - int(UP)
 	
 	#Impedir movimento diagonal
 	if direction.x != 0 && direction.y != 0:

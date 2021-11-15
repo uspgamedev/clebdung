@@ -180,7 +180,6 @@ func animation():
 			#Caso o fantasma começado a seguir agora, "iniciar" luz
 			k = 1
 			animplayerL.play("Light_FadeIn")
-			animplayerL.animation_set_next("Light_FadeIn", "Light")
 	else:
 		if last_state == States.FOLLOW:
 			#Caso o fantasma tenha parado de seguir, "retirar" luz

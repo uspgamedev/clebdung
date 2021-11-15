@@ -348,12 +348,13 @@ tracks/0/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 3.6875, 6.2845 )
+extents = Vector2( 3.6875, 7.14225 )
 
 [sub_resource type="CircleShape2D" id=11]
 radius = 104.307
 
 [node name="Ghost" type="KinematicBody2D"]
+position = Vector2( 0, 1 )
 collision_layer = 2
 collision_mask = 0
 script = ExtResource( 3 )
@@ -392,9 +393,10 @@ anims/Light = SubResource( 6 )
 anims/Light_Chaos = SubResource( 7 )
 anims/Light_FadeIn = SubResource( 8 )
 anims/Light_FadeOut = SubResource( 9 )
+next/Light_FadeIn = "Light"
 
 [node name="GhostCollision" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -12.5905 )
+position = Vector2( 0, -16.1423 )
 shape = SubResource( 10 )
 
 [node name="RayCast" type="RayCast2D" parent="."]
