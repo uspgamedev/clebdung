@@ -188,62 +188,48 @@ Offset = Vector2( 16, 18 )
 position = Vector2( 217.591, 489.636 )
 script = ExtResource( 8 )
 
-[node name="Ghost" parent="YSort" groups=[
-"Ghosts",
-] instance=ExtResource( 3 )]
+[node name="Ghost" parent="YSort" groups=["Ghosts"] instance=ExtResource( 3 )]
 position = Vector2( 464, 464 )
 positionset = NodePath("../../Positions/N")
 speed = 66
 delayrandom = 30
 
-[node name="GhostG" parent="YSort" groups=[
-"Ghosts",
-] instance=ExtResource( 3 )]
+[node name="GhostG" parent="YSort" groups=["Ghosts"] instance=ExtResource( 3 )]
 modulate = Color( 0.901961, 1, 0.862745, 1 )
 position = Vector2( 496, 496 )
 script = ExtResource( 9 )
 positionset = NodePath("../../Positions/G")
 speed = 65
 
-[node name="GhostB" parent="YSort" groups=[
-"Ghosts",
-] instance=ExtResource( 3 )]
+[node name="GhostB" parent="YSort" groups=["Ghosts"] instance=ExtResource( 3 )]
 modulate = Color( 0.768627, 0.792157, 1, 1 )
 position = Vector2( 560, 464 )
 positionset = NodePath("../../Positions/B")
 speed = 68
 delayrandom = 70
 
-[node name="GhostY" parent="YSort" groups=[
-"Ghosts",
-] instance=ExtResource( 3 )]
+[node name="GhostY" parent="YSort" groups=["Ghosts"] instance=ExtResource( 3 )]
 modulate = Color( 1, 0.960784, 0.619608, 1 )
 position = Vector2( 464, 560 )
 positionset = NodePath("../../Positions/Y")
 speed = 60
 delayrandom = 110
 
-[node name="GhostP" parent="YSort" groups=[
-"Ghosts",
-] instance=ExtResource( 3 )]
+[node name="GhostP" parent="YSort" groups=["Ghosts"] instance=ExtResource( 3 )]
 modulate = Color( 1, 0.811765, 0.996078, 1 )
 position = Vector2( 528, 528 )
 script = ExtResource( 9 )
 positionset = NodePath("../../Positions/P")
 speed = 65
 
-[node name="GhostR" parent="YSort" groups=[
-"Ghosts",
-] instance=ExtResource( 3 )]
+[node name="GhostR" parent="YSort" groups=["Ghosts"] instance=ExtResource( 3 )]
 modulate = Color( 1, 0.721569, 0.721569, 1 )
 position = Vector2( 560, 560 )
 positionset = NodePath("../../Positions/R")
 speed = 70
 delayrandom = 150
 
-[node name="GhostO" parent="YSort" groups=[
-"Ghosts",
-] instance=ExtResource( 3 )]
+[node name="GhostO" parent="YSort" groups=["Ghosts"] instance=ExtResource( 3 )]
 modulate = Color( 1, 0.835294, 0.639216, 1 )
 position = Vector2( 528, 592 )
 script = ExtResource( 16 )

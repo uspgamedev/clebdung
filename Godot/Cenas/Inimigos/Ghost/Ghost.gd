@@ -36,7 +36,7 @@ var tile_size = 32
 var direction = Vector2()
 var last_position = Vector2()
 var target_position = Vector2()
-var k = 1
+var k = 0
 var rng = RandomNumberGenerator.new()
 var in_sight = false
 var chaos = false
@@ -205,16 +205,15 @@ func animation():
 		return
 		
 	if state == States.FOLLOW:
-		if last_state != States.FOLLOW:
+		if k == 0:
 			#Caso o fantasma começado a seguir agora, "iniciar" luz
 			k = 1
 			animplayerL.play("Light_FadeIn")
 	else:
-		if last_state == States.FOLLOW:
+		if k == 1:
 			#Caso o fantasma tenha parado de seguir, "retirar" luz
-			if k == 1:
-				k = 0
-				animplayerL.play("Light_FadeOut")
+			k = 0
+			animplayerL.play("Light_FadeOut")
 
 func _on_Vision_body_entered(body):
 	#Jogador entrou na Area2D. Pode ser visto (in_sight)
