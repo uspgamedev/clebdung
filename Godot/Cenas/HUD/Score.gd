@@ -1,6 +1,7 @@
 extends Control
 
-onready var win_animation = get_tree().get_root().get_node("Fase1").get_node("Win/AnimationPlayer")
+onready var fase = find_parent("Fase*")
+onready var win_animplayer = fase.get_node("Saida/AnimationPlayer")
 var score
 
 func _ready():
@@ -13,4 +14,4 @@ func update_score():
 	get_node("AnimationPlayer").play("Score_" + str(score))
 	if score == 5:
 		get_tree().call_group("Ghosts","enter_chaos")
-		win_animation.play("WinAnimation")
+		win_animplayer.play("WinAnimation")

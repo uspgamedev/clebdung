@@ -1,24 +1,27 @@
 extends Sprite
 
-onready var astar = get_tree().get_root().get_node("Fase1").get_node("A*")
-onready var score = get_tree().get_root().get_node("Fase1").get_node("HUD/Score")
-onready var player = get_tree().get_root().get_node("Fase1").get_node("YSort/Player")
+onready var fase = find_parent("Fase*")
+onready var astar = fase.get_node("A*")
+onready var score = fase.get_node("HUD/Score")
+onready var player = fase.get_node("YSort/Player")
 export(Vector2) var LimitsI
 export(Vector2) var LimitsJ
 export(Vector2) var Offset
+export(bool) var Fixed
 var x_rand = Vector2()
 var y_rand = Vector2()
 
 var rng = RandomNumberGenerator.new()
 
 func _ready():
-	$AnimationPlayer.play('crystal')
-	generate()
-	# Se o tile escolhido não for andável (chão), escolha outro:
-	while astar.get_cell(x_rand,y_rand) != 0: 
+	# Se o cristal não é um cristal fixo, gerar posição aleatória
+	if not Fixed:
 		generate()
-	# Posição final do cristal:
-	global_position = astar.map_to_world(Vector2(x_rand,y_rand)) + Offset
+		# Se o tile escolhido não for andável (chão), escolha outro:
+		while astar.get_cell(x_rand,y_rand) != 0: 
+			generate()
+		# Posição final do cristal:
+		global_position = astar.map_to_world(Vector2(x_rand,y_rand)) + Offset
 
 func generate():
 	# Escolhe aleatoriamente um tile aleatório dentro dos limites predefinidos:

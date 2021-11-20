@@ -1,7 +1,8 @@
 extends TileMap
 
+onready var fase = find_parent("Fase*")
 onready var player_marker = get_parent().get_node("PlayerMarker")
-onready var player = get_tree().get_root().get_node("Fase1").get_node("YSort/Player")
+onready var player = fase.get_node("YSort/Player")
 
 
 func _process(_delta):

@@ -14,10 +14,7 @@ func _ready():
 	last_position = position
 	target_position = position + Vector2(32,0)
 	
-	#Bloqueia temporariamente input do jogador e simula caminhar à direita
-	direction = Vector2(1,0)
-	yield(get_tree().create_timer(3.5), "timeout")
-	input_enabled = true
+
 
 func _process(_delta):
 	animation()

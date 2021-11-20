@@ -31,6 +31,7 @@ hframes = 34
 script = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "crystal"
 anims/crystal = SubResource( 1 )
 
 [node name="Area2D" type="Area2D" parent="."]

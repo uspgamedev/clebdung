@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Assets/Fase 1/Mapa-base.tres" type="TileSet" id=1]
 [ext_resource path="res://Cenas/Player/Player.tscn" type="PackedScene" id=2]
@@ -7,15 +7,13 @@
 [ext_resource path="res://Cenas/Fase 1/MinimapaF1.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Cenas/Fase 1/TileMap.gd" type="Script" id=6]
 [ext_resource path="res://Cenas/Cristal/crystal.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Cenas/Cristal/crystalConst.gd" type="Script" id=8]
-[ext_resource path="res://Cenas/Inimigos/Ghost/Ghost_Patrol.gd" type="Script" id=9]
 [ext_resource path="res://Cenas/Fase 1/Area2DWin.gd" type="Script" id=10]
 [ext_resource path="res://Cenas/Fase 1/TochaC.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Cenas/HUD/Score.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Assets/Fase 1/Bloqueio 1.png" type="Texture" id=13]
 [ext_resource path="res://Assets/Fase 1/TorchC-G.png" type="Texture" id=14]
 [ext_resource path="res://Assets/Fase 1/Cenário.tres" type="TileSet" id=15]
-[ext_resource path="res://Cenas/Inimigos/Ghost/Ghost_RandomPatrol.gd" type="Script" id=16]
+[ext_resource path="res://Cenas/Fase 1/Fase1.gd" type="Script" id=17]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Bloqueio 1"
@@ -64,10 +62,25 @@ extents = Vector2( 16, 16 )
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 16, 16 )
 
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Collision/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+
 [sub_resource type="Animation" id=4]
 length = 2.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("WinArea2D/CollisionShape2D:disabled")
+tracks/0/path = NodePath("WinArea2D/AreaShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -78,8 +91,21 @@ tracks/0/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Collision/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.9 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [node name="Fase1" type="Node2D"]
+script = ExtResource( 17 )
 
 [node name="A*" type="TileMap" parent="."]
 visible = false
@@ -135,24 +161,47 @@ cell_size = Vector2( 16, 16 )
 format = 1
 tile_data = PoolIntArray( 458814, 12, 0, 983060, 19, 0, 2031730, 12, 0, 2555954, 12, 0, 3604538, 19, 0, 3866630, 19, 0, 4128814, 12, 0, 4128852, 19, 0, 4653066, 12, 0, 4915322, 19, 0, 6488154, 12, 0, 7012402, 19, 0, 8060940, 12, 0, 8061032, 19, 0 )
 
-[node name="Bloqueio 1" type="Sprite" parent="."]
+[node name="Entrada" type="Sprite" parent="."]
 light_mask = 4
 position = Vector2( -64, 480 )
 texture = ExtResource( 13 )
 vframes = 18
 frame = 17
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Bloqueio 1"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Entrada"]
 autoplay = "Bloqueio 1"
 playback_speed = 0.9
 "anims/Bloqueio 1" = SubResource( 1 )
 
-[node name="Collision" type="RigidBody2D" parent="Bloqueio 1"]
+[node name="Collision" type="RigidBody2D" parent="Entrada"]
 gravity_scale = 0.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bloqueio 1/Collision"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entrada/Collision"]
 position = Vector2( -16, 16 )
 shape = SubResource( 2 )
+
+[node name="Saida" type="Sprite" parent="."]
+position = Vector2( 1104, 464 )
+
+[node name="WinArea2D" type="Area2D" parent="Saida"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 10 )
+
+[node name="AreaShape2D" type="CollisionShape2D" parent="Saida/WinArea2D"]
+shape = SubResource( 3 )
+disabled = true
+
+[node name="Collision" type="RigidBody2D" parent="Saida"]
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Saida/Collision"]
+shape = SubResource( 2 )
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Saida"]
+anims/RESET = SubResource( 5 )
+anims/WinAnimation = SubResource( 4 )
 
 [node name="YSort" type="YSort" parent="."]
 
@@ -186,60 +235,63 @@ Offset = Vector2( 16, 18 )
 
 [node name="CrystalConst" parent="YSort" instance=ExtResource( 7 )]
 position = Vector2( 217.591, 489.636 )
-script = ExtResource( 8 )
+Fixed = true
 
 [node name="Ghost" parent="YSort" groups=["Ghosts"] instance=ExtResource( 3 )]
 position = Vector2( 464, 464 )
-positionset = NodePath("../../Positions/N")
+positionset = NodePath("../../Posições/N")
 speed = 66
 delayrandom = 30
 
 [node name="GhostG" parent="YSort" groups=["Ghosts"] instance=ExtResource( 3 )]
 modulate = Color( 0.901961, 1, 0.862745, 1 )
 position = Vector2( 496, 496 )
-script = ExtResource( 9 )
-positionset = NodePath("../../Positions/G")
+positionset = NodePath("../../Posições/G")
 speed = 65
+type = 2
 
 [node name="GhostB" parent="YSort" groups=["Ghosts"] instance=ExtResource( 3 )]
 modulate = Color( 0.768627, 0.792157, 1, 1 )
 position = Vector2( 560, 464 )
-positionset = NodePath("../../Positions/B")
+positionset = NodePath("../../Posições/B")
 speed = 68
 delayrandom = 70
 
 [node name="GhostY" parent="YSort" groups=["Ghosts"] instance=ExtResource( 3 )]
 modulate = Color( 1, 0.960784, 0.619608, 1 )
 position = Vector2( 464, 560 )
-positionset = NodePath("../../Positions/Y")
+positionset = NodePath("../../Posições/Y")
 speed = 60
 delayrandom = 110
 
 [node name="GhostP" parent="YSort" groups=["Ghosts"] instance=ExtResource( 3 )]
 modulate = Color( 1, 0.811765, 0.996078, 1 )
 position = Vector2( 528, 528 )
-script = ExtResource( 9 )
-positionset = NodePath("../../Positions/P")
+positionset = NodePath("../../Posições/P")
 speed = 65
+type = 2
 
 [node name="GhostR" parent="YSort" groups=["Ghosts"] instance=ExtResource( 3 )]
 modulate = Color( 1, 0.721569, 0.721569, 1 )
 position = Vector2( 560, 560 )
-positionset = NodePath("../../Positions/R")
+positionset = NodePath("../../Posições/R")
 speed = 70
 delayrandom = 150
 
 [node name="GhostO" parent="YSort" groups=["Ghosts"] instance=ExtResource( 3 )]
 modulate = Color( 1, 0.835294, 0.639216, 1 )
 position = Vector2( 528, 592 )
-script = ExtResource( 16 )
-positionset = NodePath("../../Positions/O")
+positionset = NodePath("../../Posições/O")
 speed = 54
+type = 1
 radius = 150
 
 [node name="Player" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( -272, 496 )
 speed = 83
+
+[node name="Camera2D" parent="YSort/Player" index="1"]
+zoom = Vector2( 1, 1 )
 
 [node name="Teias" type="TileMap" parent="."]
 light_mask = 4
@@ -248,143 +300,130 @@ cell_size = Vector2( 32, 32 )
 format = 1
 tile_data = PoolIntArray( 65547, 3, 0, 131076, 2, 0, 196637, 2, 0, 327701, 0, 0, 524290, 3, 0, 720916, 3, 0, 851979, 0, 0, 983067, 0, 0, 1114129, 0, 0, 1441811, 1, 0, 1572865, 1, 0, 1572874, 0, 0, 1835030, 1, 0, 1900563, 2, 0, 2031629, 0, 0, 2031646, 0, 0 )
 
-[node name="Positions" type="Node" parent="."]
+[node name="Posições" type="Node" parent="."]
 
-[node name="N" type="Node" parent="Positions"]
+[node name="N" type="Node" parent="Posições"]
 
-[node name="A" type="Position2D" parent="Positions/N"]
+[node name="A" type="Position2D" parent="Posições/N"]
 position = Vector2( 80, 112 )
 
-[node name="B" type="Position2D" parent="Positions/N"]
+[node name="B" type="Position2D" parent="Posições/N"]
 position = Vector2( 368, 144 )
 
-[node name="C" type="Position2D" parent="Positions/N"]
+[node name="C" type="Position2D" parent="Posições/N"]
 position = Vector2( 240, 496 )
 
-[node name="R1" type="Position2D" parent="Positions/N"]
+[node name="R1" type="Position2D" parent="Posições/N"]
 position = Vector2( 752, 272 )
 
-[node name="R2" type="Position2D" parent="Positions/N"]
+[node name="R2" type="Position2D" parent="Posições/N"]
 position = Vector2( 496, 528 )
 
-[node name="R3" type="Position2D" parent="Positions/N"]
+[node name="R3" type="Position2D" parent="Posições/N"]
 position = Vector2( 240, 816 )
 
-[node name="G" type="Node" parent="Positions"]
+[node name="G" type="Node" parent="Posições"]
 
-[node name="A" type="Position2D" parent="Positions/G"]
+[node name="A" type="Position2D" parent="Posições/G"]
 position = Vector2( 496, 80 )
 
-[node name="B" type="Position2D" parent="Positions/G"]
+[node name="B" type="Position2D" parent="Posições/G"]
 position = Vector2( 656, 272 )
 
-[node name="C" type="Position2D" parent="Positions/G"]
+[node name="C" type="Position2D" parent="Posições/G"]
 position = Vector2( 464, 496 )
 
-[node name="B" type="Node" parent="Positions"]
+[node name="B" type="Node" parent="Posições"]
 
-[node name="A" type="Position2D" parent="Positions/B"]
+[node name="A" type="Position2D" parent="Posições/B"]
 position = Vector2( 944, 144 )
 
-[node name="B" type="Position2D" parent="Positions/B"]
+[node name="B" type="Position2D" parent="Posições/B"]
 position = Vector2( 976, 464 )
 
-[node name="C" type="Position2D" parent="Positions/B"]
+[node name="C" type="Position2D" parent="Posições/B"]
 position = Vector2( 688, 272 )
 
-[node name="R1" type="Position2D" parent="Positions/B"]
+[node name="R1" type="Position2D" parent="Posições/B"]
 position = Vector2( 368, 80 )
 
-[node name="R2" type="Position2D" parent="Positions/B"]
+[node name="R2" type="Position2D" parent="Posições/B"]
 position = Vector2( 528, 464 )
 
-[node name="R3" type="Position2D" parent="Positions/B"]
+[node name="R3" type="Position2D" parent="Posições/B"]
 position = Vector2( 816, 816 )
 
-[node name="Y" type="Node" parent="Positions"]
+[node name="Y" type="Node" parent="Posições"]
 
-[node name="A" type="Position2D" parent="Positions/Y"]
+[node name="A" type="Position2D" parent="Posições/Y"]
 position = Vector2( 48, 1008 )
 
-[node name="B" type="Position2D" parent="Positions/Y"]
+[node name="B" type="Position2D" parent="Posições/Y"]
 position = Vector2( 48, 592 )
 
-[node name="C" type="Position2D" parent="Positions/Y"]
+[node name="C" type="Position2D" parent="Posições/Y"]
 position = Vector2( 336, 784 )
 
-[node name="R1" type="Position2D" parent="Positions/Y"]
+[node name="R1" type="Position2D" parent="Posições/Y"]
 position = Vector2( 368, 336 )
 
-[node name="R2" type="Position2D" parent="Positions/Y"]
+[node name="R2" type="Position2D" parent="Posições/Y"]
 position = Vector2( 496, 464 )
 
-[node name="R3" type="Position2D" parent="Positions/Y"]
+[node name="R3" type="Position2D" parent="Posições/Y"]
 position = Vector2( 720, 816 )
 
-[node name="P" type="Node" parent="Positions"]
+[node name="P" type="Node" parent="Posições"]
 
-[node name="A" type="Position2D" parent="Positions/P"]
+[node name="A" type="Position2D" parent="Posições/P"]
 position = Vector2( 656, 528 )
 
-[node name="B" type="Position2D" parent="Positions/P"]
+[node name="B" type="Position2D" parent="Posições/P"]
 position = Vector2( 592, 1008 )
 
-[node name="C" type="Position2D" parent="Positions/P"]
+[node name="C" type="Position2D" parent="Posições/P"]
 position = Vector2( 336, 1008 )
 
-[node name="R" type="Node" parent="Positions"]
+[node name="R" type="Node" parent="Posições"]
 
-[node name="A" type="Position2D" parent="Positions/R"]
+[node name="A" type="Position2D" parent="Posições/R"]
 position = Vector2( 848, 528 )
 
-[node name="B" type="Position2D" parent="Positions/R"]
+[node name="B" type="Position2D" parent="Posições/R"]
 position = Vector2( 720, 880 )
 
-[node name="C" type="Position2D" parent="Positions/R"]
+[node name="C" type="Position2D" parent="Posições/R"]
 position = Vector2( 976, 1008 )
 
-[node name="R1" type="Position2D" parent="Positions/R"]
+[node name="R1" type="Position2D" parent="Posições/R"]
 position = Vector2( 848, 272 )
 
-[node name="R2" type="Position2D" parent="Positions/R"]
+[node name="R2" type="Position2D" parent="Posições/R"]
 position = Vector2( 528, 528 )
 
-[node name="R3" type="Position2D" parent="Positions/R"]
+[node name="R3" type="Position2D" parent="Posições/R"]
 position = Vector2( 304, 944 )
 
-[node name="O" type="Node" parent="Positions"]
+[node name="O" type="Node" parent="Posições"]
 
-[node name="R1" type="Position2D" parent="Positions/O"]
+[node name="R1" type="Position2D" parent="Posições/O"]
 position = Vector2( 528, 496 )
 
-[node name="R2" type="Position2D" parent="Positions/O"]
+[node name="R2" type="Position2D" parent="Posições/O"]
 position = Vector2( 688, 176 )
 
-[node name="R3" type="Position2D" parent="Positions/O"]
+[node name="R3" type="Position2D" parent="Posições/O"]
 position = Vector2( 208, 240 )
 
-[node name="R4" type="Position2D" parent="Positions/O"]
+[node name="R4" type="Position2D" parent="Posições/O"]
 position = Vector2( 240, 1008 )
 
-[node name="R5" type="Position2D" parent="Positions/O"]
+[node name="R5" type="Position2D" parent="Posições/O"]
 position = Vector2( 816, 1008 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
 color = Color( 0, 0, 0, 1 )
-
-[node name="Win" type="Sprite" parent="."]
-position = Vector2( 1104, 464 )
-
-[node name="WinArea2D" type="Area2D" parent="Win"]
-collision_layer = 0
-collision_mask = 2
-script = ExtResource( 10 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Win/WinArea2D"]
-shape = SubResource( 3 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Win"]
-anims/WinAnimation = SubResource( 4 )
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -409,6 +448,6 @@ margin_top = -96.0
 margin_right = 0.0
 margin_bottom = 0.0
 
-[connection signal="body_entered" from="Win/WinArea2D" to="Win/WinArea2D" method="_on_Area2DWin_body_entered"]
+[connection signal="body_entered" from="Saida/WinArea2D" to="Saida/WinArea2D" method="_on_Area2DWin_body_entered"]
 
 [editable path="YSort/Player"]
