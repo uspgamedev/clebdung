@@ -323,8 +323,8 @@ func _on_TimerDoubt_timeout():
 		state = States.PATROL
 
 # Chamada pelo próprio nó Score
-func enter_chaos():
-	chaos = true
+func f_chaos():
+	chaos = not chaos
 
 
 func _on_TimerRandom_timeout():

@@ -13,5 +13,5 @@ func update_score():
 	score += 1
 	get_node("AnimationPlayer").play("Score_" + str(score))
 	if score == 5:
-		get_tree().call_group("Ghosts","enter_chaos")
+		get_tree().call_group("Ghosts","f_chaos")
 		win_animplayer.play("WinAnimation")
