@@ -2,7 +2,7 @@ extends Sprite
 
 onready var fase = find_parent("Fase*")
 onready var astar = fase.get_node("A*")
-onready var score = fase.get_node("HUD/Score")
+onready var score = fase.get_node("HUD/Control/ScoreRect/Score")
 onready var player = fase.get_node("YSort/Player")
 export(Vector2) var LimitsI
 export(Vector2) var LimitsJ

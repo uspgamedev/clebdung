@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Minimapa-Paleta.png-55d1a9410de7777c90e4cf1d1e7073ef.stex"
+path="res://.import/Minimapa1-Sombra.png-8e29b143eb6af981f808cae863f7b849.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Fase 1/Minimapa-Paleta.png"
-dest_files=[ "res://.import/Minimapa-Paleta.png-55d1a9410de7777c90e4cf1d1e7073ef.stex" ]
+source_file="res://Assets/Fase 1/Minimapa1-Sombra.png"
+dest_files=[ "res://.import/Minimapa1-Sombra.png-8e29b143eb6af981f808cae863f7b849.stex" ]
 
 [params]
 

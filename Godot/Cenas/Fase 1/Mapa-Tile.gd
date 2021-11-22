@@ -1,11 +1,16 @@
 extends TileMap
 
 onready var fase = find_parent("Fase*")
-onready var player_marker = get_parent().get_node("PlayerMarker")
 onready var player = fase.get_node("YSort/Player")
+onready var player_marker = get_parent().get_node("PlayerMarker")
+onready var mapa = get_parent()
 
 
 func _process(_delta):
+	if player_marker.position.x < 0 or mapa.texture.get_width() - 2 < player_marker.position.x:
+		player_marker.visible = false
+	else:
+		player_marker.visible = true
 	#Obter posição do player no minimapa e atualizar marcador
 	player_marker.position = player.position/16
 	

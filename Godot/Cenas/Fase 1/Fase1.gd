@@ -1,6 +1,7 @@
 extends Node2D
 
 onready var player = get_node("YSort/Player")
+onready var HUD = get_node("HUD")
 
 func _ready():
 	#Bloqueia temporariamente input do jogador e simula caminhar à direita
@@ -28,6 +29,8 @@ func win():
 		g.get_node("Light2D").visible = false
 	# Toca a animação para desligar luz do jogador
 	player.get_node("AnimationPlayerL").play("Light_FadeOut")
+	# Retira o HUD
+	HUD.finish()
 	# Espera a animação da luz terminar
 	yield(get_tree().create_timer(2.5), "timeout")
 	# Troca de cena

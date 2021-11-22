@@ -1,4 +1,4 @@
-extends Control
+extends Sprite
 
 onready var fase = find_parent("Fase*")
 onready var win_animplayer = fase.get_node("Saida/AnimationPlayer")
@@ -6,8 +6,6 @@ var score
 
 func _ready():
 	score = 0
-	yield(get_tree().create_timer(0.5), "timeout")
-	get_node("AnimationPlayer").play("Score_0")
 
 func update_score():
 	score += 1

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Minimapa.png-e4fb3d2703e875332a330e6ea20cc6d5.stex"
+path="res://.import/Minimapa1.png-cba93f6f79e43d1428d00dcec72a7a58.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Fase 1/Minimapa.png"
-dest_files=[ "res://.import/Minimapa.png-e4fb3d2703e875332a330e6ea20cc6d5.stex" ]
+source_file="res://Assets/Fase 1/Minimapa1.png"
+dest_files=[ "res://.import/Minimapa1.png-cba93f6f79e43d1428d00dcec72a7a58.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=true
