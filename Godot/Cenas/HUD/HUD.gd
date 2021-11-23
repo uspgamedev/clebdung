@@ -30,11 +30,11 @@ func _ready():
 func finish():
 	# Animação minimapa
 	tween.interpolate_property(minimapa, "rect_position:y", \
-	minimapa.rect_position.y, minimapa.rect_position.y + 700, 1, \
+	minimapa.rect_position.y, minimapa.rect_position.y + 500, 0.6, \
 	tween.TRANS_BACK, tween.EASE_IN)
 	tween.start()
 	# Animação score
 	tween.interpolate_property(score, "position:y", \
-	score.position.y, score.position.y + 500, 1.2, \
+	score.position.y, score.position.y + 300, 0.8, \
 	tween.TRANS_BACK, tween.EASE_IN)
 	tween.start()

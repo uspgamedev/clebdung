@@ -208,13 +208,14 @@ anims/WinAnimation = SubResource( 4 )
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Crystal" parent="YSort" instance=ExtResource( 7 )]
+scale = Vector2( 0.8, 0.8 )
 LimitsI = Vector2( 2, 3 )
 LimitsJ = Vector2( 13, 10 )
 Offset = Vector2( 14, 12 )
 
 [node name="Crystal2" parent="YSort" instance=ExtResource( 7 )]
 position = Vector2( 16, 0 )
-scale = Vector2( 0.65, 0.65 )
+scale = Vector2( 0.52, 0.52 )
 flip_h = true
 LimitsI = Vector2( 19, 3 )
 LimitsJ = Vector2( 30, 13 )
@@ -222,7 +223,7 @@ Offset = Vector2( 20, 14 )
 
 [node name="Crystal3" parent="YSort" instance=ExtResource( 7 )]
 position = Vector2( 32, 0 )
-scale = Vector2( 0.8, 0.7 )
+scale = Vector2( 0.64, 0.56 )
 flip_h = true
 LimitsI = Vector2( 1, 22 )
 LimitsJ = Vector2( 13, 31 )
@@ -230,13 +231,14 @@ Offset = Vector2( 12, 12 )
 
 [node name="Crystal4" parent="YSort" instance=ExtResource( 7 )]
 position = Vector2( 48, 0 )
-scale = Vector2( 0.72, 0.8 )
+scale = Vector2( 0.57, 0.64 )
 LimitsI = Vector2( 20, 16 )
 LimitsJ = Vector2( 30, 31 )
 Offset = Vector2( 16, 18 )
 
 [node name="CrystalConst" parent="YSort" instance=ExtResource( 7 )]
 position = Vector2( 217.591, 489.636 )
+scale = Vector2( 0.8, 0.8 )
 Fixed = true
 
 [node name="Ghost" parent="YSort" groups=["Ghosts"] instance=ExtResource( 3 )]
@@ -291,6 +293,9 @@ radius = 150
 [node name="Player" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( -208, 496 )
 speed = 83
+
+[node name="Camera2D" parent="YSort/Player" index="1"]
+offset = Vector2( 7, 7 )
 
 [node name="Teias" type="TileMap" parent="."]
 light_mask = 4

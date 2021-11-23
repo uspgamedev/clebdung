@@ -7,7 +7,6 @@ onready var mapa = get_parent()
 
 
 func _process(_delta):
-	print(mapa.texture.get_width())
 	if player_marker.position.x < 2 or mapa.texture.get_width() - 2 < player_marker.position.x:
 		player_marker.visible = false
 	else:
