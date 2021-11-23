@@ -39,22 +39,27 @@ func _on_Area2D_body_entered(body):
 		queue_free()
 
 func _process(_delta):
-	animation()
-		
-func animation():
 	d = global_position.distance_to(player.global_position)
 	# Se a distância até o jogador for pequena
 	if d < 140:
 		# Se a distância até o jogador for MUITO pequena
 		if d < 90:
 			if animplayer.is_playing() and animplayer.current_animation != "Crystal":
+				# Espera terminar animação anterior, caso houver
 				yield(animplayer, "animation_finished")
+			# Animação padrão
 			animplayer.play("Crystal")
 		# Caso contrário
 		else:
 			if animplayer.is_playing() and animplayer.current_animation != "Crystal_Light":
+				# Espera terminar animação anterior, caso houver
 				yield(animplayer, "animation_finished")
+			# Animação de dica
 			animplayer.play("Crystal_Light")
 	# Caso contrário, parar animações
 	else:
 		animplayer.stop()
+
+		
+func animation():
+	pass
