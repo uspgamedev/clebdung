@@ -348,7 +348,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 3.6875, 7.14225 )
+extents = Vector2( 5.31344, 4.60249 )
 
 [sub_resource type="CircleShape2D" id=11]
 radius = 104.307
@@ -396,7 +396,7 @@ anims/Light_FadeOut = SubResource( 9 )
 next/Light_FadeIn = "Light"
 
 [node name="GhostCollision" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -16.1423 )
+position = Vector2( 0, -9 )
 shape = SubResource( 10 )
 
 [node name="RayCast" type="RayCast2D" parent="."]

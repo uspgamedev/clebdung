@@ -84,4 +84,4 @@ func animation():
 	
 func _on_PlayerArea2D_body_entered(body):
 	if body.get_name().begins_with("Ghost"):
-		print("Perdeu")
+		get_tree().reload_current_scene()

@@ -58,6 +58,8 @@ func _process(_delta):
 			animplayer.play("Crystal_Light")
 	# Caso contrário, parar animações
 	else:
+		if animplayer.is_playing():
+			yield(animplayer, "animation_finished")
 		animplayer.stop()
 
 		
