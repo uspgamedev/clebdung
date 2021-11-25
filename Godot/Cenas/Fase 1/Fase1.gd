@@ -16,7 +16,7 @@ func _ready():
 
 func _process(_delta):
 	# Assim que o primeiro movimento for feito, desbloqueia fantasmas
-	if init == false and player.input_enabled == true and \
+	if init == false and player.input_enabled and \
 	(Input.is_action_pressed("ui_up") or \
 	Input.is_action_pressed("ui_down") or \
 	Input.is_action_pressed("ui_left") or \

@@ -1,14 +1,14 @@
 extends Sprite
 
 onready var fase = find_parent("Fase*")
-onready var astar = fase.get_node("A*")
+onready var id = fase.get_node("CristaisID")
 onready var score = fase.get_node("HUD/Control/ScoreRect/Score")
 onready var player = fase.get_node("YSort/Player")
 onready var animplayer = get_node("AnimationPlayer")
-export(Vector2) var LimitsI
-export(Vector2) var LimitsJ
 export(Vector2) var Offset
+export(Vector2) var MapSize
 export(bool) var Fixed
+export(int) var CristalID
 var x_rand = Vector2()
 var y_rand = Vector2()
 var d
@@ -21,16 +21,16 @@ func _ready():
 	if not Fixed:
 		generate()
 		# Se o tile escolhido não for andável (chão), escolha outro:
-		while astar.get_cell(x_rand,y_rand) != 0: 
+		while id.get_cell(x_rand,y_rand) != CristalID - 1: 
 			generate()
 		# Posição final do cristal:
-		global_position = astar.map_to_world(Vector2(x_rand,y_rand)) + Offset
+		global_position = id.map_to_world(Vector2(x_rand,y_rand)) + Offset
 
 func generate():
 	# Escolhe aleatoriamente um tile aleatório dentro dos limites predefinidos:
 	rng.randomize()
-	x_rand = int(rng.randf_range(LimitsI.x, LimitsJ.x))
-	y_rand = int(rng.randf_range(LimitsI.y, LimitsJ.y))
+	x_rand = int(rng.randi_range(0, MapSize.x))
+	y_rand = int(rng.randf_range(0, MapSize.y))
 
 func _on_Area2D_body_entered(body):
 	# Caso o jogador "colida" com o cristal, apague-o do mapa e incremente o score:
@@ -61,7 +61,3 @@ func _process(_delta):
 		if animplayer.is_playing():
 			yield(animplayer, "animation_finished")
 		animplayer.stop()
-
-		
-func animation():
-	pass
