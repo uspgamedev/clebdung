@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Assets/Fase 1/Mapa-base.tres" type="TileSet" id=1]
 [ext_resource path="res://Cenas/Player/Player.tscn" type="PackedScene" id=2]
@@ -15,7 +15,10 @@
 [ext_resource path="res://Assets/Fase 1/Bloqueio 1.png" type="Texture" id=13]
 [ext_resource path="res://Assets/Fase 1/TorchC-G.png" type="Texture" id=14]
 [ext_resource path="res://Assets/Fase 1/Cenário.tres" type="TileSet" id=15]
+[ext_resource path="res://Assets/Fase 1/Bloqueio2.png" type="Texture" id=16]
 [ext_resource path="res://Cenas/Fase 1/Fase1.gd" type="Script" id=17]
+[ext_resource path="res://Assets/Luz-Sprite.png" type="Texture" id=18]
+[ext_resource path="res://Cenas/Fase 1/AnimArea2D.gd" type="Script" id=19]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Bloqueio 1"
@@ -40,7 +43,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.6, 0.65, 0.7, 0.75, 0.8, 1.45, 1.55, 1.6, 1.7, 1.75, 1.85, 2, 2.45, 2.5, 2.55, 2.65, 2.7, 2.8, 2.85, 2.9, 2.95, 3.05, 3.1, 3.2, 3.25, 3.3, 4 ),
+"times": PoolRealArray( 0, 0.6, 0.65, 0.7, 0.75, 0.8, 1.45, 1.55, 1.6, 1.7, 1.75, 1.85, 2, 2.45, 2.5, 2.55, 2.65, 2.7, 2.8, 2.85, 2.9, 2.95, 3.05, 3.1, 3.2, 3.25, 3.3, 3.8 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 1, 2 ), Vector2( 2, 1 ), Vector2( 1, 1 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 2, 4 ), Vector2( 1, 2 ), Vector2( 3, 3 ), Vector2( 1, 2 ), Vector2( 2, 1 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 3, 4 ), Vector2( 4, 3 ), Vector2( 6, 3 ), Vector2( 2, 1 ), Vector2( 5, 4 ), Vector2( 1, 5 ), Vector2( 4, 4 ), Vector2( 5, 1 ), Vector2( 3, 5 ), Vector2( 3, 2 ), Vector2( 3, 5 ), Vector2( 1, 1 ), Vector2( 7, 7 ), Vector2( 0, 0 ) ]
@@ -64,10 +67,89 @@ extents = Vector2( 16, 16 )
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 16, 16 )
 
-[sub_resource type="Animation" id=4]
-length = 0.001
+[sub_resource type="Animation" id=6]
+resource_name = "Light_Blocked"
+length = 3.2
+loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Collision/CollisionShape2D:disabled")
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.09, 0.09 ), Vector2( 0.07, 0.07 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Light2D:texture_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.09, 0.07 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Light2D:energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 2.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.4, 1.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Light2D:color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.811765, 0.105882, 0.105882, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.811765, 0.105882, 0.105882, 0.156863 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "Light_Unblocked"
+length = 3.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Light2D:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -76,11 +158,72 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ true ]
+"values": [ Color( 0.105882, 0.811765, 0.764706, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.09, 0.09 ), Vector2( 0.07, 0.07 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Light2D:texture_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 2.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.09, 0.07 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Light2D:energy")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 2.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.4, 1.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.105882, 0.811765, 0.764706, 0.156863 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath(".:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
 }
 
 [sub_resource type="Animation" id=5]
-length = 2.0
+length = 2.2
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("WinArea2D/AreaShape2D:disabled")
 tracks/0/interp = 1
@@ -88,7 +231,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 1.9 ),
+"times": PoolRealArray( 2.1 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
@@ -100,11 +243,110 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 1.9 ),
+"times": PoolRealArray( 2.1 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.15, 0.45, 1.15, 1.45, 1.65, 1.8, 1.9, 2, 2.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:offset")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.15, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 0.85, 0.95, 1.05, 1.15, 1.25, 1.35, 1.45, 1.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0.4, 0.4 ), Vector2( 0.9, 0.4 ), Vector2( -0.4, 0.4 ), Vector2( 0, 0 ), Vector2( -0.4, -0.5 ), Vector2( 0, 0.8 ), Vector2( 0, 0 ), Vector2( 0.4, 0.4 ), Vector2( 0, 0 ), Vector2( -0.4, 0.4 ), Vector2( 0.4, -0.4 ), Vector2( 0, 0 ), Vector2( -0.3, -0.7 ), Vector2( 0, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../YSort/Player/Camera2D:offset")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.3, 0.35, 0.45, 0.55, 0.65, 0.75, 0.85, 0.95, 1.05, 1.15, 1.25, 1.45, 1.65, 1.8, 1.95, 2.15 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4.59479 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 2, 1 ), Vector2( 0, 0 ), Vector2( 1, 2 ), Vector2( -1, -1 ), Vector2( 0.5, 1 ), Vector2( 3, 2 ), Vector2( 0, 0 ), Vector2( -2, -1 ), Vector2( 2, 1 ), Vector2( 1, 2 ), Vector2( 2, 1 ), Vector2( 1, 3 ), Vector2( 3, 1 ), Vector2( 1, 3 ), Vector2( 0, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.45, 1.15, 1.25, 1.45, 1.7, 1.8, 2.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.07, 0.07 ), Vector2( 0.08, 0.08 ), Vector2( 0.1, 0.1 ), Vector2( 0.12, 0.12 ), Vector2( 0.14, 0.14 ), Vector2( 0.14, 0.14 ), Vector2( 0.12, 0.12 ), Vector2( 0, 0.12 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Light2D:texture_scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.45, 1.15, 1.25, 1.45, 1.7, 1.8, 2.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.07, 0.08, 0.1, 0.12, 0.14, 0.14, 0.12, 0.01 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Light2D:energy")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.45, 1.15, 1.25, 1.45, 1.7, 1.8, 2.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 1.0, 1.1, 1.2, 1.3, 1.5, 1.5, 1.2, 0.0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Sprite:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0.35, 0.45, 0.55, 0.65, 0.75, 0.85, 0.95, 1.05, 1.15, 1.25, 1.8, 2.05 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4.75683 ),
+"update": 0,
+"values": [ Vector2( -40, 0 ), Vector2( -38, 0 ), Vector2( -40, 0 ), Vector2( -41, 0 ), Vector2( -39, 0 ), Vector2( -40, 0 ), Vector2( -38, 0 ), Vector2( -36, 0 ), Vector2( -34, 0 ), Vector2( -30, 0 ), Vector2( -30, 0 ), Vector2( -30, -20 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Light2D:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0.35, 0.45, 0.55, 0.65, 0.75, 0.85, 0.95, 1.05, 1.15, 1.25, 1.8, 2.05 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4.75683 ),
+"update": 0,
+"values": [ Vector2( -40, 0 ), Vector2( -38, 0 ), Vector2( -40, 0 ), Vector2( -41, 0 ), Vector2( -39, 0 ), Vector2( -40, 0 ), Vector2( -38, 0 ), Vector2( -36, 0 ), Vector2( -34, 0 ), Vector2( -30, 0 ), Vector2( -30, 0 ), Vector2( -30, -20 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 40, 40 )
 
 [node name="Fase1" type="Node2D"]
 script = ExtResource( 17 )
@@ -138,7 +380,7 @@ visible = false
 tile_set = ExtResource( 9 )
 cell_size = Vector2( 32, 32 )
 format = 1
-tile_data = PoolIntArray( 131083, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196619, 0, 0, 196627, 1, 0, 196628, 1, 0, 196629, 1, 0, 262146, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0, 262153, 0, 0, 262154, 0, 0, 262155, 0, 0, 262163, 1, 0, 262165, 1, 0, 262166, 1, 0, 262167, 1, 0, 262168, 1, 0, 262169, 1, 0, 262170, 1, 0, 262171, 1, 0, 262172, 1, 0, 262173, 1, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0, 327690, 0, 0, 327691, 0, 0, 327699, 1, 0, 327700, 1, 0, 327701, 1, 0, 327706, 1, 0, 327709, 1, 0, 327710, 1, 0, 393226, 0, 0, 393227, 0, 0, 393242, 1, 0, 393245, 1, 0, 393246, 1, 0, 458762, 0, 0, 458763, 0, 0, 458764, 0, 0, 458765, 0, 0, 458777, 1, 0, 458778, 1, 0, 458781, 1, 0, 458782, 1, 0, 524297, 0, 0, 524298, 0, 0, 524301, 0, 0, 524308, 1, 0, 524309, 1, 0, 524310, 1, 0, 524311, 1, 0, 524312, 1, 0, 524313, 1, 0, 524314, 1, 0, 524315, 1, 0, 524316, 1, 0, 524317, 1, 0, 589834, 0, 0, 589837, 0, 0, 589845, 1, 0, 589849, 1, 0, 589853, 1, 0, 655370, 0, 0, 655371, 0, 0, 655372, 0, 0, 655373, 0, 0, 655381, 1, 0, 655385, 1, 0, 655389, 1, 0, 655390, 1, 0, 720909, 0, 0, 720917, 1, 0, 720921, 1, 0, 786456, 1, 0, 786457, 1, 0, 786458, 1, 0, 917518, 0, 0, 917519, 0, 0, 917520, 0, 0, 917521, 0, 0, 983054, 0, 0, 983055, 0, 0, 983057, 0, 0, 1048590, 0, 0, 1048591, 0, 0, 1048592, 0, 0, 1048593, 0, 0, 1114126, 0, 0, 1114127, 0, 0, 1114128, 0, 0, 1114129, 0, 0, 1245204, 3, 0, 1245207, 3, 0, 1245208, 3, 0, 1245209, 3, 0, 1245210, 3, 0, 1245211, 3, 0, 1245212, 3, 0, 1245213, 3, 0, 1245214, 3, 0, 1310740, 3, 0, 1310743, 3, 0, 1310750, 3, 0, 1376257, 2, 0, 1376274, 3, 0, 1376275, 3, 0, 1376276, 3, 0, 1376279, 3, 0, 1376286, 3, 0, 1441793, 2, 0, 1441805, 2, 0, 1441811, 3, 0, 1441812, 3, 0, 1441813, 3, 0, 1441814, 3, 0, 1441815, 3, 0, 1441820, 3, 0, 1441821, 3, 0, 1441822, 3, 0, 1507329, 2, 0, 1507338, 2, 0, 1507341, 2, 0, 1507351, 3, 0, 1507354, 3, 0, 1507355, 3, 0, 1507356, 3, 0, 1507357, 3, 0, 1572865, 2, 0, 1572866, 2, 0, 1572867, 2, 0, 1572872, 2, 0, 1572873, 2, 0, 1572874, 2, 0, 1572877, 2, 0, 1572887, 3, 0, 1572890, 3, 0, 1572891, 3, 0, 1638403, 2, 0, 1638420, 3, 0, 1638421, 3, 0, 1638422, 3, 0, 1638423, 3, 0, 1638424, 3, 0, 1638425, 3, 0, 1638426, 3, 0, 1638427, 3, 0, 1703939, 2, 0, 1703957, 3, 0, 1703959, 3, 0, 1703963, 3, 0, 1703964, 3, 0, 1703965, 3, 0, 1703966, 3, 0, 1769475, 2, 0, 1769476, 2, 0, 1769477, 2, 0, 1769478, 2, 0, 1769479, 2, 0, 1769482, 2, 0, 1769483, 2, 0, 1769484, 2, 0, 1769493, 3, 0, 1769494, 3, 0, 1769495, 3, 0, 1769499, 3, 0, 1769502, 3, 0, 1835009, 2, 0, 1835010, 2, 0, 1835011, 2, 0, 1835015, 2, 0, 1835018, 2, 0, 1835026, 3, 0, 1835030, 3, 0, 1835031, 3, 0, 1835032, 3, 0, 1835033, 3, 0, 1835034, 3, 0, 1835035, 3, 0, 1835038, 3, 0, 1900545, 2, 0, 1900546, 2, 0, 1900551, 2, 0, 1900552, 2, 0, 1900553, 2, 0, 1900554, 2, 0, 1900562, 3, 0, 1900569, 3, 0, 1900574, 3, 0, 1966081, 2, 0, 1966082, 2, 0, 1966087, 2, 0, 1966090, 2, 0, 1966093, 2, 0, 1966098, 3, 0, 1966099, 3, 0, 1966105, 3, 0, 1966110, 3, 0, 2031617, 2, 0, 2031618, 2, 0, 2031619, 2, 0, 2031620, 2, 0, 2031621, 2, 0, 2031622, 2, 0, 2031623, 2, 0, 2031624, 2, 0, 2031625, 2, 0, 2031626, 2, 0, 2031627, 2, 0, 2031628, 2, 0, 2031629, 2, 0, 2031634, 3, 0, 2031635, 3, 0, 2031636, 3, 0, 2031637, 3, 0, 2031638, 3, 0, 2031639, 3, 0, 2031640, 3, 0, 2031641, 3, 0, 2031642, 3, 0, 2031643, 3, 0, 2031644, 3, 0, 2031645, 3, 0, 2031646, 3, 0 )
+tile_data = PoolIntArray( 131083, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196619, 0, 0, 196627, 1, 0, 196628, 1, 0, 196629, 1, 0, 262146, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0, 262153, 0, 0, 262154, 0, 0, 262155, 0, 0, 262163, 1, 0, 262165, 1, 0, 262166, 1, 0, 262167, 1, 0, 262168, 1, 0, 262169, 1, 0, 262170, 1, 0, 262171, 1, 0, 262172, 1, 0, 262173, 1, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0, 327690, 0, 0, 327691, 0, 0, 327699, 1, 0, 327700, 1, 0, 327701, 1, 0, 327706, 1, 0, 327709, 1, 0, 327710, 1, 0, 393226, 0, 0, 393227, 0, 0, 393242, 1, 0, 393245, 1, 0, 393246, 1, 0, 458762, 0, 0, 458763, 0, 0, 458764, 0, 0, 458765, 0, 0, 458777, 1, 0, 458778, 1, 0, 458781, 1, 0, 458782, 1, 0, 524297, 0, 0, 524298, 0, 0, 524301, 0, 0, 524308, 1, 0, 524309, 1, 0, 524310, 1, 0, 524311, 1, 0, 524312, 1, 0, 524313, 1, 0, 524314, 1, 0, 524315, 1, 0, 524316, 1, 0, 524317, 1, 0, 589834, 0, 0, 589837, 0, 0, 589845, 1, 0, 589849, 1, 0, 589853, 1, 0, 655370, 0, 0, 655371, 0, 0, 655372, 0, 0, 655373, 0, 0, 655381, 1, 0, 655385, 1, 0, 655389, 1, 0, 655390, 1, 0, 720909, 0, 0, 720917, 1, 0, 720921, 1, 0, 720926, 1, 0, 786456, 1, 0, 786457, 1, 0, 786458, 1, 0, 851994, 1, 0, 917518, 0, 0, 917519, 0, 0, 917520, 0, 0, 917521, 0, 0, 917530, 1, 0, 983054, 0, 0, 983055, 0, 0, 983057, 0, 0, 1048590, 0, 0, 1048591, 0, 0, 1048592, 0, 0, 1048593, 0, 0, 1114126, 0, 0, 1114127, 0, 0, 1114128, 0, 0, 1114129, 0, 0, 1245204, 3, 0, 1245207, 3, 0, 1245208, 3, 0, 1245209, 3, 0, 1245210, 3, 0, 1245211, 3, 0, 1245212, 3, 0, 1245213, 3, 0, 1245214, 3, 0, 1310740, 3, 0, 1310743, 3, 0, 1310750, 3, 0, 1376257, 2, 0, 1376274, 3, 0, 1376275, 3, 0, 1376276, 3, 0, 1376279, 3, 0, 1376286, 3, 0, 1441793, 2, 0, 1441805, 2, 0, 1441811, 3, 0, 1441812, 3, 0, 1441813, 3, 0, 1441814, 3, 0, 1441815, 3, 0, 1441820, 3, 0, 1441821, 3, 0, 1441822, 3, 0, 1507329, 2, 0, 1507338, 2, 0, 1507341, 2, 0, 1507351, 3, 0, 1507354, 3, 0, 1507355, 3, 0, 1507356, 3, 0, 1507357, 3, 0, 1572865, 2, 0, 1572866, 2, 0, 1572867, 2, 0, 1572872, 2, 0, 1572873, 2, 0, 1572874, 2, 0, 1572877, 2, 0, 1572887, 3, 0, 1572890, 3, 0, 1572891, 3, 0, 1638403, 2, 0, 1638420, 3, 0, 1638421, 3, 0, 1638422, 3, 0, 1638423, 3, 0, 1638424, 3, 0, 1638425, 3, 0, 1638426, 3, 0, 1638427, 3, 0, 1703939, 2, 0, 1703957, 3, 0, 1703959, 3, 0, 1703963, 3, 0, 1703964, 3, 0, 1703965, 3, 0, 1703966, 3, 0, 1769475, 2, 0, 1769476, 2, 0, 1769477, 2, 0, 1769478, 2, 0, 1769479, 2, 0, 1769482, 2, 0, 1769483, 2, 0, 1769484, 2, 0, 1769493, 3, 0, 1769494, 3, 0, 1769495, 3, 0, 1769499, 3, 0, 1769502, 3, 0, 1835009, 2, 0, 1835010, 2, 0, 1835011, 2, 0, 1835015, 2, 0, 1835018, 2, 0, 1835026, 3, 0, 1835030, 3, 0, 1835031, 3, 0, 1835032, 3, 0, 1835033, 3, 0, 1835034, 3, 0, 1835035, 3, 0, 1835038, 3, 0, 1900545, 2, 0, 1900546, 2, 0, 1900551, 2, 0, 1900552, 2, 0, 1900553, 2, 0, 1900554, 2, 0, 1900562, 3, 0, 1900569, 3, 0, 1900574, 3, 0, 1966081, 2, 0, 1966082, 2, 0, 1966087, 2, 0, 1966090, 2, 0, 1966093, 2, 0, 1966098, 3, 0, 1966099, 3, 0, 1966105, 3, 0, 1966110, 3, 0, 2031617, 2, 0, 2031618, 2, 0, 2031619, 2, 0, 2031620, 2, 0, 2031621, 2, 0, 2031622, 2, 0, 2031623, 2, 0, 2031624, 2, 0, 2031625, 2, 0, 2031626, 2, 0, 2031627, 2, 0, 2031628, 2, 0, 2031629, 2, 0, 2031634, 3, 0, 2031635, 3, 0, 2031636, 3, 0, 2031637, 3, 0, 2031638, 3, 0, 2031639, 3, 0, 2031640, 3, 0, 2031641, 3, 0, 2031642, 3, 0, 2031643, 3, 0, 2031644, 3, 0, 2031645, 3, 0, 2031646, 3, 0 )
 
 [node name="TochaC" parent="." instance=ExtResource( 11 )]
 position = Vector2( 1040, 424 )
@@ -176,7 +418,7 @@ light_mask = 4
 position = Vector2( 0, 480 )
 texture = ExtResource( 13 )
 vframes = 18
-frame = 17
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Entrada"]
 autoplay = "Bloqueio 1"
@@ -189,20 +431,26 @@ gravity_scale = 0.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Entrada/Collision"]
 position = Vector2( -16, 16 )
 shape = SubResource( 2 )
+disabled = true
 
 [node name="Saida" type="Sprite" parent="."]
-position = Vector2( 1104, 464 )
+light_mask = 4
+position = Vector2( 1141.48, 444.995 )
+texture = ExtResource( 16 )
+vframes = 11
+frame = 2
 
 [node name="WinArea2D" type="Area2D" parent="Saida"]
+position = Vector2( -37.48, 19.005 )
 collision_layer = 0
 collision_mask = 2
 script = ExtResource( 10 )
 
 [node name="AreaShape2D" type="CollisionShape2D" parent="Saida/WinArea2D"]
 shape = SubResource( 3 )
-disabled = true
 
 [node name="Collision" type="RigidBody2D" parent="Saida"]
+position = Vector2( -37.48, 19.005 )
 gravity_scale = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Saida/Collision"]
@@ -210,8 +458,35 @@ shape = SubResource( 2 )
 disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Saida"]
-anims/RESET = SubResource( 4 )
+autoplay = "Light_Blocked"
+anims/Light_Blocked = SubResource( 6 )
+anims/Light_Unblocked = SubResource( 7 )
 anims/WinAnimation = SubResource( 5 )
+blend_times = [ "Light_Blocked", "Light_Unblocked", 0.5, "Light_Unblocked", "WinAnimation", 0.5 ]
+
+[node name="Sprite" type="Sprite" parent="Saida"]
+modulate = Color( 0.105882, 0.811765, 0.764706, 0.156863 )
+light_mask = 4
+position = Vector2( -40, 0 )
+scale = Vector2( 0.0722222, 0.0722222 )
+texture = ExtResource( 18 )
+
+[node name="Light2D" type="Light2D" parent="Saida"]
+position = Vector2( -40, 0 )
+texture = ExtResource( 18 )
+texture_scale = 0.0722222
+color = Color( 0.105882, 0.811765, 0.764706, 1 )
+energy = 1.02222
+mode = 2
+range_item_cull_mask = 7
+
+[node name="AnimArea2D" type="Area2D" parent="Saida"]
+collision_mask = 2
+script = ExtResource( 19 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Saida/AnimArea2D"]
+position = Vector2( -189.48, -4.995 )
+shape = SubResource( 9 )
 
 [node name="YSort" type="YSort" parent="."]
 
@@ -301,9 +576,6 @@ radius = 150
 [node name="Player" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( -208, 496 )
 speed = 83
-
-[node name="Camera2D" parent="YSort/Player" index="1"]
-offset = Vector2( 7, 7 )
 
 [node name="Teias" type="TileMap" parent="."]
 light_mask = 4
@@ -479,5 +751,6 @@ centered = false
 [node name="Tween" type="Tween" parent="HUD/Control"]
 
 [connection signal="body_entered" from="Saida/WinArea2D" to="Saida/WinArea2D" method="_on_Area2DWin_body_entered"]
+[connection signal="body_entered" from="Saida/AnimArea2D" to="Saida/AnimArea2D" method="_on_AnimArea2D_body_entered"]
 
 [editable path="YSort/Player"]

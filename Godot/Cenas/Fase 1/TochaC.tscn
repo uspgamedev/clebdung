@@ -51,6 +51,7 @@ resource_name = "TochaC (L)"
 [node name="TochaC" type="Sprite"]
 texture = ExtResource( 2 )
 hframes = 6
+frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "TochaC"
@@ -59,8 +60,8 @@ anims/TochaC = SubResource( 1 )
 
 [node name="Light2D" type="Light2D" parent="."]
 texture = ExtResource( 1 )
-texture_scale = 0.34
-color = Color( 0.882353, 0.658824, 0.372549, 1 )
-energy = 1.08
+texture_scale = 0.355
+color = Color( 0.819608, 0.631373, 0.380392, 1 )
+energy = 1.02
 mode = 2
 range_item_cull_mask = 7
