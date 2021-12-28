@@ -1,11 +1,15 @@
 extends CanvasLayer
 
 onready var tween = get_node("Control/Tween")
-onready var minimapa = get_node("Control/MinimapaF1")
 onready var score = get_node("Control/ScoreRect/Score")
+export(PackedScene) var minimapa_caminho
+var minimapa
 
 
 func _ready():
+	# Adiciona o minimapa correspondente à fase especificada
+	minimapa = minimapa_caminho.instance()
+	get_node("Control").add_child(minimapa)
 	# Deixa os itens invisíveis (pois antes da animação ainda estão na tela)
 	minimapa.visible = false
 	score.visible = false

@@ -9,10 +9,10 @@ func _ready():
 	#Bloqueia temporariamente input do jogador e simula caminhar à direita
 	player.direction = Vector2(1,0)
 	yield(get_tree().create_timer(3.5), "timeout")
+	# Bloqueia fantasmas
 	for g in ghosts:
 		g.set_physics_process(false)
 	player.input_enabled = true
-	# Bloqueia fantasmas
 
 func _process(_delta):
 	# Assim que o primeiro movimento for feito, desbloqueia fantasmas
@@ -24,6 +24,7 @@ func _process(_delta):
 		init = true
 		for g in ghosts:
 			g.set_physics_process(true)
+			
 
 func win():
 	# Desativa input do jogador e simula caminhar à direita

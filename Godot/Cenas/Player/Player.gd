@@ -13,12 +13,12 @@ func _ready():
 	#Inicializar variáveis
 	last_position = position
 	target_position = position + Vector2(32,0)
-	
 
 
 func _process(_delta):
 	animation()
-	
+
+
 func _physics_process(delta): 
 	#MOVENDO
 	#Colisão
@@ -38,6 +38,7 @@ func _physics_process(delta):
 		last_position = position
 		target_position += direction * tile_size
 
+
 func set_direction():
 	#Determinar direção
 	var UP = Input.is_action_pressed("ui_up")
@@ -56,7 +57,8 @@ func set_direction():
 	#Apontar Raycast
 	if direction != Vector2():
 		$PlayerRayCast.cast_to = direction * tile_size/2
-		
+
+
 func animation():
 	var anim_direc
 	var anim_modo
@@ -81,7 +83,8 @@ func animation():
 		
 	animation = anim_direc + "_" + anim_modo 
 	get_node("AnimationPlayer").play(animation)
-	
+
+
 func _on_PlayerArea2D_body_entered(body):
 	if body.get_name().begins_with("Ghost"):
 		get_tree().reload_current_scene()
