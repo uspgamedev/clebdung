@@ -50,4 +50,4 @@ func win():
 	# Espera a animação da luz terminar
 	yield(get_tree().create_timer(2.5), "timeout")
 	# Troca de cena
-	print("Ganhou")
+	get_tree().change_scene("res://Recursos/Fase 2/Fase2.tscn")
