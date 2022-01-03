@@ -11,7 +11,8 @@ config_version=4
 [application]
 
 config/name="ClebDung"
-run/main_scene="res://Cenas/Fase 1/Fase1.tscn"
+run/main_scene="res://Recursos/Fase 1/Fase1.tscn"
+config/icon="res://icon.png"
 
 [display]
 
