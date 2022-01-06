@@ -347,16 +347,16 @@ tracks/0/keys = {
 "values": [ 1.0, 0.0 ]
 }
 
-[sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 5.31344, 4.60249 )
-
 [sub_resource type="CircleShape2D" id=11]
 radius = 104.307
 
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 5.31344, 4.60249 )
+
 [node name="Ghost" type="KinematicBody2D"]
 position = Vector2( 0, 1 )
-collision_layer = 2
-collision_mask = 0
+collision_layer = 0
+collision_mask = 2
 script = ExtResource( 3 )
 
 [node name="GhostSprite" type="Sprite" parent="."]
@@ -372,7 +372,6 @@ frame = 12
 position = Vector2( 1, -25.868 )
 texture = ExtResource( 2 )
 texture_scale = 0.06
-color = Color( 1, 0, 0, 1 )
 energy = 0.0
 range_item_cull_mask = 3
 
@@ -394,10 +393,6 @@ anims/Light_Chaos = SubResource( 7 )
 anims/Light_FadeIn = SubResource( 8 )
 anims/Light_FadeOut = SubResource( 9 )
 next/Light_FadeIn = "Light"
-
-[node name="GhostCollision" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -9 )
-shape = SubResource( 10 )
 
 [node name="RayCast" type="RayCast2D" parent="."]
 enabled = true
@@ -429,6 +424,10 @@ one_shot = true
 [node name="TimerDoubt" type="Timer" parent="."]
 wait_time = 1.7
 one_shot = true
+
+[node name="GhostCollision" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -9 )
+shape = SubResource( 10 )
 
 [connection signal="body_entered" from="Vision" to="." method="_on_Vision_body_entered"]
 [connection signal="body_exited" from="Vision" to="." method="_on_Vision_body_exited"]

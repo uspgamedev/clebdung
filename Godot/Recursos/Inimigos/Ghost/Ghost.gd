@@ -63,6 +63,15 @@ export(int) var radius
 
 
 func _ready():
+	# Corrige a cor da luz do fantasma baseado na textura
+	var texture = get_node("GhostSprite").get_texture().get_data()
+	texture.lock()
+	var color = texture.get_pixel(13,37)
+	texture.unlock()
+	get_node("Light2D").color = color
+	get_node("Light2D/SpriteLight (Correção)").modulate = color
+	get_node("Light2D/SpriteLight (Correção)").modulate.a = 0.1176
+	
 	# Inicializar variáveis
 	last_position = position
 	target_position = position
@@ -119,8 +128,10 @@ func _process(_delta):
 	animation()
 	
 func _physics_process(delta):
-	# Atualizar a posição com base na direção a ser seguida (tile origem -> tile destino)
-	global_position += speed * direction * delta
+	# Mover com base na direção a ser seguida (tile origem -> tile destino)
+	# e checar possível colisão com o jogador
+	if move_and_collide(speed * direction * delta):
+		player.die()
 	# Atualizar a posição para o destino, caso se distancie "X" do tile origem
 	if position.distance_to(last_position) >= tile_size - speed * delta:
 		position = target_position
@@ -342,4 +353,3 @@ func _on_Delay_timeout():
 	# Ao fim do delay, iniciar timer de RANDOM e entrar no próprio estado RANDOM
 	get_node("TimerRandom").start()
 	_on_TimerRandom_timeout()
-

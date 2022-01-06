@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Assets/Luz-Sprite.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Player/Player_Spritesheet.png" type="Texture" id=2]
@@ -6,9 +6,6 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 8, 16 )
 
 [sub_resource type="Animation" id=3]
 length = 6.5
@@ -371,7 +368,7 @@ tracks/0/keys = {
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
-collision_mask = 4
+collision_mask = 0
 script = ExtResource( 3 )
 
 [node name="PlayerSprite" type="Sprite" parent="."]
@@ -425,18 +422,9 @@ shadow_item_cull_mask = 0
 enabled = true
 cast_to = Vector2( 16, 0 )
 
-[node name="PlayerArea2D" type="Area2D" parent="."]
-position = Vector2( 0, -16 )
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerArea2D"]
-position = Vector2( 0, 8 )
-shape = SubResource( 1 )
-
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -16 )
-shape = SubResource( 2 )
+position = Vector2( 0, -8 )
+shape = SubResource( 1 )
 
 [node name="AnimationPlayerL" type="AnimationPlayer" parent="."]
 autoplay = "Light_FadeIn"
@@ -455,5 +443,3 @@ anims/Right_Idle = SubResource( 8 )
 anims/Right_Walk = SubResource( 9 )
 anims/Up_Idle = SubResource( 10 )
 anims/Up_Walk = SubResource( 11 )
-
-[connection signal="body_entered" from="PlayerArea2D" to="." method="_on_PlayerArea2D_body_entered"]

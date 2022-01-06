@@ -84,7 +84,5 @@ func animation():
 	animation = anim_direc + "_" + anim_modo 
 	get_node("AnimationPlayer").play(animation)
 
-
-func _on_PlayerArea2D_body_entered(body):
-	if body.get_name().begins_with("Ghost"):
-		get_tree().reload_current_scene()
+func die():
+	get_tree().reload_current_scene()
