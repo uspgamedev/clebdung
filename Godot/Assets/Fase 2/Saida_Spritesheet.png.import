@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Bloqueio2_Spritesheet.png-6e85eff3ee7f20b94028ed7e34f9eec7.stex"
+path="res://.import/Saida_Spritesheet.png-48046b204097eebfa84892ff816d6121.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Fase 1/Bloqueio2_Spritesheet.png"
-dest_files=[ "res://.import/Bloqueio2_Spritesheet.png-6e85eff3ee7f20b94028ed7e34f9eec7.stex" ]
+source_file="res://Assets/Fase 2/Saida_Spritesheet.png"
+dest_files=[ "res://.import/Saida_Spritesheet.png-48046b204097eebfa84892ff816d6121.stex" ]
 
 [params]
 

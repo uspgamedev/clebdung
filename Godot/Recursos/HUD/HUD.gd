@@ -2,6 +2,7 @@ extends CanvasLayer
 
 onready var tween = get_node("Control/Tween")
 onready var score = get_node("Control/ScoreRect/Score")
+onready var fade_animplayer = get_node("Control/Fade/AnimationPlayer")
 export(PackedScene) var minimapa_caminho
 var minimapa
 
@@ -42,3 +43,7 @@ func finish():
 	score.position.y, score.position.y + 300, 0.8, \
 	tween.TRANS_BACK, tween.EASE_IN)
 	tween.start()
+
+func transition():
+	# Toca a animação de transição
+	fade_animplayer.play("Fade")

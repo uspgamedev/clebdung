@@ -3,6 +3,10 @@ extends Node2D
 onready var player = get_node("YSort/Player")
 onready var HUD = get_node("HUD")
 onready var ghosts = get_tree().get_nodes_in_group("Ghosts")
+onready var win_animplayer = get_node("YSort/Saida/AnimationPlayer")
+onready var block = get_node("YSort/Saida/Bloco")
+onready var ladder_sup = get_node("SaidaAbaixo/SupEscada")
+
 var init = false
 
 func _ready():
@@ -27,27 +31,30 @@ func _process(_delta):
 			g.set_physics_process(true)
 			
 
+func unblock():
+	#get_tree().call_group("Ghosts","f_chaos")
+	win_animplayer.play("Unblocked")
+
 func win():
 	# Desativa input do jogador e simula caminhar à direita
 	player.input_enabled = false
-	player.direction = Vector2(1,0)
-	# Desativa o modo chaos dos fantasmas
-	# Espera o jogador avançar um pouco no caminho da saída
-	yield(get_tree().create_timer(3), "timeout")
-	get_tree().call_group("Ghosts","f_chaos")
-	# Toca a animação para desligar luz dos fantasmas
-	for g in ghosts:
-		g.get_node("AnimationPlayerL").play("Light_FadeOut")
-	# Espera a animação da luz terminar
-	yield(get_tree().create_timer(1), "timeout")
-	# Deixa a luz dos fantasmas invisível
-	for g in ghosts:
-		g.get_node("Light2D").visible = false
-	# Toca a animação para desligar luz do jogador
+	player.direction = Vector2(0,1)
 	player.get_node("AnimationPlayerL").play("Light_FadeOut")
+	# Retira colisões e conserta as camadas dos sprites da saída
+	block.get_node("Saida1").z_index = 1
+	block.get_node("CollisionShape2D").disabled = true
+	ladder_sup.get_node("Saida2").z_index = 1
+	ladder_sup.get_node("CollisionShape2D").disabled = true
+	# Espera o jogador avançar um pouco no caminho da saída
+	# yield(get_tree().create_timer(0.2), "timeout")
 	# Retira o HUD
 	HUD.finish()
-	# Espera a animação da luz terminar
-	yield(get_tree().create_timer(2.5), "timeout")
-	# Troca de cena
-	get_tree().change_scene("res://Recursos/Fase 2/Fase2.tscn")
+	# Toca a transição
+	HUD.transition()
+	# yield(get_tree().create_timer(0.8), "timeout")
+	# player.direction = Vector2(0,0)
+	# Desativa o modo chaos dos fantasmas
+	# get_tree().call_group("Ghosts","f_chaos")
+
+
+	# Aguarda e troca de cena

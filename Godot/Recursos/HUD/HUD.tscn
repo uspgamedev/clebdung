@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Recursos/HUD/HUD.gd" type="Script" id=1]
 [ext_resource path="res://Recursos/HUD/Score.gd" type="Script" id=4]
@@ -104,6 +104,22 @@ tracks/0/keys = {
 "values": [ 30, 31, 32, 33, 34, 35 ]
 }
 
+[sub_resource type="Animation" id=7]
+resource_name = "Fade"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource( 1 )
 
@@ -133,6 +149,7 @@ texture = ExtResource( 6 )
 centered = false
 hframes = 6
 vframes = 6
+frame = 5
 script = ExtResource( 4 )
 __meta__ = {
 "_editor_description_": ""
@@ -148,3 +165,14 @@ anims/Score_4 = SubResource( 5 )
 anims/Score_5 = SubResource( 6 )
 
 [node name="Tween" type="Tween" parent="Control"]
+
+[node name="Fade" type="ColorRect" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Fade"]
+anims/Fade = SubResource( 7 )
