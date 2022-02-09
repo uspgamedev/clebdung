@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Recursos/Fase 1/Mapa1.tres" type="TileSet" id=1]
 [ext_resource path="res://Recursos/Player/Player.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Recursos/Cristal/Cristal.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Recursos/HUD/HUD.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Recursos/Cristal/CristaisID.tres" type="TileSet" id=9]
+[ext_resource path="res://Recursos/Outros/Guia.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Recursos/Fase 1/Tocha.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Recursos/Fase 1/Saida.gd" type="Script" id=12]
 [ext_resource path="res://Assets/Fase 1/Entrada_Spritesheet.png" type="Texture" id=13]
@@ -16,7 +17,7 @@
 [ext_resource path="res://Recursos/Fase 1/Cenário.tres" type="TileSet" id=15]
 [ext_resource path="res://Assets/Fase 1/Saida_Spritesheet.png" type="Texture" id=16]
 [ext_resource path="res://Recursos/Fase 1/Fase1.gd" type="Script" id=17]
-[ext_resource path="res://Assets/Luz-Sprite.png" type="Texture" id=18]
+[ext_resource path="res://Assets/Outros/Luz-Sprite.png" type="Texture" id=18]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Bloqueio"
@@ -256,7 +257,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.15, 0.45, 1.15, 1.45, 1.65, 1.8, 1.9, 2, 2.1 ),
+"times": PoolRealArray( 0.15, 0.45, 1.15, 1.5, 1.65, 1.8, 1.9, 2, 2.1 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
@@ -411,6 +412,9 @@ cell_size = Vector2( 16, 16 )
 format = 1
 tile_data = PoolIntArray( 458814, 12, 0, 983060, 19, 0, 2031730, 12, 0, 2555954, 12, 0, 3604538, 19, 0, 3866630, 19, 0, 4128814, 12, 0, 4128852, 19, 0, 4653066, 12, 0, 4915322, 19, 0, 6488154, 12, 0, 7012402, 19, 0, 8060940, 12, 0, 8061032, 19, 0 )
 
+[node name="Guia" parent="." instance=ExtResource( 10 )]
+exit_path = NodePath("../Saida/WinArea2D")
+
 [node name="Entrada" type="Sprite" parent="."]
 light_mask = 4
 position = Vector2( 0, 480 )
@@ -434,6 +438,7 @@ light_mask = 4
 position = Vector2( 1141.48, 444.995 )
 texture = ExtResource( 16 )
 vframes = 11
+frame = 10
 script = ExtResource( 12 )
 
 [node name="WinArea2D" type="Area2D" parent="Saida"]
@@ -454,12 +459,12 @@ disabled = true
 [node name="Sprite-Light2D" type="Sprite" parent="Saida"]
 modulate = Color( 0.811765, 0.105882, 0.105882, 0.156863 )
 light_mask = 4
-position = Vector2( -40, 0 )
+position = Vector2( -30, -20 )
 scale = Vector2( 0.07, 0.07 )
 texture = ExtResource( 18 )
 
 [node name="Light2D" type="Light2D" parent="Saida"]
-position = Vector2( -40, 0 )
+position = Vector2( -30, -20 )
 texture = ExtResource( 18 )
 texture_scale = 0.07
 color = Color( 0.811765, 0.105882, 0.105882, 1 )

@@ -32,8 +32,9 @@ func _process(_delta):
 			
 
 func unblock():
-	#get_tree().call_group("Ghosts","f_chaos")
+	get_tree().call_group("Ghosts","f_chaos")
 	win_animplayer.play("Unblocked")
+	get_node("Guia").enable()
 
 func win():
 	# Desativa input do jogador e simula caminhar à direita
@@ -51,10 +52,8 @@ func win():
 	HUD.finish()
 	# Toca a transição
 	HUD.transition()
-	# yield(get_tree().create_timer(0.8), "timeout")
-	# player.direction = Vector2(0,0)
 	# Desativa o modo chaos dos fantasmas
-	# get_tree().call_group("Ghosts","f_chaos")
-
-
+	get_tree().call_group("Ghosts","f_chaos")
 	# Aguarda e troca de cena
+	yield(get_tree().create_timer(3), "timeout")
+	get_tree().change_scene("res://Recursos/Fase 2/Fase2.tscn")

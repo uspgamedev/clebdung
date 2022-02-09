@@ -30,7 +30,8 @@ func _process(_delta):
 func unblock():
 	get_tree().call_group("Ghosts","f_chaos")
 	win_animplayer.play("Unblocked")
-
+	get_node("Guia").enable()
+	
 func win():
 	# Desativa input do jogador e simula caminhar à direita
 	player.input_enabled = false
