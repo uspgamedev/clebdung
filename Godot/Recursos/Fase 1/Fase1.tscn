@@ -710,3 +710,5 @@ minimapa_caminho = ExtResource( 5 )
 
 [connection signal="body_entered" from="Saida/WinArea2D" to="Saida" method="_on_WinArea2D_body_entered"]
 [connection signal="body_entered" from="Saida/AnimArea2D" to="Saida" method="_on_AnimArea2D_body_entered"]
+
+[editable path="YSort/Player"]
