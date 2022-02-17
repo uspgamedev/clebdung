@@ -1,0 +1,143 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Resources/Main Menu/player_static.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Resources/Main Menu/ghost_static.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Main Menu/title_name.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Main Menu/play_button1.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Main Menu/play_button2.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Main Menu/quit_button2.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Main Menu/quit_button1.png" type="Texture" id=8]
+[ext_resource path="res://Resources/Main Menu/quit.gd" type="Script" id=9]
+[ext_resource path="res://Resources/Main Menu/play.gd" type="Script" id=10]
+[ext_resource path="res://Resources/Levels/Level 1/tilemap_level1.tres" type="TileSet" id=11]
+[ext_resource path="res://Assets/Main Menu/bgsprite.png" type="Texture" id=12]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+points = PoolVector2Array( 128, 128, 0, 128, 0, 0, 128, 0 )
+
+[sub_resource type="TileSet" id=2]
+0/name = "bgsprite.png 0"
+0/texture = ExtResource( 12 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 128, 128 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 1 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 1 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+1/name = "bgsprite.png 1"
+1/texture = ExtResource( 12 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 128, 0, 128, 128 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Ghost" parent="." instance=ExtResource( 3 )]
+position = Vector2( 216, 432 )
+scale = Vector2( 10, 10 )
+
+[node name="Chão" type="TileMap" parent="."]
+light_mask = 2
+scale = Vector2( 5, 5 )
+tile_set = ExtResource( 11 )
+cell_size = Vector2( 32, 32 )
+occluder_light_mask = 2
+format = 1
+tile_data = PoolIntArray( 262144, 6, 0, 262145, 5, 0, 262146, 4, 0, 262147, 8, 0, 262148, 4, 0, 262149, 4, 0, 262150, 5, 0, 262151, 4, 0 )
+
+[node name="Paredes" type="TileMap" parent="."]
+light_mask = 2
+scale = Vector2( 10, 10 )
+tile_set = ExtResource( 11 )
+cell_size = Vector2( 32, 32 )
+occluder_light_mask = 2
+format = 1
+tile_data = PoolIntArray( 0, 17, 0, 1, 16, 0, 2, 17, 0, 3, 16, 0, 65537, 9, 0, 65538, 9, 0, 720941, 0, 0 )
+
+[node name="TileMap" type="TileMap" parent="."]
+scale = Vector2( 2.5, 2.5 )
+tile_set = SubResource( 2 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( 262144, 1, 0, 262156, 0, 0 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 641, 704 )
+scale = Vector2( 10, 10 )
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Node2D"]
+position = Vector2( 632, 104 )
+scale = Vector2( 1.02301, 0.981818 )
+texture = ExtResource( 4 )
+
+[node name="pos1" type="Position2D" parent="."]
+position = Vector2( 248, 656 )
+
+[node name="pos2" type="Position2D" parent="."]
+position = Vector2( 1008, 672 )
+
+[node name="pos3" type="Position2D" parent="."]
+position = Vector2( 80, 760 )
+
+[node name="pos4" type="Position2D" parent="."]
+position = Vector2( 1184, 848 )
+
+[node name="Play" type="TextureButton" parent="."]
+light_mask = 0
+margin_left = 104.0
+margin_top = 400.0
+margin_right = 368.0
+margin_bottom = 464.0
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 6 )
+texture_hover = ExtResource( 6 )
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="TextureButton" parent="."]
+light_mask = 0
+margin_left = 104.0
+margin_top = 488.0
+margin_right = 368.0
+margin_bottom = 552.0
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 7 )
+texture_hover = ExtResource( 7 )
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
+light_mask = 2
+color = Color( 0, 0, 0, 1 )
+
+[connection signal="pressed" from="Play" to="Play" method="_on_Play_pressed"]
+[connection signal="pressed" from="Quit" to="Quit" method="_on_Quit_pressed"]
