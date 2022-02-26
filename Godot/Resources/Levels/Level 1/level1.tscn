@@ -5,7 +5,7 @@
 [ext_resource path="res://Resources/Player/player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Resources/Crystal/crystal.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Resources/Others/astar.tres" type="TileSet" id=5]
-[ext_resource path="res://Assets/Level 1/torch2_spritesheet.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Levels/Level 1/torch2_spritesheet.png" type="Texture" id=6]
 [ext_resource path="res://Resources/Levels/Level 1/composition.tres" type="TileSet" id=7]
 [ext_resource path="res://Resources/HUD/HUD.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Resources/Others/astar.gd" type="Script" id=9]
@@ -13,8 +13,8 @@
 [ext_resource path="res://Resources/Enemies/Ghost/ghost.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Resources/Levels/Level 1/exit.gd" type="Script" id=12]
 [ext_resource path="res://Resources/Others/guide.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Assets/Level 1/entry_spritesheet.png" type="Texture" id=14]
-[ext_resource path="res://Assets/Level 1/exit_spritesheet.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Levels/Level 1/entry_spritesheet.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Levels/Level 1/exit_spritesheet.png" type="Texture" id=15]
 [ext_resource path="res://Resources/Levels/Level 1/torch.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Resources/Levels/Level 1/minimap_level1.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Resources/Levels/Level 1/tilemap_level1.tres" type="TileSet" id=18]
@@ -398,14 +398,14 @@ cell_size = Vector2( 32, 32 )
 format = 1
 tile_data = PoolIntArray( 131083, 20, 0, 196612, 20, 0, 196624, 9, 0, 196625, 8, 0, 196626, 10, 0, 196627, 6, 0, 196629, 4, 0, 196630, 9, 0, 262151, 15, 0, 262173, 7, 0, 262174, 8, 0, 327682, 7, 0, 393228, 8, 0, 393229, 10, 0, 458765, 7, 0, 458775, 9, 0, 458776, 8, 0, 524294, 7, 0, 524295, 10, 0, 524296, 8, 0, 524314, 15, 0, 589831, 6, 0, 589845, 4, 0, 655370, 14, 0, 655373, 6, 0, 655375, 10, 0, 720909, 7, 0, 720913, 4, 0, 720916, 9, 0, 786457, 14, 0, 851971, 4, 0, 851979, 4, 0, 851982, 8, 0, 851996, 9, 0, 851997, 10, 0, 852003, 10, 0, 852004, 9, 0, 917535, 20, 0, 917536, 4, 0, 983045, 15, 0, 983050, 10, 0, 983051, 9, 0, 983055, 20, 0, 983057, 15, 0, 983066, 7, 0, 1048591, 4, 0, 1048599, 7, 0, 1048600, 20, 0, 1114114, 9, 0, 1114128, 7, 0, 1179659, 20, 0, 1179675, 9, 0, 1179676, 10, 0, 1245192, 8, 0, 1245195, 4, 0, 1245207, 15, 0, 1245213, 6, 0, 1376259, 15, 0, 1376266, 14, 0, 1441813, 7, 0, 1441814, 6, 0, 1441820, 20, 0, 1441821, 7, 0, 1507336, 8, 0, 1507337, 10, 0, 1572867, 7, 0, 1572878, 10, 0, 1572879, 9, 0, 1638415, 15, 0, 1703940, 9, 0, 1703966, 4, 0, 1769474, 9, 0, 1769477, 14, 0, 1769485, 4, 0, 1769496, 9, 0, 1835009, 6, 0, 1835026, 7, 0, 1835030, 4, 0, 1835031, 7, 0, 1835032, 6, 0, 1900552, 20, 0, 1900553, 4, 0, 1966081, 7, 0, 1966106, 9, 0, 1966107, 8, 0, 1966108, 10, 0, 1966109, 9, 0, 2031626, 7, 0, 2031636, 15, 0, 2031637, 7, 0, 2031646, 6, 0 )
 
-[node name="Composition (0,5 Scale)" type="TileMap" parent="."]
+[node name="CompositionHalfScale" type="TileMap" parent="."]
 scale = Vector2( 0.5, 0.5 )
 tile_set = ExtResource( 7 )
 cell_size = Vector2( 16, 16 )
 format = 1
 tile_data = PoolIntArray( 786440, 18, 0, 1179718, 16, 0, 1310842, 13, 0, 2097188, 17, 0, 3145752, 13, 0, 3145816, 16, 0, 3145833, 17, 0, 3670086, 18, 0, 4456516, 17, 0, 4718596, 18, 0, 5505032, 13, 0, 5505095, 16, 0, 6029416, 18, 0, 8126510, 17, 0, 8257540, 16, 0, 8257608, 13, 0 )
 
-[node name="SpiderWeb (0,5 Scale)" type="TileMap" parent="."]
+[node name="SpiderWebHalfScale" type="TileMap" parent="."]
 light_mask = 4
 scale = Vector2( 0.5, 0.5 )
 tile_set = ExtResource( 7 )
