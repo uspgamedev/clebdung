@@ -231,6 +231,9 @@ shape = SubResource( 6 )
 disabled = true
 one_way_collision_margin = 4.0
 
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 0, -16 )
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
