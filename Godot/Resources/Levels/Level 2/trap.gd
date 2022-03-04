@@ -3,12 +3,14 @@ extends Node2D
 var mode = "idle"
 var on_area = false
 onready var player = get_parent().get_node("Player")
+onready var particles = load("res://Resources/Levels/Level 2/SandParticles.tscn")
 
 func _process(_delta):
 	if mode == "idle":
 		animation()
-	elif mode == "active":
-		if on_area:
+	elif mode == "trigger":
+		if on_area and $Sprite.frame > 4:
+			print("die")
 			player.die()
 
 func animation():
@@ -16,13 +18,15 @@ func animation():
 
 func _on_TimerTrigger_timeout():
 	get_node("AnimationPlayer").play("active")
+	particles_spawn()
 	get_node("TimerRetract").set_wait_time(5)
 	get_node("TimerRetract").start()
+	mode = "trigger"
 
 func _on_TimerRetract_timeout():
 	get_node("AnimationPlayer").play("retract")
 
-# Só arrumar o tempo que o player morre, uma vez que ele so morre quando a animação dos espinhos acaba
+
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "retract":
 		mode = "idle"
@@ -40,3 +44,9 @@ func _on_Area2D_body_entered(body):
 func _on_Area2D_body_exited(body):
 	if body.get_name() == "Player":
 		on_area = false
+		
+func particles_spawn():
+	var scene_instance = particles.instance()
+	scene_instance.set_name("particles")
+	add_child(scene_instance)
+
