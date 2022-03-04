@@ -3,11 +3,37 @@ extends CanvasLayer
 onready var tween = get_node("Control/Tween")
 onready var score = get_node("Control/ScoreRect/Score")
 onready var fade_animplayer = get_node("Control/Fade/AnimationPlayer")
+onready var levelname = get_node("Control").get_node("LevelName")
 export(PackedScene) var minimap_scene
+export(String) var scene_name
 var minimap
 
-
 func _ready():
+	display_name()
+	init_map_score()
+
+# Mostra o nome da fase
+func display_name():
+	# Define o texto do  nó para o nome da fase correspondente
+	levelname.bbcode_text = "[center][u]" + \
+	scene_name + "[/u][/center]"
+	# Animação de aparecimento
+	tween.interpolate_property(levelname, "modulate", \
+	Color(1, 1, 1, 0), Color(1, 1, 1, 1), 1.5, \
+	Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	yield(get_tree().create_timer(0.3), "timeout")
+	tween.start()
+
+# Retira o nome da fase
+func undisplay_name():
+	# Animação de desaparecimento
+	tween.interpolate_property(levelname, "modulate", \
+	Color(1, 1, 1, 1), Color(1, 1, 1, 0), 1.5, \
+	Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	tween.start()
+
+# Inicia o minimapa e score
+func init_map_score():
 	# Adiciona o minimapa correspondente à fase especificada
 	minimap = minimap_scene.instance()
 	get_node("Control").add_child(minimap)
@@ -30,6 +56,7 @@ func _ready():
 	tween.start()
 	yield(get_tree().create_timer(0.001), "timeout")
 	score.visible = true
+	
 
 # Retira o HUD da tela
 func finish():

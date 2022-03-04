@@ -8,7 +8,6 @@ onready var guide = get_node("Guide")
 onready var block = get_node("YSort/Exit/Exit1")
 onready var ladder_sup = get_node("Stairs/Exit2")
 export(String, FILE, "*.tscn") var next_scene_path
-var init = false
 var default_code = load("res://Resources/Levels/default_level.gd").new()
 
 func _ready():
@@ -17,16 +16,8 @@ func _ready():
 	default_code.init(2.8, Vector2(1,0))
 
 func _process(_delta):
-	# Assim que o primeiro movimento for feito, desbloqueia fantasmas
-	if init == false and player.input_enabled and \
-	(Input.is_action_pressed("ui_up") or \
-	Input.is_action_pressed("ui_down") or \
-	Input.is_action_pressed("ui_left") or \
-	Input.is_action_pressed("ui_right")):
-		init = true
-		for g in ghosts:
-			g.set_physics_process(true)
-			
+	# Código padrão
+	default_code.detect_move()
 
 func unblock():
 	# Código padrão

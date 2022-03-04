@@ -6,6 +6,7 @@ var HUD
 var win_animplayer
 var guide
 var tree
+var init = false
 
 # Importa as referências da fase
 func import_ref(player_arg, ghosts_arg, HUD_arg, win_animplayer_arg, guide_arg, tree_arg):
@@ -27,6 +28,19 @@ func init(init_time, init_direction):
 	for g in ghosts:
 		g.set_physics_process(false)
 	player.input_enabled = true
+
+func detect_move():
+	# Assim que o primeiro movimento for feito, desbloqueia fantasmas
+	# e retira o nome da fase da tela
+	if init == false and player.input_enabled and \
+	(Input.is_action_pressed("ui_up") or \
+	Input.is_action_pressed("ui_down") or \
+	Input.is_action_pressed("ui_left") or \
+	Input.is_action_pressed("ui_right")):
+		init = true
+		for g in ghosts:
+			g.set_physics_process(true)
+		HUD.undisplay_name()
 
 # Desbloqueia a saída após coleta dos cristais
 func unblock():

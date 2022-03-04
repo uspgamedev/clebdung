@@ -734,6 +734,7 @@ color = Color( 0, 0, 0, 1 )
 
 [node name="HUD" parent="." instance=ExtResource( 8 )]
 minimap_scene = ExtResource( 19 )
+scene_name = "Level 2"
 
 [connection signal="body_entered" from="Stairs/WinArea2D" to="YSort/Exit" method="_on_WinArea2D_body_entered"]
 [connection signal="body_exited" from="Stairs/WinArea2D" to="YSort/Exit" method="_on_WinArea2D_body_exited"]

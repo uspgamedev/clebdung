@@ -440,6 +440,7 @@ light_mask = 4
 position = Vector2( 1141.48, 444.995 )
 texture = ExtResource( 15 )
 vframes = 11
+frame = 2
 script = ExtResource( 12 )
 
 [node name="WinArea2D" type="Area2D" parent="Exit"]
@@ -458,18 +459,17 @@ shape = SubResource( 2 )
 disabled = true
 
 [node name="Sprite-Light2D" type="Sprite" parent="Exit"]
-modulate = Color( 0.811765, 0.105882, 0.105882, 0.156863 )
+modulate = Color( 0.105882, 0.811765, 0.764706, 0.156863 )
 light_mask = 4
-position = Vector2( -30, -20 )
-scale = Vector2( 0.09, 0.09 )
+position = Vector2( -40, 0 )
+scale = Vector2( 0.07, 0.07 )
 texture = ExtResource( 2 )
 
 [node name="Light2D" type="Light2D" parent="Exit"]
-position = Vector2( -30, -20 )
+position = Vector2( -40, 0 )
 texture = ExtResource( 2 )
-texture_scale = 0.09
-color = Color( 0.811765, 0.105882, 0.105882, 1 )
-energy = 1.4
+texture_scale = 0.07
+color = Color( 0.105882, 0.811765, 0.764706, 1 )
 mode = 2
 range_item_cull_mask = 7
 
@@ -709,6 +709,7 @@ color = Color( 0, 0, 0, 1 )
 
 [node name="HUD" parent="." instance=ExtResource( 8 )]
 minimap_scene = ExtResource( 17 )
+scene_name = "Level 1"
 
 [connection signal="body_entered" from="Exit/WinArea2D" to="Exit" method="_on_WinArea2D_body_entered"]
 [connection signal="body_entered" from="Exit/AnimArea2D" to="Exit" method="_on_AnimArea2D_body_entered"]
