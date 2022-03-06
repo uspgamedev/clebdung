@@ -85,4 +85,6 @@ func animation():
 	get_node("AnimationPlayer").play(animation)
 
 func die():
-	get_tree().reload_current_scene()
+	$PlayerCollision.disabled = true
+	yield(get_tree().create_timer(.5), "timeout")
+	$PlayerCollision.disabled = false

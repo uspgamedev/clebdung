@@ -18,6 +18,7 @@ hue_variation = -0.02
 hue_variation_random = 0.65
 
 [node name="SandParticles" type="Particles2D"]
+light_mask = 4
 position = Vector2( 80, 81 )
 emitting = false
 amount = 10

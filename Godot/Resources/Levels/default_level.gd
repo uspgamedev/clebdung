@@ -1,29 +1,33 @@
 extends Node
 
+var tree
 var player
 var ghosts
 var HUD
+var fade
 var win_animplayer
 var guide
-var tree
-var init = false
+var init_level = false
 
 # Importa as referências da fase
-func import_ref(player_arg, ghosts_arg, HUD_arg, win_animplayer_arg, guide_arg, tree_arg):
-	player = player_arg
-	ghosts = ghosts_arg
-	HUD = HUD_arg
-	win_animplayer = win_animplayer_arg
-	guide = guide_arg
+func import_ref(tree_arg, root_node, win_animplayer_arg):
 	tree = tree_arg
+	player = root_node.get_node("YSort/Player")
+	ghosts = tree.get_nodes_in_group("Ghosts")
+	HUD = root_node.get_node("HUD")
+	win_animplayer = win_animplayer_arg
+	guide = root_node.get_node("Guide")
+	fade = root_node.get_node("Fade")
 	
 # Inicia a fase
 func init(init_time, init_direction):
+	# Toca a transição de tela
+	fade.fade_in()
 	# Bloqueia temporariamente input do jogador e simula caminhar
 	# à uma direção determinada
 	player.target_position = player.global_position + Vector2(32,0)
 	player.direction = init_direction
-	yield(tree.create_timer(2.8), "timeout")
+	yield(tree.create_timer(init_time), "timeout")
 	# Bloqueia fantasmas
 	for g in ghosts:
 		g.set_physics_process(false)
@@ -32,15 +36,16 @@ func init(init_time, init_direction):
 func detect_move():
 	# Assim que o primeiro movimento for feito, desbloqueia fantasmas
 	# e retira o nome da fase da tela
-	if init == false and player.input_enabled and \
+	if init_level == false and player.input_enabled and \
 	(Input.is_action_pressed("ui_up") or \
 	Input.is_action_pressed("ui_down") or \
 	Input.is_action_pressed("ui_left") or \
 	Input.is_action_pressed("ui_right")):
-		init = true
+		init_level = true
 		for g in ghosts:
 			g.set_physics_process(true)
 		HUD.undisplay_name()
+		HUD.init_map_score()
 
 # Desbloqueia a saída após coleta dos cristais
 func unblock():
@@ -64,8 +69,8 @@ func lock_player(finish_direction):
 func finish_level(next_scene_path):
 	# Retira o HUD
 	HUD.finish()
-	# Toca a transição
-	HUD.transition()
+	# Toca a transição de tela
+	fade.fade_out()
 	# Desativa o modo chaos dos fantasmas
 	tree.call_group("Ghosts","f_chaos")
 	# Aguarda e troca de cena

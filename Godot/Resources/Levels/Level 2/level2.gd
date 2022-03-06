@@ -1,10 +1,7 @@
 extends Node2D
 
 onready var player = get_node("YSort/Player")
-onready var HUD = get_node("HUD")
-onready var ghosts = get_tree().get_nodes_in_group("Ghosts")
 onready var win_animplayer = get_node("YSort/Exit/AnimationPlayer")
-onready var guide = get_node("Guide")
 onready var block = get_node("YSort/Exit/Exit1")
 onready var ladder_sup = get_node("Stairs/Exit2")
 export(String, FILE, "*.tscn") var next_scene_path
@@ -12,7 +9,7 @@ var default_code = load("res://Resources/Levels/default_level.gd").new()
 
 func _ready():
 	# Código padrão
-	default_code.import_ref(player, ghosts, HUD, win_animplayer, guide, get_tree())
+	default_code.import_ref(get_tree(), self, win_animplayer)
 	default_code.init(2.8, Vector2(1,0))
 
 func _process(_delta):

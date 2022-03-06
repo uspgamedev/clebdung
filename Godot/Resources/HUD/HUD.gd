@@ -2,7 +2,6 @@ extends CanvasLayer
 
 onready var tween = get_node("Control/Tween")
 onready var score = get_node("Control/ScoreRect/Score")
-onready var fade_animplayer = get_node("Control/Fade/AnimationPlayer")
 onready var levelname = get_node("Control").get_node("LevelName")
 export(PackedScene) var minimap_scene
 export(String) var scene_name
@@ -10,7 +9,6 @@ var minimap
 
 func _ready():
 	display_name()
-	init_map_score()
 
 # Mostra o nome da fase
 func display_name():
@@ -20,7 +18,7 @@ func display_name():
 	# Animação de aparecimento
 	tween.interpolate_property(levelname, "modulate", \
 	Color(1, 1, 1, 0), Color(1, 1, 1, 1), 1.5, \
-	Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	Tween.TRANS_LINEAR)
 	yield(get_tree().create_timer(0.3), "timeout")
 	tween.start()
 
@@ -41,7 +39,7 @@ func init_map_score():
 	minimap.visible = false
 	score.visible = false
 	# Espera um tempo antes de começar a animação
-	yield(get_tree().create_timer(0.5), "timeout")
+	yield(get_tree().create_timer(0.1), "timeout")
 	# Animação minimapa
 	tween.interpolate_property(minimap, "rect_position:y", \
 	minimap.rect_position.y + 700, minimap.rect_position.y, 1.2, \
@@ -70,7 +68,3 @@ func finish():
 	score.position.y, score.position.y + 300, 0.8, \
 	tween.TRANS_BACK, tween.EASE_IN)
 	tween.start()
-
-func transition():
-	# Toca a animação de transição
-	fade_animplayer.play("Fade")

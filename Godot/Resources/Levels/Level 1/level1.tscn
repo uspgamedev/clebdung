@@ -1,7 +1,6 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Resources/Levels/Level 1/level1.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Others/light_sprite.png" type="Texture" id=2]
 [ext_resource path="res://Resources/Player/player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Resources/Crystal/crystal.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Resources/Others/astar.tres" type="TileSet" id=5]
@@ -14,17 +13,30 @@
 [ext_resource path="res://Resources/Levels/Level 1/exit.gd" type="Script" id=12]
 [ext_resource path="res://Resources/Others/guide.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Assets/Levels/Level 1/entry_spritesheet.png" type="Texture" id=14]
-[ext_resource path="res://Assets/Levels/Level 1/exit_spritesheet.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Levels/Level 1/exit_light_spritesheet.png" type="Texture" id=15]
 [ext_resource path="res://Resources/Levels/Level 1/torch.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Resources/Levels/Level 1/minimap_level1.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Resources/Levels/Level 1/tilemap_level1.tres" type="TileSet" id=18]
+[ext_resource path="res://Resources/Others/fade.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Assets/Levels/Level 1/exit_rock_spritesheet.png" type="Texture" id=20]
+
+[sub_resource type="Environment" id=10]
+background_mode = 4
+glow_intensity = 0.5
+glow_strength = 0.68
+glow_bloom = 0.5
+glow_blend_mode = 0
+glow_bicubic_upscale = true
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 16, 16 )
 
 [sub_resource type="Animation" id=1]
 resource_name = "Block"
 length = 3.8
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("EntrySprite:frame")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -48,7 +60,7 @@ tracks/1/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 1, 2 ), Vector2( 2, 1 ), Vector2( 1, 1 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 2, 4 ), Vector2( 1, 2 ), Vector2( 3, 3 ), Vector2( 1, 2 ), Vector2( 2, 1 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 3, 4 ), Vector2( 4, 3 ), Vector2( 6, 3 ), Vector2( 2, 1 ), Vector2( 5, 4 ), Vector2( 1, 5 ), Vector2( 4, 4 ), Vector2( 5, 1 ), Vector2( 3, 5 ), Vector2( 3, 2 ), Vector2( 3, 5 ), Vector2( 1, 1 ), Vector2( 7, 7 ), Vector2( 0, 0 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Collision/CollisionShape2D:disabled")
+tracks/2/path = NodePath("CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -59,9 +71,6 @@ tracks/2/keys = {
 "update": 1,
 "values": [ true, false ]
 }
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 16, 16 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 16, 16 )
@@ -74,31 +83,31 @@ resource_name = "Blocked"
 length = 3.2
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite-Light2D:scale")
+tracks/0/path = NodePath("ExitLight:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 2.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0.09, 0.09 ), Vector2( 0.07, 0.07 ) ]
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Light2D:texture_scale")
+tracks/1/path = NodePath("ExitRock:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 2.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.09, 0.07 ]
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Light2D:energy")
+tracks/2/path = NodePath("ExitLight:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -107,43 +116,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 2.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 1.4, 1.0 ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Light2D:color")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 0.811765, 0.105882, 0.105882, 1 ) ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath(".:frame")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 0 ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("Sprite-Light2D:modulate")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 0.811765, 0.105882, 0.105882, 0.156863 ) ]
+"values": [ Color( 3, 2, 2, 1 ), Color( 2.2, 2, 2, 1 ) ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -151,7 +124,7 @@ resource_name = "Unblocked"
 length = 3.2
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Light2D:color")
+tracks/0/path = NodePath("ExitLight:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -159,23 +132,23 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 0.105882, 0.811765, 0.764706, 1 ) ]
+"update": 1,
+"values": [ 1 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite-Light2D:scale")
+tracks/1/path = NodePath("ExitRock:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 2.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0.09, 0.09 ), Vector2( 0.07, 0.07 ) ]
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Light2D:texture_scale")
+tracks/2/path = NodePath("ExitLight:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -184,43 +157,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 2.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0.09, 0.07 ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Light2D:energy")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 2.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 1.4, 1.0 ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Sprite-Light2D:modulate")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 0.105882, 0.811765, 0.764706, 0.156863 ) ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath(".:frame")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 1 ]
+"values": [ Color( 2.4, 2.4, 2.4, 1 ), Color( 2, 2, 2, 1 ) ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -239,7 +176,7 @@ tracks/0/keys = {
 "values": [ false ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Collision/CollisionShape2D:disabled")
+tracks/1/path = NodePath("CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -251,7 +188,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath(".:frame")
+tracks/2/path = NodePath("ExitRock:frame")
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -263,7 +200,7 @@ tracks/2/keys = {
 "values": [ 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath(".:offset")
+tracks/3/path = NodePath("ExitRock:offset")
 tracks/3/interp = 0
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -287,69 +224,48 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 2, 1 ), Vector2( 0, 0 ), Vector2( 1, 2 ), Vector2( -1, -1 ), Vector2( 0.5, 1 ), Vector2( 3, 2 ), Vector2( 0, 0 ), Vector2( -2, -1 ), Vector2( 2, 1 ), Vector2( 1, 2 ), Vector2( 2, 1 ), Vector2( 1, 3 ), Vector2( 3, 1 ), Vector2( 1, 3 ), Vector2( 0, 0 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Sprite-Light2D:scale")
-tracks/5/interp = 1
+tracks/5/path = NodePath("ExitLight:frame")
+tracks/5/interp = 2
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0, 0.45, 1.15, 1.25, 1.45, 1.7, 1.8, 2.1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0.07, 0.07 ), Vector2( 0.08, 0.08 ), Vector2( 0.1, 0.1 ), Vector2( 0.12, 0.12 ), Vector2( 0.14, 0.14 ), Vector2( 0.14, 0.14 ), Vector2( 0.12, 0.12 ), Vector2( 0, 0.12 ) ]
+"times": PoolRealArray( 0.15, 0.45, 1.15, 1.5, 1.65, 1.8, 1.9, 2, 2.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("Light2D:texture_scale")
-tracks/6/interp = 1
+tracks/6/path = NodePath("ExitLight:offset")
+tracks/6/interp = 0
 tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0, 0.45, 1.15, 1.25, 1.45, 1.7, 1.8, 2.1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0.15, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 0.85, 0.95, 1.05, 1.15, 1.25, 1.35, 1.45, 1.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 0.07, 0.08, 0.1, 0.12, 0.14, 0.14, 0.12, 0.01 ]
+"values": [ Vector2( 0, 0 ), Vector2( 0.4, 0.4 ), Vector2( 0.9, 0.4 ), Vector2( -0.4, 0.4 ), Vector2( 0, 0 ), Vector2( -0.4, -0.5 ), Vector2( 0, 0.8 ), Vector2( 0, 0 ), Vector2( 0.4, 0.4 ), Vector2( 0, 0 ), Vector2( -0.4, 0.4 ), Vector2( 0.4, -0.4 ), Vector2( 0, 0 ), Vector2( -0.3, -0.7 ), Vector2( 0, 0 ) ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("Light2D:energy")
+tracks/7/path = NodePath("ExitLight:modulate")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0, 0.45, 1.15, 1.25, 1.45, 1.7, 1.8, 2.1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 1.75, 2.15 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 1.0, 1.1, 1.2, 1.3, 1.5, 1.5, 1.2, 0.0 ]
-}
-tracks/8/type = "value"
-tracks/8/path = NodePath("Sprite-Light2D:position")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/keys = {
-"times": PoolRealArray( 0.35, 0.45, 0.55, 0.65, 0.75, 0.85, 0.95, 1.05, 1.15, 1.25, 1.8, 2.05 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4.75683 ),
-"update": 0,
-"values": [ Vector2( -40, 0 ), Vector2( -38, 0 ), Vector2( -40, 0 ), Vector2( -41, 0 ), Vector2( -39, 0 ), Vector2( -40, 0 ), Vector2( -38, 0 ), Vector2( -36, 0 ), Vector2( -34, 0 ), Vector2( -30, 0 ), Vector2( -30, 0 ), Vector2( -30, -20 ) ]
-}
-tracks/9/type = "value"
-tracks/9/path = NodePath("Light2D:position")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/keys = {
-"times": PoolRealArray( 0.35, 0.45, 0.55, 0.65, 0.75, 0.85, 0.95, 1.05, 1.15, 1.25, 1.8, 2.05 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4.75683 ),
-"update": 0,
-"values": [ Vector2( -40, 0 ), Vector2( -38, 0 ), Vector2( -40, 0 ), Vector2( -41, 0 ), Vector2( -39, 0 ), Vector2( -40, 0 ), Vector2( -38, 0 ), Vector2( -36, 0 ), Vector2( -34, 0 ), Vector2( -30, 0 ), Vector2( -30, 0 ), Vector2( -30, -20 ) ]
+"values": [ Color( 2.8, 2.8, 2.8, 1 ), Color( 2, 2, 2, 1 ) ]
 }
 
 [node name="Level1" type="Node2D"]
 script = ExtResource( 1 )
 next_scene_path = "res://Resources/Levels/Level 2/level2.tscn"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 10 )
 
 [node name="A*" type="TileMap" parent="."]
 visible = false
@@ -416,31 +332,32 @@ tile_data = PoolIntArray( 458814, 12, 0, 983060, 19, 0, 2031730, 12, 0, 2555954,
 [node name="Guide" parent="." instance=ExtResource( 13 )]
 exit_path = NodePath("../Exit/WinArea2D")
 
-[node name="Entry" type="Sprite" parent="."]
+[node name="Entry" type="StaticBody2D" parent="."]
 light_mask = 4
 position = Vector2( 0, 480 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entry"]
+position = Vector2( -16, 16 )
+shape = SubResource( 2 )
+disabled = true
+
+[node name="EntrySprite" type="Sprite" parent="Entry"]
+light_mask = 4
 texture = ExtResource( 14 )
 vframes = 18
 frame = 17
+__meta__ = {
+"_editor_description_": ""
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Entry"]
 autoplay = "Block"
 playback_speed = 0.9
 anims/Block = SubResource( 1 )
 
-[node name="Collision" type="StaticBody2D" parent="Entry"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Entry/Collision"]
-position = Vector2( -16, 16 )
-shape = SubResource( 2 )
-disabled = true
-
-[node name="Exit" type="Sprite" parent="."]
+[node name="Exit" type="StaticBody2D" parent="."]
 light_mask = 4
 position = Vector2( 1141.48, 444.995 )
-texture = ExtResource( 15 )
-vframes = 11
-frame = 2
 script = ExtResource( 12 )
 
 [node name="WinArea2D" type="Area2D" parent="Exit"]
@@ -451,27 +368,10 @@ collision_mask = 2
 [node name="AreaShape2D" type="CollisionShape2D" parent="Exit/WinArea2D"]
 shape = SubResource( 3 )
 
-[node name="Collision" type="StaticBody2D" parent="Exit"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit"]
 position = Vector2( -37.48, 19.005 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit/Collision"]
 shape = SubResource( 2 )
 disabled = true
-
-[node name="Sprite-Light2D" type="Sprite" parent="Exit"]
-modulate = Color( 0.105882, 0.811765, 0.764706, 0.156863 )
-light_mask = 4
-position = Vector2( -40, 0 )
-scale = Vector2( 0.07, 0.07 )
-texture = ExtResource( 2 )
-
-[node name="Light2D" type="Light2D" parent="Exit"]
-position = Vector2( -40, 0 )
-texture = ExtResource( 2 )
-texture_scale = 0.07
-color = Color( 0.105882, 0.811765, 0.764706, 1 )
-mode = 2
-range_item_cull_mask = 7
 
 [node name="AnimArea2D" type="Area2D" parent="Exit"]
 collision_mask = 2
@@ -479,6 +379,15 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Exit/AnimArea2D"]
 position = Vector2( -189.48, -4.995 )
 shape = SubResource( 9 )
+
+[node name="ExitRock" type="Sprite" parent="Exit"]
+texture = ExtResource( 20 )
+vframes = 11
+
+[node name="ExitLight" type="Sprite" parent="Exit"]
+modulate = Color( 3, 2, 2, 1 )
+texture = ExtResource( 15 )
+vframes = 11
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Exit"]
 autoplay = "Blocked"
@@ -711,7 +620,9 @@ color = Color( 0, 0, 0, 1 )
 minimap_scene = ExtResource( 17 )
 scene_name = "Level 1"
 
+[node name="Fade" parent="." instance=ExtResource( 19 )]
+fade_in_time = 2.0
+fade_out_time = 1.0
+
 [connection signal="body_entered" from="Exit/WinArea2D" to="Exit" method="_on_WinArea2D_body_entered"]
 [connection signal="body_entered" from="Exit/AnimArea2D" to="Exit" method="_on_AnimArea2D_body_entered"]
-
-[editable path="YSort/Player"]

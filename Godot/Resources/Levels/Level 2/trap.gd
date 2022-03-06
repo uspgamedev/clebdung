@@ -2,14 +2,14 @@ extends Node2D
 
 var mode = "idle"
 var on_area = false
-onready var player = get_parent().get_node("Player")
+onready var player = get_parent().get_parent().get_node("YSort/Player")
 onready var particles = load("res://Resources/Levels/Level 2/SandParticles.tscn")
 
 func _process(_delta):
 	if mode == "idle":
 		animation()
 	elif mode == "trigger":
-		if on_area and $Sprite.frame > 4:
+		if on_area and $Spritesheet.frame > 4:
 			print("die")
 			player.die()
 

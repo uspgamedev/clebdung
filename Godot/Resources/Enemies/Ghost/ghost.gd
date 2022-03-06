@@ -22,7 +22,7 @@ ESTADOS:
 - Random = De 30 em 30s, escolhe uma posição aleatória entre {ran1,ran2,ran3} 
 e vai até ela (caso não esteja seguindo). Ao fim, volta a patrulhar. 
 """
-enum States { FOLLOW, DOUBT, RANDOM, PATROL }
+enum States { FOLLOW, DOUBT, PATROL, RANDOM}
 
 var state = States.PATROL
 var last_state
@@ -142,7 +142,10 @@ func _physics_process(delta):
 		# Calcula a direção do próximo movimento
 		set_direction()
 		last_position = position
-		target_position = position + (direction * tile_size)
+		target_position = (position + (direction * tile_size)).round()
+		# Aproxima target_position para o múltiplo de 32 mais próximo
+		target_position.x = target_position.x + tile_size / 2 - (int(target_position.x) % tile_size)
+		target_position.y = target_position.y + tile_size / 2 - (int(target_position.y) % tile_size)
 		
 	# Se o jogador estiver dentro da área 2D
 	if in_sight:
@@ -259,10 +262,7 @@ func set_direction():
 	if len(path) > 0:
 		direction = Vector2(path[0] - global_position).normalized()
 		path.remove(0)
-	# Se não existir caminho, não há direção.
-	else:
-		direction = Vector2(0,0)
-	
+		
 
 func _update_navigation_path(start_position, end_position):
 	# Retorna um PoolVector2Array de pontos que te levam de start_position 
@@ -278,21 +278,24 @@ func animation():
 	# ANIMAÇÃO DO FANTASMA
 
 	# Animação movimento
-	var anim_direc
+	var anim_name
 	# Seleciona animação correta com base na direção
 	match direction:
 		Vector2(0,-1):
-			anim_direc = "Up"
+			anim_name = "Up_Walk"
 		Vector2(0,1):
-			anim_direc = "Down"
+			anim_name = "Down_Walk"
 		Vector2(-1,0):
-			anim_direc = "Left"
+			anim_name = "Left_Walk"
 		Vector2(1,0):
-			anim_direc = "Right"
+			anim_name = "Right_Walk"
 		Vector2(0,0):
-			return
+			anim_name = "Doubt"
+			
+	if anim_name == null:
+		return
 	# Toca animação correspondente
-	get_node("AnimationPlayer").play(anim_direc + "_Walk")
+	get_node("AnimationPlayer").play(anim_name)
 
 	# Animação luz
 	if state == States.FOLLOW:

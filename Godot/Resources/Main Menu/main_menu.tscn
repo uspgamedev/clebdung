@@ -1,12 +1,11 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://Resources/Main Menu/mm_play.gd" type="Script" id=1]
-[ext_resource path="res://Resources/Main Menu/mm_quit.gd" type="Script" id=2]
-[ext_resource path="res://Resources/Main Menu/mm_levels.gd" type="Script" id=3]
+[ext_resource path="res://Resources/Main Menu/main_menu.gd" type="Script" id=1]
 [ext_resource path="res://Assets/HUD/upheavtt.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Assets/Main Menu/mm_torch.tres" type="Texture" id=5]
 [ext_resource path="res://Resources/Others/upheavtt.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://Assets/Others/light2_sprite.png" type="Texture" id=7]
+[ext_resource path="res://Resources/Others/fade.tscn" type="PackedScene" id=8]
 
 [sub_resource type="StyleBoxEmpty" id=2]
 
@@ -54,9 +53,11 @@ tracks/0/keys = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = SubResource( 1 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+next_level_path = "res://Resources/Levels/Level 1/level1.tscn"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -90,11 +91,9 @@ margin_right = 120.0
 margin_bottom = 34.0
 text = "PLAY"
 flat = true
-script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-next_level_path = "res://Resources/Levels/Level 1/level1.tscn"
 
 [node name="Levels" type="Button" parent="HBoxContainer"]
 margin_top = 38.0
@@ -103,7 +102,6 @@ margin_bottom = 72.0
 disabled = true
 text = "LEVELS"
 flat = true
-script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -114,7 +112,6 @@ margin_right = 120.0
 margin_bottom = 110.0
 text = "QUIT"
 flat = true
-script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -157,10 +154,15 @@ autoplay = "Light"
 anims/Light = SubResource( 5 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
 color = Color( 0, 0, 0, 1 )
 
-[connection signal="focus_entered" from="HBoxContainer/Play" to="HBoxContainer/Play" method="_on_Play_focus_entered"]
+[node name="Fade" parent="." instance=ExtResource( 8 )]
+fade_in_time = 1.0
+fade_out_time = 1.0
+
+[connection signal="pressed" from="HBoxContainer/Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="HBoxContainer/Play" to="HBoxContainer/Play" method="_on_Play_pressed"]
+[connection signal="pressed" from="HBoxContainer/Levels" to="." method="_on_Levels_pressed"]
 [connection signal="pressed" from="HBoxContainer/Levels" to="HBoxContainer/Levels" method="_on_Levels_pressed"]
+[connection signal="pressed" from="HBoxContainer/Quit" to="." method="_on_Quit_pressed"]
 [connection signal="pressed" from="HBoxContainer/Quit" to="HBoxContainer/Quit" method="_on_Quit_pressed"]

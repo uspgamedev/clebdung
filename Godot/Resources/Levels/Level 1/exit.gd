@@ -1,4 +1,4 @@
-extends Sprite
+extends StaticBody2D
 
 onready var animPlayer = get_node("AnimationPlayer")
 
