@@ -9,9 +9,13 @@ func _process(_delta):
 	if mode == "idle":
 		animation()
 	elif mode == "trigger":
-		if on_area and $Spritesheet.frame > 4:
-			print("die")
-			player.die()
+		if on_area:
+			if $Spritesheet.frame > 4:
+				player.speed = 0
+				$StaticBody2D/CollisionShape2D.disabled = false
+				player.die()
+		else:
+			$StaticBody2D/CollisionShape2D.disabled = false
 
 func animation():
 	get_node("AnimationPlayer").play("idle")
