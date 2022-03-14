@@ -143,9 +143,6 @@ func _physics_process(delta):
 		set_direction()
 		last_position = position
 		target_position = (position + (direction * tile_size)).round()
-		# Aproxima target_position para o múltiplo de 32 mais próximo
-		target_position.x = target_position.x + tile_size / 2 - (int(target_position.x) % tile_size)
-		target_position.y = target_position.y + tile_size / 2 - (int(target_position.y) % tile_size)
 		
 	# Se o jogador estiver dentro da área 2D
 	if in_sight:

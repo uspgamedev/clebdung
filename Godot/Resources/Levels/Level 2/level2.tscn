@@ -598,7 +598,6 @@ position = Vector2( 656, 208 )
 position = Vector2( 624, 592 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
 color = Color( 0, 0, 0, 1 )
 
 [node name="HUD" parent="." instance=ExtResource( 8 )]

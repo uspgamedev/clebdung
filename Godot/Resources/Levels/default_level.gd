@@ -33,6 +33,7 @@ func init(init_time, init_direction):
 		g.set_physics_process(false)
 	player.input_enabled = true
 
+
 func detect_move():
 	# Assim que o primeiro movimento for feito, desbloqueia fantasmas
 	# e retira o nome da fase da tela
