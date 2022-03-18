@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Resources/Levels/Level 2/SandParticles.gd" type="Script" id=1]
+[ext_resource path="res://Resources/Levels/Level 2/sand_particles.gd" type="Script" id=1]
 
 [sub_resource type="ParticlesMaterial" id=15]
 emission_shape = 2
@@ -22,7 +22,7 @@ light_mask = 4
 position = Vector2( 80, 81 )
 emitting = false
 amount = 10
-lifetime = 3.0
+lifetime = 1.8
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource( 15 )

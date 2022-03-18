@@ -5,18 +5,11 @@ onready var astar = get_tree().get_root().get_node("Level2/A*")
 onready var player = get_parent().get_node("Player")
 var k = 0
 var on_stairs = false
+var on_area = false
 
 func _process(_delta):
-	# Caso o jogador esteja andando em direção às escadas
-	# após o desbloqueio, encerrar fase
-	if on_stairs and player.direction == Vector2(0,1):
-		get_tree().get_root().get_node("Level2").win()
-
-func _on_AnimArea2D_body_entered(body):
-	# (Área só funciona após coleta dos cristais)
 	# Desbloqueia a saída e retira o Astar onde o bloco é movido
-	if k == 0 and \
-	body.get_name() == "Player" and \
+	if on_area and k == 0 and \
 	animPlayer.get_current_animation() == "Unblocked":
 		animPlayer.play("WinAnimation")
 		# O Astar é retirado "em cima da hora" e gradualmente, 
@@ -27,6 +20,14 @@ func _on_AnimArea2D_body_entered(body):
 			astar._ready()
 			yield(get_tree().create_timer(0.4), "timeout")
 		k = 1
+	# Caso o jogador esteja andando em direção às escadas
+	# após o desbloqueio, encerrar fase
+	if on_stairs and player.direction == Vector2(0,1):
+		get_tree().get_root().get_node("Level2").win()
+		
+func _on_AnimArea2D_body_entered(_body):
+	# (Área só funciona após coleta dos cristais)
+	on_area = true
 
 func _on_AnimationPlayer_animation_changed(old_name, _new_name):
 	# Ativa Astar próximo à escada após desbloqueio da saída
@@ -44,3 +45,7 @@ func _on_StairsArea2D_body_entered(_body):
 # (Área só funciona após desbloqueio da saída)
 func _on_StairsArea2D_body_exited(_body):
 	on_stairs = false
+
+
+func _on_AnimArea2D_body_exited(_body):
+	on_area = false

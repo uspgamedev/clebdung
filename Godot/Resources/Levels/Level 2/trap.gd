@@ -3,7 +3,7 @@ extends Node2D
 var mode = "idle"
 var on_area = false
 onready var player = get_parent().get_parent().get_node("YSort/Player")
-onready var particles = load("res://Resources/Levels/Level 2/SandParticles.tscn")
+onready var particles = load("res://Resources/Levels/Level 2/sand_particles.tscn")
 
 func _process(_delta):
 	if mode == "idle":

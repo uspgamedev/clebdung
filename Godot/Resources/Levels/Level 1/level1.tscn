@@ -371,7 +371,6 @@ shape = SubResource( 3 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Exit"]
 position = Vector2( -37.48, 19.005 )
 shape = SubResource( 2 )
-disabled = true
 
 [node name="AnimArea2D" type="Area2D" parent="Exit"]
 collision_mask = 2
@@ -381,11 +380,13 @@ position = Vector2( -189.48, -4.995 )
 shape = SubResource( 9 )
 
 [node name="ExitRock" type="Sprite" parent="Exit"]
+light_mask = 4
 texture = ExtResource( 20 )
 vframes = 11
 
 [node name="ExitLight" type="Sprite" parent="Exit"]
 modulate = Color( 3, 2, 2, 1 )
+light_mask = 4
 texture = ExtResource( 15 )
 vframes = 11
 

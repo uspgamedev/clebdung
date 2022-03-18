@@ -611,6 +611,7 @@ fade_out_time = 1.0
 [connection signal="body_entered" from="Stairs/StairsArea2D" to="YSort/Exit" method="_on_StairsArea2D_body_entered"]
 [connection signal="body_exited" from="Stairs/StairsArea2D" to="YSort/Exit" method="_on_StairsArea2D_body_exited"]
 [connection signal="body_entered" from="YSort/Exit/AnimArea2D" to="YSort/Exit" method="_on_AnimArea2D_body_entered"]
+[connection signal="body_exited" from="YSort/Exit/AnimArea2D" to="YSort/Exit" method="_on_AnimArea2D_body_exited"]
 [connection signal="animation_changed" from="YSort/Exit/AnimationPlayer" to="YSort/Exit" method="_on_AnimationPlayer_animation_changed"]
 [connection signal="animation_finished" from="YSort/Exit/AnimationPlayer" to="YSort/Exit" method="_on_AnimationPlayer_animation_finished"]
 
