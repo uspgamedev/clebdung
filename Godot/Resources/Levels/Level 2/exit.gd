@@ -19,11 +19,13 @@ func _on_AnimArea2D_body_entered(body):
 	body.get_name() == "Player" and \
 	animPlayer.get_current_animation() == "Unblocked":
 		animPlayer.play("WinAnimation")
-		# O Astar é retirado "em cima da hora" para evitar bugs
+		# O Astar é retirado "em cima da hora" e gradualmente, 
+		# para evitar bugs	
 		yield(get_tree().create_timer(1.0), "timeout")
-		for x in range(15,18):
+		for x in [16,15,17]:
 			astar.set_cell(x,18,1)
-		astar._ready()
+			astar._ready()
+			yield(get_tree().create_timer(0.4), "timeout")
 		k = 1
 
 func _on_AnimationPlayer_animation_changed(old_name, _new_name):

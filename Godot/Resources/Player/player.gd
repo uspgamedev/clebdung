@@ -51,10 +51,11 @@ func _physics_process(delta):
 		# e a nova direção for nula, seguir na última direção (até o destino)
 		if direction == Vector2(0,0):
 			direction = old_direction
-		# e tente reverter o movimento em algum eixo, o alvo é atualizado
-		if (old_direction.x != direction.x and old_direction.y == direction.y) \
-		or (old_direction.y != direction.y and old_direction.x == direction.x):
+		# e tente reverter o movimento no mesmo eixo, o alvo é atualizado
+		if direction*(-1) == old_direction:
 			target_position += direction * tile_size
+		else:
+			direction = old_direction
 	# Caso esteja,
 	else:
 		# atualiza a posição exata do jogador (evita bugs)
@@ -63,7 +64,7 @@ func _physics_process(delta):
 		target_position += direction * tile_size
 	
 	# Calcula a direção que o jogador deve seguir para alcançar o alvo
-	target_direction = (target_position - position).round().normalized()
+	target_direction = position.direction_to(target_position).round()
 	# Caso a direção ao alvo seja não nula, lançar raycast
 	if target_direction != Vector2(0,0):
 		$PlayerRayCast.cast_to = target_direction * tile_size/2

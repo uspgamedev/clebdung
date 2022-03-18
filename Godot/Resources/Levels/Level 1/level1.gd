@@ -7,7 +7,7 @@ var default_code = load("res://Resources/Levels/default_level.gd").new()
 func _ready():
 	# Código padrão
 	default_code.import_ref(get_tree(), self, win_animplayer)
-	default_code.init(3.5, Vector2(1,0))
+	default_code.init(3.25, Vector2(1,0))
 
 func _process(_delta):
 	# Código padrão

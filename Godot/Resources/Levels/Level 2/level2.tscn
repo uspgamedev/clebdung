@@ -606,6 +606,7 @@ scene_name = "Level 2"
 
 [node name="Fade" parent="." instance=ExtResource( 17 )]
 fade_in_time = 1.0
+fade_out_time = 1.0
 
 [connection signal="body_entered" from="Stairs/StairsArea2D" to="YSort/Exit" method="_on_StairsArea2D_body_entered"]
 [connection signal="body_exited" from="Stairs/StairsArea2D" to="YSort/Exit" method="_on_StairsArea2D_body_exited"]

@@ -14,7 +14,7 @@ func _process(_delta):
 		draw()
 		# Pausa para evitar atualização instantânea do caminho
 		set_process(false)
-		yield(get_tree().create_timer(2.9), "timeout")
+		yield(get_tree().create_timer(3), "timeout")
 		set_process(true)
 	
 func draw():

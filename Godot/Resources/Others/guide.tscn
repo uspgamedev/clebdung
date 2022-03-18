@@ -14,14 +14,14 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1.1, 1.6, 2.4 ),
+"times": PoolRealArray( 0.1, 1, 1.6, 2.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 3, 3, 3, 0 ), Color( 3.2, 3.2, 3.2, 0.3 ), Color( 3.2, 3.2, 3.2, 0.3 ), Color( 2, 2, 2, 0 ) ]
 }
 
 [node name="Guide" type="Line2D"]
-modulate = Color( 2, 2, 2, 0 )
+modulate = Color( 3, 3, 3, 0 )
 width = 40.0
 default_color = Color( 0.329412, 0.870588, 0.882353, 1 )
 texture = ExtResource( 2 )
