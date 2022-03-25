@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Resources/Levels/level_music.gd" type="Script" id=2]
+
+[node name="LevelMusic" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="LevelIntro" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+
+[node name="LevelLoop" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+
+[node name="LevelEnd" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+
+[node name="Tween" type="Tween" parent="."]
+
+[connection signal="finished" from="LevelIntro" to="." method="_on_LevelIntro_finished"]

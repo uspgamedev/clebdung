@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/clebdung_fase1_B _loop.ogg-022d54f6f25202991dc0b190958a36dc.oggstr"
+
+[deps]
+
+source_file="res://Assets/Levels/Level 1/clebdung_fase1_B _loop.ogg"
+dest_files=[ "res://.import/clebdung_fase1_B _loop.ogg-022d54f6f25202991dc0b190958a36dc.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
