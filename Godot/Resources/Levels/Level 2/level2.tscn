@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://Assets/Levels/Level 2/exit1_light.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Levels/Level 2/exit2.png" type="Texture" id=2]
@@ -22,8 +22,12 @@
 [ext_resource path="res://Assets/Levels/Level 2/exit1.png" type="Texture" id=20]
 [ext_resource path="res://Resources/Levels/Level 2/composition.tres" type="TileSet" id=21]
 [ext_resource path="res://Resources/Others/spawner.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Assets/Levels/Level 2/level2_music_intro.ogg" type="AudioStream" id=23]
+[ext_resource path="res://Assets/Levels/Level 2/level2_music_final.ogg" type="AudioStream" id=24]
+[ext_resource path="res://Assets/Levels/Level 2/level2_music_loop.ogg" type="AudioStream" id=25]
+[ext_resource path="res://Resources/Levels/level_music.tscn" type="PackedScene" id=26]
 
-[sub_resource type="Environment" id=10]
+[sub_resource type="Environment" id=1]
 background_mode = 4
 glow_intensity = 0.5
 glow_strength = 0.68
@@ -31,7 +35,7 @@ glow_bloom = 0.5
 glow_blend_mode = 0
 glow_bicubic_upscale = true
 
-[sub_resource type="TileSet" id=14]
+[sub_resource type="TileSet" id=2]
 0/name = "trap_base.png 0"
 0/texture = ExtResource( 7 )
 0/tex_offset = Vector2( 0, 0 )
@@ -47,10 +51,10 @@ glow_bicubic_upscale = true
 0/shapes = [  ]
 0/z_index = 0
 
-[sub_resource type="RectangleShape2D" id=11]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 16, 16 )
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=4]
 resource_name = "Entrada"
 length = 4.0
 step = 0.05
@@ -91,7 +95,7 @@ tracks/2/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 1, 2 ), Vector2( 3, 2 ), Vector2( 0, 0 ), Vector2( 1, 2 ), Vector2( 0, 0 ), Vector2( 2, 1 ), Vector2( 0, 3 ), Vector2( 2, 0 ), Vector2( 0, 1 ), Vector2( 2, 3 ), Vector2( 0, 0 ), Vector2( 2, 3 ), Vector2( 1, 2 ), Vector2( 2, 1 ), Vector2( 0, 0 ), Vector2( 3, 2 ), Vector2( 0, 0 ), Vector2( 1, 2 ), Vector2( 0, 0 ), Vector2( 2, 1 ), Vector2( 0, 3 ), Vector2( 2, 0 ), Vector2( 0, 1 ), Vector2( 2, 3 ), Vector2( 0, 0 ), Vector2( 1, 1 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=5]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("CollisionShape2D:disabled")
@@ -118,26 +122,25 @@ tracks/1/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 16, 16 )
-
-[sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 16, 16 )
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 48, 48 )
-
-[sub_resource type="OccluderPolygon2D" id=15]
-polygon = PoolVector2Array( -37, -25, -20, -42, -14, -42, -14, -39, -10, -39, -10, -42, -3, -42, -3, -39, 1, -39, 1, -42, 8, -42, 8, -39, 12, -39, 12, -42, 18, -42, 35, -25, 35, 21, 19, 38, -21, 38, -37, 21 )
 
 [sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 48, 80 )
+extents = Vector2( 16, 16 )
 
 [sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 48, 48 )
+
+[sub_resource type="OccluderPolygon2D" id=9]
+polygon = PoolVector2Array( -37, -25, -20, -42, -14, -42, -14, -39, -10, -39, -10, -42, -3, -42, -3, -39, 1, -39, 1, -42, 8, -42, 8, -39, 12, -39, 12, -42, 18, -42, 35, -25, 35, 21, 19, 38, -21, 38, -37, 21 )
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 48, 80 )
+
+[sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 80, 112 )
 
-[sub_resource type="Animation" id=3]
-resource_name = "Blocked"
+[sub_resource type="Animation" id=12]
 length = 3.2
 loop = true
 tracks/0/type = "value"
@@ -165,8 +168,7 @@ tracks/1/keys = {
 "values": [ Color( 3, 2, 2, 1 ), Color( 2.3, 2, 2, 1 ) ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "Unblocked"
+[sub_resource type="Animation" id=13]
 length = 3.2
 loop = true
 tracks/0/type = "value"
@@ -206,8 +208,7 @@ tracks/2/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "WinAnimation"
+[sub_resource type="Animation" id=14]
 length = 4.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Exit1:position")
@@ -287,7 +288,7 @@ script = ExtResource( 12 )
 next_scene_path = "res://Resources/Levels/Level 3/level3.tscn"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 10 )
+environment = SubResource( 1 )
 __meta__ = {
 "_editor_description_": ""
 }
@@ -324,7 +325,7 @@ tile_data = PoolIntArray( 131097, 0, 0, 131098, 0, 0, 131099, 0, 0, 131100, 0, 0
 
 [node name="Trap_bases" type="TileMap" parent="."]
 visible = false
-tile_set = SubResource( 14 )
+tile_set = SubResource( 2 )
 cell_size = Vector2( 32, 32 )
 format = 1
 tile_data = PoolIntArray( 131080, 0, 0, 131097, 0, 0, 393229, 0, 0, 393238, 0, 0, 458753, 0, 0, 655366, 0, 0, 655376, 0, 0, 720924, 0, 0, 917516, 0, 0, 917535, 0, 0, 1048583, 0, 0, 1114133, 0, 0, 1114137, 0, 0, 1179649, 0, 0, 1376261, 0, 0, 1376272, 0, 0, 1441801, 0, 0, 1441823, 0, 0, 1507356, 0, 0, 1572868, 0, 0, 1572881, 0, 0, 1703948, 0, 0, 1703960, 0, 0, 1835014, 0, 0, 1966081, 0, 0, 1966089, 0, 0, 1966099, 0, 0, 1966111, 0, 0 )
@@ -366,13 +367,13 @@ vframes = 20
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Entry"]
 position = Vector2( -16, 80 )
-shape = SubResource( 11 )
+shape = SubResource( 3 )
 disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Entry"]
 autoplay = "Entrada"
-anims/Entrada = SubResource( 12 )
-anims/RESET = SubResource( 13 )
+anims/Entrada = SubResource( 4 )
+anims/RESET = SubResource( 5 )
 
 [node name="Stairs" type="Node2D" parent="."]
 position = Vector2( 528, 528 )
@@ -384,7 +385,7 @@ texture = ExtResource( 16 )
 [node name="Exit2" type="StaticBody2D" parent="Stairs"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stairs/Exit2"]
-shape = SubResource( 2 )
+shape = SubResource( 6 )
 disabled = true
 
 [node name="Exit2" type="Sprite" parent="Stairs/Exit2"]
@@ -397,7 +398,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stairs/StairsArea2D"]
 position = Vector2( 0, -32 )
-shape = SubResource( 9 )
+shape = SubResource( 7 )
 
 [node name="YSort" type="YSort" parent="."]
 
@@ -409,11 +410,11 @@ script = ExtResource( 15 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Exit/Exit1"]
 position = Vector2( 0, 6 )
-shape = SubResource( 1 )
+shape = SubResource( 8 )
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="YSort/Exit/Exit1"]
 position = Vector2( 1, 0 )
-occluder = SubResource( 15 )
+occluder = SubResource( 9 )
 
 [node name="Exit1" type="Sprite" parent="YSort/Exit/Exit1"]
 light_mask = 12
@@ -429,7 +430,7 @@ hframes = 2
 position = Vector2( 0, 32 )
 
 [node name="Temp-CollisionShape2D" type="CollisionShape2D" parent="YSort/Exit/Temp-StaticBody2D"]
-shape = SubResource( 7 )
+shape = SubResource( 10 )
 disabled = true
 
 [node name="AnimArea2D" type="Area2D" parent="YSort/Exit"]
@@ -438,13 +439,13 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Exit/AnimArea2D"]
 position = Vector2( 1, 32 )
-shape = SubResource( 8 )
+shape = SubResource( 11 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="YSort/Exit"]
 autoplay = "Blocked"
-anims/Blocked = SubResource( 3 )
-anims/Unblocked = SubResource( 4 )
-anims/WinAnimation = SubResource( 6 )
+anims/Blocked = SubResource( 12 )
+anims/Unblocked = SubResource( 13 )
+anims/WinAnimation = SubResource( 14 )
 next/WinAnimation = "Unblocked"
 blend_times = [ "Blocked", "Unblocked", 0.5, "Unblocked", "WinAnimation", 0.5, "WinAnimation", "Unblocked", 0.5 ]
 
@@ -481,7 +482,9 @@ Offset = Vector2( 13, 16 )
 MapSize = Vector2( 30, 31 )
 CristalID = 5
 
-[node name="GhostOP1" parent="YSort" groups=["Ghosts"] instance=ExtResource( 11 )]
+[node name="GhostOP1" parent="YSort" groups=[
+"Ghosts",
+] instance=ExtResource( 11 )]
 modulate = Color( 1, 0.517647, 0.517647, 1 )
 position = Vector2( 464, 560 )
 positionset = NodePath("../../Positions/OP1")
@@ -497,7 +500,9 @@ color = Color( 1, 0.513726, 0, 0.117647 )
 [node name="SpriteLight (Correção)" parent="YSort/GhostOP1/Light2D" index="0"]
 modulate = Color( 1, 0.513726, 0, 0.117647 )
 
-[node name="GhostOP2" parent="YSort" groups=["Ghosts"] instance=ExtResource( 11 )]
+[node name="GhostOP2" parent="YSort" groups=[
+"Ghosts",
+] instance=ExtResource( 11 )]
 modulate = Color( 1, 0.698039, 0.368627, 1 )
 position = Vector2( 592, 528 )
 positionset = NodePath("../../Positions/OP2")
@@ -513,7 +518,9 @@ color = Color( 1, 0.513726, 0, 0.117647 )
 [node name="SpriteLight (Correção)" parent="YSort/GhostOP2/Light2D" index="0"]
 modulate = Color( 1, 0.513726, 0, 0.117647 )
 
-[node name="GhostOP3" parent="YSort" groups=["Ghosts"] instance=ExtResource( 11 )]
+[node name="GhostOP3" parent="YSort" groups=[
+"Ghosts",
+] instance=ExtResource( 11 )]
 modulate = Color( 0.933333, 1, 0.819608, 1 )
 position = Vector2( 464, 464 )
 positionset = NodePath("../../Positions/OP3")
@@ -523,7 +530,9 @@ type = 2
 [node name="GhostSprite" parent="YSort/GhostOP3" index="0"]
 texture = ExtResource( 14 )
 
-[node name="GhostRP" parent="YSort" groups=["Ghosts"] instance=ExtResource( 11 )]
+[node name="GhostRP" parent="YSort" groups=[
+"Ghosts",
+] instance=ExtResource( 11 )]
 position = Vector2( 592, 592 )
 positionset = NodePath("../../Positions/RP")
 speed = 68
@@ -607,6 +616,11 @@ scene_name = "Level 2"
 [node name="Fade" parent="." instance=ExtResource( 17 )]
 fade_in_time = 1.0
 fade_out_time = 1.0
+
+[node name="LevelMusic" parent="." instance=ExtResource( 26 )]
+intro_music = ExtResource( 23 )
+loop_music = ExtResource( 25 )
+end_music = ExtResource( 24 )
 
 [connection signal="body_entered" from="Stairs/StairsArea2D" to="YSort/Exit" method="_on_StairsArea2D_body_entered"]
 [connection signal="body_exited" from="Stairs/StairsArea2D" to="YSort/Exit" method="_on_StairsArea2D_body_exited"]

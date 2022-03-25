@@ -19,7 +19,7 @@ func _ready():
 
 
 func _on_LevelIntro_finished():
-		loop_player.playing = true
+	loop_player.playing = true
 
 func finish_music():
 	$Tween.interpolate_property(loop_player, "volume_db", 1*volume,\

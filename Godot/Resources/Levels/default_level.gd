@@ -7,6 +7,7 @@ var HUD
 var fade
 var win_animplayer
 var guide
+var level_music
 var init_level = false
 
 # Importa as referências da fase
@@ -18,7 +19,8 @@ func import_ref(tree_arg, root_node, win_animplayer_arg):
 	win_animplayer = win_animplayer_arg
 	guide = root_node.get_node("Guide")
 	fade = root_node.get_node("Fade")
-	
+	level_music = root_node.get_node("LevelMusic")
+
 # Inicia a fase
 func init(init_time, init_direction):
 	# Toca a transição de tela
@@ -65,6 +67,8 @@ func lock_player(finish_direction):
 	player.direction = finish_direction
 	# Desativa o guia
 	guide.disable()
+	# Toca a música final
+	level_music.finish_music()
 
 # Finaliza o level e troca de cena
 func finish_level(next_scene_path):

@@ -1,6 +1,7 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Resources/Levels/Level 1/level1.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Levels/Level 1/level1_music_loop.ogg" type="AudioStream" id=2]
 [ext_resource path="res://Resources/Player/player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Resources/Crystal/crystal.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Resources/Others/astar.tres" type="TileSet" id=5]
@@ -19,8 +20,11 @@
 [ext_resource path="res://Resources/Levels/Level 1/tilemap_level1.tres" type="TileSet" id=18]
 [ext_resource path="res://Resources/Others/fade.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Assets/Levels/Level 1/exit_rock_spritesheet.png" type="Texture" id=20]
+[ext_resource path="res://Assets/Levels/Level 1/level1_music_final.ogg" type="AudioStream" id=21]
+[ext_resource path="res://Assets/Levels/Level 1/level1_music_intro.ogg" type="AudioStream" id=22]
+[ext_resource path="res://Resources/Levels/level_music.tscn" type="PackedScene" id=23]
 
-[sub_resource type="Environment" id=10]
+[sub_resource type="Environment" id=1]
 background_mode = 4
 glow_intensity = 0.5
 glow_strength = 0.68
@@ -31,8 +35,7 @@ glow_bicubic_upscale = true
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 16, 16 )
 
-[sub_resource type="Animation" id=1]
-resource_name = "Block"
+[sub_resource type="Animation" id=3]
 length = 3.8
 step = 0.05
 tracks/0/type = "value"
@@ -72,10 +75,10 @@ tracks/2/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 16, 16 )
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 40, 40 )
 
 [sub_resource type="Animation" id=6]
@@ -160,7 +163,7 @@ tracks/2/keys = {
 "values": [ Color( 2.4, 2.4, 2.4, 1 ), Color( 2, 2, 2, 1 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=8]
 length = 2.2
 step = 0.05
 tracks/0/type = "value"
@@ -265,7 +268,7 @@ script = ExtResource( 1 )
 next_scene_path = "res://Resources/Levels/Level 2/level2.tscn"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 10 )
+environment = SubResource( 1 )
 
 [node name="A*" type="TileMap" parent="."]
 visible = false
@@ -353,7 +356,7 @@ __meta__ = {
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Entry"]
 autoplay = "Block"
 playback_speed = 0.9
-anims/Block = SubResource( 1 )
+anims/Block = SubResource( 3 )
 
 [node name="Exit" type="StaticBody2D" parent="."]
 light_mask = 4
@@ -366,7 +369,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="AreaShape2D" type="CollisionShape2D" parent="Exit/WinArea2D"]
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Exit"]
 position = Vector2( -37.48, 19.005 )
@@ -377,7 +380,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Exit/AnimArea2D"]
 position = Vector2( -189.48, -4.995 )
-shape = SubResource( 9 )
+shape = SubResource( 5 )
 
 [node name="ExitRock" type="Sprite" parent="Exit"]
 light_mask = 4
@@ -394,7 +397,7 @@ vframes = 11
 autoplay = "Blocked"
 anims/Blocked = SubResource( 6 )
 anims/Unblocked = SubResource( 7 )
-anims/WinAnimation = SubResource( 5 )
+anims/WinAnimation = SubResource( 8 )
 blend_times = [ "Blocked", "Unblocked", 0.5, "Unblocked", "WinAnimation", 0.5 ]
 
 [node name="YSort" type="YSort" parent="."]
@@ -433,48 +436,62 @@ position = Vector2( 217.591, 489.636 )
 scale = Vector2( 0.8, 0.8 )
 Fixed = true
 
-[node name="GhostD1" parent="YSort" groups=["Ghosts"] instance=ExtResource( 11 )]
+[node name="GhostD1" parent="YSort" groups=[
+"Ghosts",
+] instance=ExtResource( 11 )]
 position = Vector2( 464, 464 )
 positionset = NodePath("../../Positions/D1")
 speed = 66
 delayrandom = 30
 
-[node name="GhostOP1" parent="YSort" groups=["Ghosts"] instance=ExtResource( 11 )]
+[node name="GhostOP1" parent="YSort" groups=[
+"Ghosts",
+] instance=ExtResource( 11 )]
 modulate = Color( 0.901961, 1, 0.862745, 1 )
 position = Vector2( 496, 496 )
 positionset = NodePath("../../Positions/OP1")
 speed = 65
 type = 2
 
-[node name="GhostD2" parent="YSort" groups=["Ghosts"] instance=ExtResource( 11 )]
+[node name="GhostD2" parent="YSort" groups=[
+"Ghosts",
+] instance=ExtResource( 11 )]
 modulate = Color( 0.768627, 0.792157, 1, 1 )
 position = Vector2( 560, 464 )
 positionset = NodePath("../../Positions/D2")
 speed = 68
 delayrandom = 70
 
-[node name="GhostD3" parent="YSort" groups=["Ghosts"] instance=ExtResource( 11 )]
+[node name="GhostD3" parent="YSort" groups=[
+"Ghosts",
+] instance=ExtResource( 11 )]
 modulate = Color( 1, 0.960784, 0.619608, 1 )
 position = Vector2( 464, 560 )
 positionset = NodePath("../../Positions/D3")
 speed = 60
 delayrandom = 110
 
-[node name="GhostOP2" parent="YSort" groups=["Ghosts"] instance=ExtResource( 11 )]
+[node name="GhostOP2" parent="YSort" groups=[
+"Ghosts",
+] instance=ExtResource( 11 )]
 modulate = Color( 1, 0.811765, 0.996078, 1 )
 position = Vector2( 528, 528 )
 positionset = NodePath("../../Positions/OP2")
 speed = 65
 type = 2
 
-[node name="GhostD4" parent="YSort" groups=["Ghosts"] instance=ExtResource( 11 )]
+[node name="GhostD4" parent="YSort" groups=[
+"Ghosts",
+] instance=ExtResource( 11 )]
 modulate = Color( 1, 0.721569, 0.721569, 1 )
 position = Vector2( 560, 560 )
 positionset = NodePath("../../Positions/D4")
 speed = 70
 delayrandom = 150
 
-[node name="GhostRP" parent="YSort" groups=["Ghosts"] instance=ExtResource( 11 )]
+[node name="GhostRP" parent="YSort" groups=[
+"Ghosts",
+] instance=ExtResource( 11 )]
 modulate = Color( 1, 0.835294, 0.639216, 1 )
 position = Vector2( 528, 592 )
 positionset = NodePath("../../Positions/RP")
@@ -624,6 +641,11 @@ scene_name = "Level 1"
 [node name="Fade" parent="." instance=ExtResource( 19 )]
 fade_in_time = 2.0
 fade_out_time = 1.0
+
+[node name="LevelMusic" parent="." instance=ExtResource( 23 )]
+intro_music = ExtResource( 22 )
+loop_music = ExtResource( 2 )
+end_music = ExtResource( 21 )
 
 [connection signal="body_entered" from="Exit/WinArea2D" to="Exit" method="_on_WinArea2D_body_entered"]
 [connection signal="body_entered" from="Exit/AnimArea2D" to="Exit" method="_on_AnimArea2D_body_entered"]
