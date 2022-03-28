@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/L2_final_antigo.ogg-4bbf3ee23123c6494b7a4b27c28af78f.oggstr"
+
+[deps]
+
+source_file="res://Assets/Levels/Level 2/L2_final_antigo.ogg"
+dest_files=[ "res://.import/L2_final_antigo.ogg-4bbf3ee23123c6494b7a4b27c28af78f.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
