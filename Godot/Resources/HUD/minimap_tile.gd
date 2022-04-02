@@ -1,7 +1,7 @@
 extends TileMap
 
-onready var level = find_parent("Level*")
-onready var player = level.get_node("YSort/Player")
+onready var root_node = find_parent("Level*")
+onready var player = root_node.get_node("YSort/Player")
 onready var player_marker = get_parent().get_node("PlayerMarker")
 onready var map = get_parent()
 

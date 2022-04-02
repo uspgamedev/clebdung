@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Levels/Level 3/water.png" type="Texture" id=1]
+[ext_resource path="res://Resources/Levels/Level 3/water_shader.tres" type="Material" id=2]
+[ext_resource path="res://Resources/Levels/Level 3/water.gd" type="Script" id=3]
+
+[node name="Polygon2D" type="Polygon2D"]
+modulate = Color( 1, 1, 1, 0.392157 )
+material = ExtResource( 2 )
+texture = ExtResource( 1 )
+script = ExtResource( 3 )
+
+[node name="EnterArea2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="EnterArea2D"]
+
+[node name="ExitArea2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ExitArea2D"]
+
+[node name="Tween" type="Tween" parent="."]
+
+[connection signal="body_entered" from="EnterArea2D" to="." method="_on_EnterArea2D_body_entered"]
+[connection signal="body_exited" from="ExitArea2D" to="." method="_on_ExitArea2D_body_exited"]

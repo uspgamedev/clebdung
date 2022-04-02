@@ -409,7 +409,6 @@ script = ExtResource( 15 )
 [node name="Exit1" type="StaticBody2D" parent="YSort/Exit"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Exit/Exit1"]
-position = Vector2( 0, 6 )
 shape = SubResource( 8 )
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="YSort/Exit/Exit1"]
@@ -427,9 +426,11 @@ texture = ExtResource( 1 )
 hframes = 2
 
 [node name="Temp-StaticBody2D" type="StaticBody2D" parent="YSort/Exit"]
+visible = false
 position = Vector2( 0, 32 )
 
 [node name="Temp-CollisionShape2D" type="CollisionShape2D" parent="YSort/Exit/Temp-StaticBody2D"]
+visible = false
 shape = SubResource( 10 )
 disabled = true
 
@@ -482,9 +483,7 @@ Offset = Vector2( 13, 16 )
 MapSize = Vector2( 30, 31 )
 CristalID = 5
 
-[node name="GhostOP1" parent="YSort" groups=[
-"Ghosts",
-] instance=ExtResource( 11 )]
+[node name="GhostOP1" parent="YSort" groups=["Ghosts"] instance=ExtResource( 11 )]
 modulate = Color( 1, 0.517647, 0.517647, 1 )
 position = Vector2( 464, 560 )
 positionset = NodePath("../../Positions/OP1")
@@ -500,9 +499,7 @@ color = Color( 1, 0.513726, 0, 0.117647 )
 [node name="SpriteLight (Correção)" parent="YSort/GhostOP1/Light2D" index="0"]
 modulate = Color( 1, 0.513726, 0, 0.117647 )
 
-[node name="GhostOP2" parent="YSort" groups=[
-"Ghosts",
-] instance=ExtResource( 11 )]
+[node name="GhostOP2" parent="YSort" groups=["Ghosts"] instance=ExtResource( 11 )]
 modulate = Color( 1, 0.698039, 0.368627, 1 )
 position = Vector2( 592, 528 )
 positionset = NodePath("../../Positions/OP2")
@@ -518,9 +515,7 @@ color = Color( 1, 0.513726, 0, 0.117647 )
 [node name="SpriteLight (Correção)" parent="YSort/GhostOP2/Light2D" index="0"]
 modulate = Color( 1, 0.513726, 0, 0.117647 )
 
-[node name="GhostOP3" parent="YSort" groups=[
-"Ghosts",
-] instance=ExtResource( 11 )]
+[node name="GhostOP3" parent="YSort" groups=["Ghosts"] instance=ExtResource( 11 )]
 modulate = Color( 0.933333, 1, 0.819608, 1 )
 position = Vector2( 464, 464 )
 positionset = NodePath("../../Positions/OP3")
@@ -530,9 +525,7 @@ type = 2
 [node name="GhostSprite" parent="YSort/GhostOP3" index="0"]
 texture = ExtResource( 14 )
 
-[node name="GhostRP" parent="YSort" groups=[
-"Ghosts",
-] instance=ExtResource( 11 )]
+[node name="GhostRP" parent="YSort" groups=["Ghosts"] instance=ExtResource( 11 )]
 position = Vector2( 592, 592 )
 positionset = NodePath("../../Positions/RP")
 speed = 68

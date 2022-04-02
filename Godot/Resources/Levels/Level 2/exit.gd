@@ -1,8 +1,9 @@
 extends Node2D
 
 onready var animPlayer = get_node("AnimationPlayer")
-onready var astar = get_tree().get_root().get_node("Level2/A*")
-onready var player = get_parent().get_node("Player")
+onready var root_node = get_tree().get_root().get_node("Level2")
+onready var astar = root_node.get_node("A*")
+onready var player = root_node.get_node("YSort/Player")
 var k = 0
 var on_stairs = false
 var on_area = false
@@ -23,7 +24,8 @@ func _process(_delta):
 	# Caso o jogador esteja andando em direção às escadas
 	# após o desbloqueio, encerrar fase
 	if on_stairs and player.direction == Vector2(0,1):
-		get_tree().get_root().get_node("Level2").win()
+		root_node.get_node("Stairs/StairsArea2D").monitoring = false
+		root_node.win()
 		
 func _on_AnimArea2D_body_entered(_body):
 	# (Área só funciona após coleta dos cristais)
@@ -45,7 +47,6 @@ func _on_StairsArea2D_body_entered(_body):
 # (Área só funciona após desbloqueio da saída)
 func _on_StairsArea2D_body_exited(_body):
 	on_stairs = false
-
 
 func _on_AnimArea2D_body_exited(_body):
 	on_area = false

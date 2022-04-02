@@ -1,9 +1,9 @@
 extends Sprite
 
-onready var level = find_parent("Level*")
-onready var id = level.get_node("CrystalsID")
-onready var score = level.get_node("HUD/Control/ScoreRect/Score")
-onready var player = level.get_node("YSort/Player")
+onready var root_node = find_parent("Level*")
+onready var id = root_node.get_node("CrystalsID")
+onready var score = root_node.get_node("HUD/Control/ScoreRect/Score")
+onready var player = root_node.get_node("YSort/Player")
 onready var animplayer = get_node("AnimationPlayer")
 export(Vector2) var Offset
 export(Vector2) var MapSize

@@ -1,8 +1,8 @@
 extends KinematicBody2D
 
-onready var level = find_parent("Level*")
-onready var astar = level.get_node("A*")
-onready var player = level.get_node("YSort/Player")
+onready var root_node = find_parent("Level*")
+onready var astar = root_node.get_node("A*")
+onready var player = root_node.get_node("YSort/Player")
 onready var animplayerL = get_node("AnimationPlayerL")
 
 onready var RC = get_node("RayCast")

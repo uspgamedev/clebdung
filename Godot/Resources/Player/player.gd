@@ -107,7 +107,7 @@ func animation():
 		Vector2(1,0):
 			anim_direc = "Right"
 		Vector2(0,0):
-			anim_direc = "Null"
+			anim_direc = "Idle"
 	
 	if target_direction != Vector2(0,0):
 		anim_mode = "Walk"
@@ -118,7 +118,7 @@ func animation():
 	get_node("AnimationPlayer").play(animation)
 
 func die():
-	#get_tree().reload_current_scene()
-	$PlayerCollision.disabled = true
-	yield(get_tree().create_timer(.5), "timeout")
-	$PlayerCollision.disabled = false
+	get_tree().reload_current_scene()
+	#$PlayerCollision.disabled = true
+	#yield(get_tree().create_timer(.5), "timeout")
+	#$PlayerCollision.disabled = false
