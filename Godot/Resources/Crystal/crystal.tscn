@@ -59,6 +59,7 @@ extents = Vector2( 7.5, 1.09375 )
 [node name="Crystal" type="Sprite"]
 texture = ExtResource( 1 )
 hframes = 34
+frame = 28
 script = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

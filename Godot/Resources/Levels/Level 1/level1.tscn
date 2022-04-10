@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://Resources/Levels/Level 1/level1.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Levels/Level 1/level1_music_loop.ogg" type="AudioStream" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://Assets/Levels/Level 1/level1_music_final.ogg" type="AudioStream" id=21]
 [ext_resource path="res://Assets/Levels/Level 1/level1_music_intro.ogg" type="AudioStream" id=22]
 [ext_resource path="res://Resources/Levels/level_music.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Resources/PowerUps/Dash/CollectableDash.tscn" type="PackedScene" id=24]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -435,6 +436,10 @@ CristalID = 4
 position = Vector2( 217.591, 489.636 )
 scale = Vector2( 0.8, 0.8 )
 Fixed = true
+
+[node name="CollectableDash" parent="YSort" instance=ExtResource( 24 )]
+position = Vector2( 112.016, 496.962 )
+scale = Vector2( 0.8, 0.8 )
 
 [node name="GhostD1" parent="YSort" groups=["Ghosts"] instance=ExtResource( 11 )]
 position = Vector2( 464, 464 )

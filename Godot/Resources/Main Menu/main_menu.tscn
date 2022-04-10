@@ -54,9 +54,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = SubResource( 3 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 next_level_path = "res://Resources/Levels/Level 1/level1.tscn"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -71,9 +68,6 @@ margin_right = -910.0
 margin_bottom = -610.0
 rect_scale = Vector2( 8, 8 )
 texture = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0

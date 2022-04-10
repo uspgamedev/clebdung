@@ -47,7 +47,7 @@ func _physics_process(delta):
 	set_direction()
 	
 	# Caso o jogador NÂO esteja na posição alvo,
-	if position.distance_to(target_position) > 1:
+	if position.distance_to(target_position) > speed * delta:
 		# e a nova direção for nula, seguir na última direção (até o destino)
 		if direction == Vector2(0,0):
 			direction = old_direction
