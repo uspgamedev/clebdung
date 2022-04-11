@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node",
+"class": "LevelRoot",
+"language": "GDScript",
+"path": "res://Resources/Levels/default_level.gd"
+} ]
+_global_script_class_icons={
+"LevelRoot": ""
+}
+
 [application]
 
 config/name="ClebDung"

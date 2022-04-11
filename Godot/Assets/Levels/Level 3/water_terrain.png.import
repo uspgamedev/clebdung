@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/water_borders.png-6c3553d997d5f4413b12133be4103d41.stex"
+path="res://.import/water_terrain.png-3015582401d3fc25820dba7ef541c871.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Levels/Level 3/water_borders.png"
-dest_files=[ "res://.import/water_borders.png-6c3553d997d5f4413b12133be4103d41.stex" ]
+source_file="res://Assets/Levels/Level 3/water_terrain.png"
+dest_files=[ "res://.import/water_terrain.png-3015582401d3fc25820dba7ef541c871.stex" ]
 
 [params]
 

@@ -1,25 +1,24 @@
 extends Node
 
-var tree
-var player
-var ghosts
-var HUD
-var fade
-var win_animplayer
-var guide
-var level_music
+class_name LevelRoot
+
+onready var player
+onready var ghosts
+onready var HUD
+onready var fade
+onready var guide
+onready var level_music
+onready var win_animplayer
 var init_level = false
 
 # Importa as referências da fase
-func import_ref(tree_arg, root_node, win_animplayer_arg):
-	tree = tree_arg
-	player = root_node.get_node("YSort/Player")
-	ghosts = tree.get_nodes_in_group("Ghosts")
-	HUD = root_node.get_node("HUD")
-	win_animplayer = win_animplayer_arg
-	guide = root_node.get_node("Guide")
-	fade = root_node.get_node("Fade")
-	level_music = root_node.get_node("LevelMusic")
+func create_ref():
+	player = self.get_node("YSort/Player")
+	ghosts = get_tree().get_nodes_in_group("Ghosts")
+	HUD = self.get_node("HUD")
+	guide = self.get_node("Guide")
+	fade = self.get_node("Fade")
+	level_music = self.get_node("LevelMusic")
 
 # Inicia a fase
 func init(init_time, init_direction):
@@ -29,7 +28,7 @@ func init(init_time, init_direction):
 	# à uma direção determinada
 	player.target_position = player.global_position + Vector2(32,0)
 	player.direction = init_direction
-	yield(tree.create_timer(init_time), "timeout")
+	yield(get_tree().create_timer(init_time), "timeout")
 	# Bloqueia fantasmas
 	for g in ghosts:
 		g.set_physics_process(false)
@@ -53,7 +52,7 @@ func detect_move():
 # Desbloqueia a saída após coleta dos cristais
 func unblock():
 	# Ativa o modo caos
-	tree.call_group("Ghosts","f_chaos")
+	get_tree().call_group("Ghosts","f_chaos")
 	# Atualiza o estado do bloqueio da saída
 	win_animplayer.play("Unblocked")
 	# Ativa o guia
@@ -77,8 +76,7 @@ func finish_level(next_scene_path):
 	# Toca a transição de tela
 	fade.fade_out()
 	# Desativa o modo chaos dos fantasmas
-	tree.call_group("Ghosts","f_chaos")
+	get_tree().call_group("Ghosts","f_chaos")
 	# Aguarda e troca de cena
-	yield(tree.create_timer(3), "timeout")
-	tree.change_scene(next_scene_path)
-	
+	yield(get_tree().create_timer(3), "timeout")
+	get_tree().change_scene(next_scene_path)
