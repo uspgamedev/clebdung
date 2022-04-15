@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Resources/Player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Resources/Levels/Level 3/tilemap_level3.tres" type="TileSet" id=2]
@@ -9,8 +9,7 @@
 [ext_resource path="res://Resources/Levels/Level 3/player_mask.gd" type="Script" id=7]
 [ext_resource path="res://Resources/Levels/Level 3/player_reflection.gd" type="Script" id=8]
 [ext_resource path="res://Assets/Levels/Level 3/player_mask.png" type="Texture" id=9]
-[ext_resource path="res://Assets/PowerUps/dash_spritesheet.png" type="Texture" id=10]
-[ext_resource path="res://Resources/Player/PowerUp.gd" type="Script" id=11]
+[ext_resource path="res://Resources/PowerUps/Collectables/collectable_power_up.tscn" type="PackedScene" id=10]
 
 [sub_resource type="Shader" id=4]
 code = "shader_type canvas_item;
@@ -31,7 +30,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=5]
 shader = SubResource( 4 )
-shader_param/mask = 0.5
+shader_param/mask = 0.0
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -54,7 +53,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
-shader_param/mask = 0.0
+shader_param/mask = 1.0
 shader_param/mask_texture = ExtResource( 9 )
 
 [node name="Level 3" type="Node2D"]
@@ -86,8 +85,12 @@ tile_data = PoolIntArray( -327661, 15, 0, -262125, 20, 0, -196589, 14, 0, -13105
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( 624, 368 )
 
+[node name="CollectablePowerUp" parent="YSort" instance=ExtResource( 10 )]
+position = Vector2( 624, 272 )
+power_up = 1
+
 [node name="PlayerReflection" type="Sprite" parent="."]
-modulate = Color( 1, 1, 1, 0.27451 )
+modulate = Color( 1, 1, 1, 0.705882 )
 light_mask = 4
 material = SubResource( 5 )
 texture = ExtResource( 6 )
@@ -102,14 +105,8 @@ script = ExtResource( 8 )
 [node name="Polygon2D" parent="WaterPolygons" instance=ExtResource( 4 )]
 polygon = PoolVector2Array( 512, 288, 512, 320, 480, 320, 480, 416, 512, 416, 512, 448, 736, 448, 736, 416, 768, 416, 768, 320, 736, 320, 736, 288, 640, 352, 640, 384, 608, 384, 608, 352, 640, 352, 736, 288 )
 
-[node name="EnterArea2D" parent="WaterPolygons/Polygon2D" index="0"]
-visible = false
-
 [node name="CollisionPolygon2D" parent="WaterPolygons/Polygon2D/EnterArea2D" index="0"]
 polygon = PoolVector2Array( 516, 292, 516, 324, 484, 324, 484, 412, 516, 412, 516, 444, 732, 444, 732, 412, 764, 412, 764, 324, 732, 324, 644, 348, 644, 388, 604, 388, 604, 348, 644, 348, 732, 324, 732, 292 )
-
-[node name="ExitArea2D" parent="WaterPolygons/Polygon2D" index="1"]
-visible = false
 
 [node name="CollisionPolygon2D" parent="WaterPolygons/Polygon2D/ExitArea2D" index="0"]
 polygon = PoolVector2Array( 536, 304, 504, 336, 504, 388, 536, 420, 712, 420, 744, 388, 744, 336, 724, 320, 664, 328, 664, 396, 660, 400, 588, 400, 584, 396, 584, 328, 588, 324, 660, 324, 664, 328, 724, 320, 712, 304 )
@@ -131,6 +128,9 @@ polygon = PoolVector2Array( 312, 316, 360, 316, 360, 292, 312, 292 )
 
 [node name="Polygon2D2" parent="WaterPolygons" instance=ExtResource( 4 )]
 polygon = PoolVector2Array( 64, 32, 64, 64, 32, 64, 32, 256, 64, 256, 64, 288, 224, 288, 224, 256, 256, 256, 256, 64, 224, 64, 224, 32 )
+
+[node name="Polygon2D4" parent="WaterPolygons" instance=ExtResource( 4 )]
+polygon = PoolVector2Array( 128, 416, 128, 448, 320, 448, 320, 512, 352, 512, 352, 448, 416, 448, 416, 416 )
 
 [node name="WaterBorders" type="TileMap" parent="."]
 tile_set = ExtResource( 5 )
@@ -154,17 +154,20 @@ frame = 35
 script = ExtResource( 7 )
 
 [node name="PowerUp" type="Sprite" parent="PlayerMask"]
-visible = false
 light_mask = 4
 use_parent_material = true
-texture = ExtResource( 10 )
 hframes = 5
 vframes = 8
 frame = 35
-script = ExtResource( 11 )
 __meta__ = {
 "_editor_description_": ""
 }
+
+[node name="PowerUp2" type="Sprite" parent="PlayerMask"]
+use_parent_material = true
+
+[node name="PowerUp3" type="Sprite" parent="PlayerMask"]
+use_parent_material = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0, 0, 0, 1 )

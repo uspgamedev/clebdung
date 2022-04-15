@@ -6,7 +6,9 @@ export(Vector2) var offset
 
 
 func _ready():
+	# Carrega a cena que será instanciada
 	var scene = load(spawn_scene)
+	# Para cada tile usado, instanciar a cena
 	var used_cells = get_used_cells()
 	for cell in used_cells:
 		var instance = scene.instance()

@@ -2,7 +2,7 @@ extends Control
 
 export(String, FILE, "*.tscn") var next_level_path
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	$Fade.fade_in()
 

@@ -23,7 +23,7 @@
 [ext_resource path="res://Assets/Levels/Level 1/level1_music_final.ogg" type="AudioStream" id=21]
 [ext_resource path="res://Assets/Levels/Level 1/level1_music_intro.ogg" type="AudioStream" id=22]
 [ext_resource path="res://Resources/Levels/level_music.tscn" type="PackedScene" id=23]
-[ext_resource path="res://Resources/PowerUps/Dash/CollectableDash.tscn" type="PackedScene" id=24]
+[ext_resource path="res://Resources/PowerUps/Collectables/collectable_power_up.tscn" type="PackedScene" id=24]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -437,9 +437,13 @@ position = Vector2( 217.591, 489.636 )
 scale = Vector2( 0.8, 0.8 )
 Fixed = true
 
-[node name="CollectableDash" parent="YSort" instance=ExtResource( 24 )]
-position = Vector2( 112.016, 496.962 )
-scale = Vector2( 0.8, 0.8 )
+[node name="CollectablePowerUp" parent="YSort" instance=ExtResource( 24 )]
+position = Vector2( 80, 432 )
+power_up = 1
+
+[node name="CollectablePowerUp2" parent="YSort" instance=ExtResource( 24 )]
+position = Vector2( 112, 496 )
+power_up = 1
 
 [node name="GhostD1" parent="YSort" groups=["Ghosts"] instance=ExtResource( 11 )]
 position = Vector2( 464, 464 )
@@ -623,6 +627,7 @@ position = Vector2( 240, 1008 )
 position = Vector2( 816, 1008 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
 color = Color( 0, 0, 0, 1 )
 
 [node name="HUD" parent="." instance=ExtResource( 8 )]

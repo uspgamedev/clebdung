@@ -1,10 +1,9 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Assets/Others/light_sprite.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Player/player_spritesheet.png" type="Texture" id=2]
 [ext_resource path="res://Resources/Player/player.gd" type="Script" id=3]
-[ext_resource path="res://Resources/Player/PowerUp.gd" type="Script" id=4]
-[ext_resource path="res://Assets/PowerUps/dash_spritesheet.png" type="Texture" id=5]
+[ext_resource path="res://Resources/PowerUps/PowerUpSlot.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 7.92188 )
@@ -381,22 +380,10 @@ hframes = 5
 vframes = 8
 frame = 35
 
-[node name="PowerUp" type="Sprite" parent="PlayerSprite"]
-visible = false
-light_mask = 4
-texture = ExtResource( 5 )
-hframes = 5
-vframes = 8
-frame = 35
-script = ExtResource( 4 )
-__meta__ = {
-"_editor_description_": ""
-}
-
 [node name="Camera2D" type="Camera2D" parent="."]
 light_mask = 3
 current = true
-zoom = Vector2( 0.2, 0.2 )
+zoom = Vector2( 0.35, 0.35 )
 smoothing_enabled = true
 smoothing_speed = 5.7
 
@@ -439,6 +426,15 @@ cast_to = Vector2( 16, 0 )
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -7.92188 )
 shape = SubResource( 1 )
+
+[node name="PowerUpSlot1" parent="." instance=ExtResource( 4 )]
+Slot = 1
+
+[node name="PowerUpSlot2" parent="." instance=ExtResource( 4 )]
+Slot = 2
+
+[node name="PowerUpSlot3" parent="." instance=ExtResource( 4 )]
+Slot = 3
 
 [node name="AnimationPlayerL" type="AnimationPlayer" parent="."]
 autoplay = "Light_FadeIn"
