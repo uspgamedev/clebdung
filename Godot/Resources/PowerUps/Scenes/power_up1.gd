@@ -1,11 +1,11 @@
 extends Node
 
-onready var player_sprite = get_parent().get_parent().get_node("PlayerSprite")
+onready var player = get_parent().get_parent().get_parent()
+onready var player_sprite = player.get_node("PlayerSprite")
 var speed_boost: float = 2.5
-var interpolation_duration: float = 0.5
+var interpolation_duration: float = 0.5	
 
 func usePowerUp():
-	var player = get_parent().get_parent()
 	$Tween.stop_all()
 	$Tween.interpolate_property(player, "speed",
 								speed_boost * player.speed, player.speed,
@@ -14,7 +14,7 @@ func usePowerUp():
 	yield($Tween, "tween_completed")
 	queue_free()
 
-func getTime():
+func get_duration():
 	return interpolation_duration
 
 func _process(_delta):

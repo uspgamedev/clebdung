@@ -10,8 +10,9 @@ func _ready():
 
 func _on_Self_body_entered(body):
 	if body.get_name() == "Player":
-		for i in range(1,4):
-			var power_up_slot = body.get_node("PowerUpSlot" + str(i))
+		var power_up_manager = body.get_node("PowerUpManager")
+		for i in range(1, power_up_manager.get_child_count() + 1):
+			var power_up_slot = power_up_manager.get_node("PowerUpSlot" + str(i))
 			if power_up_slot.isEmpty():
 				power_up_slot.setSlot(id)
 				queue_free()
