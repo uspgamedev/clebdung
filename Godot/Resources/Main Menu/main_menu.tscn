@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Resources/Main Menu/main_menu.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Main Menu/mm_music.ogg" type="AudioStream" id=2]
+[ext_resource path="res://Resources/Settings Menu/settings_menu.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/HUD/upheavtt.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Assets/Main Menu/mm_torch.tres" type="Texture" id=5]
 [ext_resource path="res://Resources/Others/upheavtt.ttf" type="DynamicFontData" id=6]
@@ -72,16 +73,16 @@ texture = ExtResource( 5 )
 [node name="HBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 580.0
+margin_left = 550.0
 margin_top = 540.0
-margin_right = -580.0
-margin_bottom = -70.0
+margin_right = -577.0
+margin_bottom = -32.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Play" type="Button" parent="HBoxContainer"]
-margin_right = 120.0
+margin_right = 153.0
 margin_bottom = 34.0
 text = "PLAY"
 flat = true
@@ -91,7 +92,7 @@ __meta__ = {
 
 [node name="Levels" type="Button" parent="HBoxContainer"]
 margin_top = 38.0
-margin_right = 120.0
+margin_right = 153.0
 margin_bottom = 72.0
 disabled = true
 text = "LEVELS"
@@ -100,10 +101,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Quit" type="Button" parent="HBoxContainer"]
+[node name="SETTINGS" type="Button" parent="HBoxContainer"]
 margin_top = 76.0
-margin_right = 120.0
+margin_right = 153.0
 margin_bottom = 110.0
+text = "SeTTINGS"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Button" parent="HBoxContainer"]
+margin_top = 114.0
+margin_right = 153.0
+margin_bottom = 148.0
 text = "QUIT"
 flat = true
 __meta__ = {
@@ -159,6 +170,10 @@ stream = ExtResource( 2 )
 volume_db = -15.0
 autoplay = true
 
+[node name="SettingsMenu" parent="." instance=ExtResource( 3 )]
+visible = false
+
 [connection signal="pressed" from="HBoxContainer/Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="HBoxContainer/Levels" to="." method="_on_Levels_pressed"]
+[connection signal="pressed" from="HBoxContainer/SETTINGS" to="." method="_on_SETTINGS_pressed"]
 [connection signal="pressed" from="HBoxContainer/Quit" to="." method="_on_Quit_pressed"]

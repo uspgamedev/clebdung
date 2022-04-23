@@ -24,6 +24,11 @@ config/name="ClebDung"
 run/main_scene="res://Resources/Main Menu/main_menu.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+GlobalSettings="*res://Resources/Settings Menu/global_settings.gd"
+Save="*res://Resources/Settings Menu/save.gd"
+
 [display]
 
 window/size/width=1280
