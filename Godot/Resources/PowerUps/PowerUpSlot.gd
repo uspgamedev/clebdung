@@ -13,8 +13,9 @@ func useSlot():
 		power_up_node.usePowerUp()
 		power_up_node = null
 		yield(get_tree().create_timer(delay), "timeout")
+		emit_signal("used_slot")
 	get_parent().lock = false
-	emit_signal("used_slot")
+
 
 func setSlot(id):
 	var node = load("res://Resources/PowerUps/Scenes/" + id + ".tscn")

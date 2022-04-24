@@ -4,7 +4,7 @@ onready var level = find_parent("Level*")
 var score
 
 func _ready():
-	score = 0
+	score = 4
 
 func update_score():
 	score += 1

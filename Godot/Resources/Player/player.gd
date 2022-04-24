@@ -20,27 +20,6 @@ func _ready():
 func _process(_delta):
 	animation()
 
-"""
-func _physics_process(delta): 
-	#MOVENDO
-	#Colisão
-	if $PlayerRayCast.is_colliding():
-		position = last_position
-		target_position = position
-	else:
-		#Mover-se
-		move_and_collide(speed * direction * delta)
-		
-		if position.distance_to(last_position) >= tile_size - speed * delta:
-			position = target_position
-	
-	#PARADO
-	if position == target_position:
-		set_direction()
-		last_position = position
-		target_position += direction * tile_size
-"""
-
 func _physics_process(delta):
 	# Salva a última direção e atualiza o parâmetro
 	old_direction = direction
