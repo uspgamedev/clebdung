@@ -8,6 +8,10 @@ func _ready():
 	create_ref()
 	# Código padrão
 	init(3.25, Vector2(1,0))
+	# Esconde os power ups do HUD
+	HUD.get_node("Control/PowerUpSlot1").visible = false
+	HUD.get_node("Control/PowerUpSlot2").visible = false
+	HUD.get_node("Control/PowerUpSlot3").visible = false
 
 func _process(_delta):
 	# Código padrão

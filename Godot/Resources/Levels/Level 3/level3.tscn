@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Resources/Player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Resources/Levels/Level 3/tilemap_level3.tres" type="TileSet" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Resources/Levels/Level 3/player_reflection.gd" type="Script" id=8]
 [ext_resource path="res://Assets/Levels/Level 3/player_mask.png" type="Texture" id=9]
 [ext_resource path="res://Resources/PowerUps/Collectables/collectable_power_up.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Resources/Levels/Level 3/power_up_mask.gd" type="Script" id=11]
 
 [sub_resource type="Shader" id=4]
 code = "shader_type canvas_item;
@@ -102,35 +103,143 @@ script = ExtResource( 8 )
 
 [node name="WaterPolygons" type="Node2D" parent="."]
 
-[node name="Polygon2D" parent="WaterPolygons" instance=ExtResource( 4 )]
-polygon = PoolVector2Array( 512, 288, 512, 320, 480, 320, 480, 416, 512, 416, 512, 448, 736, 448, 736, 416, 768, 416, 768, 320, 736, 320, 736, 288, 640, 352, 640, 384, 608, 384, 608, 352, 640, 352, 736, 288 )
+[node name="WaterPolygon1" parent="WaterPolygons" instance=ExtResource( 4 )]
+polygon = PoolVector2Array( 64, 288, 64, 256, 32, 256, 32, 64, 64, 64, 64, 32, 224, 32, 224, 64, 256, 64, 256, 256, 224, 256, 224, 288 )
 
-[node name="CollisionPolygon2D" parent="WaterPolygons/Polygon2D/EnterArea2D" index="0"]
-polygon = PoolVector2Array( 516, 292, 516, 324, 484, 324, 484, 412, 516, 412, 516, 444, 732, 444, 732, 412, 764, 412, 764, 324, 732, 324, 644, 348, 644, 388, 604, 388, 604, 348, 644, 348, 732, 324, 732, 292 )
+[node name="WaterPolygon2" parent="WaterPolygons" instance=ExtResource( 4 )]
+polygon = PoolVector2Array( 576, 128, 576, 64, 672, 64, 672, 128 )
 
-[node name="CollisionPolygon2D" parent="WaterPolygons/Polygon2D/ExitArea2D" index="0"]
-polygon = PoolVector2Array( 536, 304, 504, 336, 504, 388, 536, 420, 712, 420, 744, 388, 744, 336, 724, 320, 664, 328, 664, 396, 660, 400, 588, 400, 584, 396, 584, 328, 588, 324, 660, 324, 664, 328, 724, 320, 712, 304 )
+[node name="WaterPolygon3" parent="WaterPolygons" instance=ExtResource( 4 )]
+polygon = PoolVector2Array( 928, 32, 928, 288, 960, 288, 960, 32 )
 
-[node name="Polygon2D" parent="WaterPolygons/Polygon2D" instance=ExtResource( 4 )]
-position = Vector2( 112, 184 )
+[node name="WaterPolygon4" parent="WaterPolygons" instance=ExtResource( 4 )]
+position = Vector2( 96, 0 )
+polygon = PoolVector2Array( 928, 32, 928, 288, 960, 288, 960, 32 )
 
-[node name="Polygon2D2" parent="WaterPolygons/Polygon2D" instance=ExtResource( 4 )]
-position = Vector2( 88, 144 )
+[node name="WaterPolygon5" parent="WaterPolygons" instance=ExtResource( 4 )]
+position = Vector2( 192, 0 )
+polygon = PoolVector2Array( 928, 32, 928, 288, 960, 288, 960, 32 )
 
-[node name="Polygon2D3" parent="WaterPolygons" instance=ExtResource( 4 )]
+[node name="WaterPolygon6" parent="WaterPolygons" instance=ExtResource( 4 )]
+position = Vector2( 288, 0 )
+polygon = PoolVector2Array( 928, 64, 928, 288, 960, 288, 960, 64 )
+
+[node name="WaterPolygon7" parent="WaterPolygons" instance=ExtResource( 4 )]
 polygon = PoolVector2Array( 288, 288, 288, 320, 384, 320, 384, 288 )
 
-[node name="CollisionPolygon2D" parent="WaterPolygons/Polygon2D3/EnterArea2D" index="0"]
-polygon = PoolVector2Array( 292, 292, 292, 316, 380, 316, 380, 292 )
+[node name="WaterPolygon8" parent="WaterPolygons" instance=ExtResource( 4 )]
+polygon = PoolVector2Array( 512, 288, 512, 320, 480, 320, 480, 416, 512, 416, 512, 448, 736, 448, 736, 416, 768, 416, 768, 320, 736, 320, 736, 288, 640, 288, 640, 384, 608, 384, 608, 352, 640, 352, 640, 288 )
 
-[node name="CollisionPolygon2D" parent="WaterPolygons/Polygon2D3/ExitArea2D" index="0"]
-polygon = PoolVector2Array( 312, 316, 360, 316, 360, 292, 312, 292 )
+[node name="WaterPolygon9" parent="WaterPolygons" instance=ExtResource( 4 )]
+position = Vector2( 544, 0 )
+polygon = PoolVector2Array( 288, 288, 288, 320, 384, 320, 384, 288 )
 
-[node name="Polygon2D2" parent="WaterPolygons" instance=ExtResource( 4 )]
-polygon = PoolVector2Array( 64, 32, 64, 64, 32, 64, 32, 256, 64, 256, 64, 288, 224, 288, 224, 256, 256, 256, 256, 64, 224, 64, 224, 32 )
+[node name="WaterPolygon10" parent="WaterPolygons" instance=ExtResource( 4 )]
+position = Vector2( 672, 0 )
+polygon = PoolVector2Array( 288, 288, 288, 320, 352, 320, 352, 288 )
 
-[node name="Polygon2D4" parent="WaterPolygons" instance=ExtResource( 4 )]
-polygon = PoolVector2Array( 128, 416, 128, 448, 320, 448, 320, 512, 352, 512, 352, 448, 416, 448, 416, 416 )
+[node name="WaterPolygon11" parent="WaterPolygons" instance=ExtResource( 4 )]
+position = Vector2( 768, 0 )
+polygon = PoolVector2Array( 288, 288, 288, 320, 352, 320, 352, 288 )
+
+[node name="WaterPolygon12" parent="WaterPolygons" instance=ExtResource( 4 )]
+position = Vector2( 864, 0 )
+polygon = PoolVector2Array( 288, 288, 288, 320, 352, 320, 352, 288 )
+
+[node name="WaterPolygon13" parent="WaterPolygons" instance=ExtResource( 4 )]
+position = Vector2( -160, 128 )
+polygon = PoolVector2Array( 288, 288, 288, 320, 480, 320, 480, 384, 512, 384, 512, 320, 576, 320, 576, 288 )
+
+[node name="WaterPolygon14" parent="WaterPolygons" instance=ExtResource( 4 )]
+position = Vector2( 416, 128 )
+polygon = PoolVector2Array( 448, 288, 448, 320, 480, 320, 480, 352, 512, 352, 512, 320, 544, 320, 544, 288 )
+
+[node name="WaterPolygon15" parent="WaterPolygons" instance=ExtResource( 4 )]
+position = Vector2( 640, 128 )
+polygon = PoolVector2Array( 416, 288, 416, 320, 480, 320, 480, 352, 512, 352, 512, 320, 544, 320, 544, 288 )
+
+[node name="WaterPolygon16" parent="WaterPolygons" instance=ExtResource( 4 )]
+position = Vector2( -404, 276 )
+polygon = PoolVector2Array( 436, 204, 436, 492, 468, 492, 468, 300, 500, 300, 500, 268, 468, 268, 468, 204 )
+
+[node name="WaterPolygon17" parent="WaterPolygons" instance=ExtResource( 4 )]
+position = Vector2( -44, 356 )
+polygon = PoolVector2Array( 428, 220, 428, 348, 492, 348, 492, 284, 524, 284, 524, 316, 492, 316, 492, 348, 556, 348, 556, 252, 620, 252, 620, 284, 652, 284, 652, 348, 684, 348, 684, 284, 716, 284, 716, 220 )
+
+[node name="WaterPolygon18" parent="WaterPolygons" instance=ExtResource( 4 )]
+polygon = PoolVector2Array( 896, 544, 896, 608, 928, 608, 928, 544 )
+
+[node name="WaterPolygon19" parent="WaterPolygons" instance=ExtResource( 4 )]
+position = Vector2( 96, 32 )
+polygon = PoolVector2Array( 896, 544, 896, 576, 960, 576, 960, 544 )
+
+[node name="WaterPolygon20" parent="WaterPolygons" instance=ExtResource( 4 )]
+position = Vector2( 304, 4 )
+polygon = PoolVector2Array( 912, 444, 912, 636, 944, 636, 944, 444 )
+
+[node name="WaterPolygon21" parent="WaterPolygons" instance=ExtResource( 4 )]
+position = Vector2( -16, 196 )
+polygon = PoolVector2Array( 912, 444, 912, 540, 944, 540, 944, 444 )
+
+[node name="WaterPolygon22" parent="WaterPolygons" instance=ExtResource( 4 )]
+position = Vector2( 208, 164 )
+polygon = PoolVector2Array( 912, 444, 912, 540, 944, 540, 944, 444 )
+
+[node name="WaterPolygon23" parent="WaterPolygons" instance=ExtResource( 4 )]
+position = Vector2( -696, 352 )
+polygon = PoolVector2Array( 920, 448, 920, 480, 1208, 480, 1208, 448 )
+
+[node name="WaterPolygon24" parent="WaterPolygons" instance=ExtResource( 4 )]
+position = Vector2( 204, 304 )
+polygon = PoolVector2Array( 1012, 400, 1012, 688, 1044, 688, 1044, 400 )
+
+[node name="WaterPolygon25" parent="WaterPolygons" instance=ExtResource( 4 )]
+position = Vector2( -980, 464 )
+polygon = PoolVector2Array( 1012, 400, 1012, 560, 1044, 560, 1044, 400 )
+
+[node name="WaterPolygon26" parent="WaterPolygons" instance=ExtResource( 4 )]
+position = Vector2( -372, 464 )
+polygon = PoolVector2Array( 1012, 400, 1012, 528, 1044, 528, 1044, 400 )
+
+[node name="WaterPolygon27" parent="WaterPolygons" instance=ExtResource( 4 )]
+position = Vector2( -116, 432 )
+polygon = PoolVector2Array( 1012, 400, 1012, 464, 1044, 464, 1044, 400 )
+
+[node name="WaterPolygon28" parent="WaterPolygons" instance=ExtResource( 4 )]
+position = Vector2( -308, 528 )
+polygon = PoolVector2Array( 1012, 400, 1012, 432, 1140, 432, 1140, 400 )
+
+[node name="WaterPolygon29" parent="WaterPolygons" instance=ExtResource( 4 )]
+position = Vector2( -52, 496 )
+polygon = PoolVector2Array( 1012, 400, 1012, 432, 1076, 432, 1076, 400 )
+
+[node name="WaterPolygon30" parent="WaterPolygons" instance=ExtResource( 4 )]
+position = Vector2( -948, 624 )
+polygon = PoolVector2Array( 1012, 400, 1012, 528, 1076, 528, 1076, 592, 1140, 592, 1140, 624, 1268, 624, 1268, 592, 1268, 560, 1300, 560, 1300, 592, 1268, 592, 1268, 624, 1460, 624, 1460, 592, 1524, 592, 1524, 528, 1492, 464, 1460, 464, 1460, 432, 1492, 432, 1492, 464, 1524, 528, 1588, 528, 1588, 400, 1524, 400, 1524, 336, 1460, 336, 1460, 304, 1171.5, 304, 1140, 304, 1140, 336, 1076, 336, 1076, 400, 1172, 400, 1172, 368, 1204, 368, 1204, 400 )
+
+[node name="WaterPolygon31" parent="WaterPolygons" instance=ExtResource( 4 )]
+position = Vector2( 140, 624 )
+polygon = PoolVector2Array( 1012, 400, 1012, 464, 1076, 464, 1076, 400 )
+
+[node name="WaterPolygon32" parent="WaterPolygons" instance=ExtResource( 4 )]
+position = Vector2( -84, 688 )
+polygon = PoolVector2Array( 1012, 400, 1012, 432, 1140, 432, 1140, 400 )
+
+[node name="WaterPolygon33" parent="WaterPolygons" instance=ExtResource( 4 )]
+position = Vector2( -340, 816 )
+polygon = PoolVector2Array( 1012, 400, 1012, 432, 1204, 432, 1204, 400, 1172, 400, 1172, 304, 1140, 304, 1140, 400 )
+
+[node name="WaterPolygon34" parent="WaterPolygons" instance=ExtResource( 4 )]
+position = Vector2( -84, 816 )
+polygon = PoolVector2Array( 1012, 400, 1012, 432, 1108, 432, 1108, 400 )
+
+[node name="WaterPolygon35" parent="WaterPolygons" instance=ExtResource( 4 )]
+position = Vector2( 76, 816 )
+polygon = PoolVector2Array( 1012, 400, 1012, 432, 1108, 432, 1108, 400, 1076, 400, 1076, 368, 1044, 368, 1044, 400 )
+
+[node name="WaterPolygon36" parent="WaterPolygons" instance=ExtResource( 4 )]
+position = Vector2( 172, 752 )
+polygon = PoolVector2Array( 1044, 460, 1076, 460, 1076, 368, 1044, 368 )
 
 [node name="WaterBorders" type="TileMap" parent="."]
 tile_set = ExtResource( 5 )
@@ -153,25 +262,27 @@ vframes = 8
 frame = 35
 script = ExtResource( 7 )
 
-[node name="PowerUp" type="Sprite" parent="PlayerMask"]
+[node name="PowerUpMask1" type="Sprite" parent="PlayerMask"]
 light_mask = 4
 use_parent_material = true
 hframes = 5
 vframes = 8
 frame = 35
+script = ExtResource( 11 )
 __meta__ = {
 "_editor_description_": ""
 }
+slot = 1
 
-[node name="PowerUp2" type="Sprite" parent="PlayerMask"]
+[node name="PowerUpMask2" type="Sprite" parent="PlayerMask"]
 use_parent_material = true
+script = ExtResource( 11 )
+slot = 2
 
-[node name="PowerUp3" type="Sprite" parent="PlayerMask"]
+[node name="PowerUpMask3" type="Sprite" parent="PlayerMask"]
 use_parent_material = true
+script = ExtResource( 11 )
+slot = 3
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0, 0, 0, 1 )
-
-[editable path="WaterPolygons/Polygon2D"]
-[editable path="WaterPolygons/Polygon2D3"]
-[editable path="WaterPolygons/Polygon2D2"]

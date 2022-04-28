@@ -1,7 +1,7 @@
 extends Control
 
 export(String, FILE, "*.tscn") var next_level_path
-
+onready var settings_menu = $SettingsMenu
 
 func _ready():
 	$Fade.fade_in()
@@ -21,3 +21,7 @@ func _on_Levels_pressed():
 
 func _on_Quit_pressed():
 	get_tree().quit()
+
+
+func _on_SETTINGS_pressed():
+	settings_menu.popup_centered()

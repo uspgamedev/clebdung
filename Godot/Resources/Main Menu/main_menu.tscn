@@ -1,18 +1,21 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Resources/Main Menu/main_menu.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Main Menu/mm_music.ogg" type="AudioStream" id=2]
-[ext_resource path="res://Assets/HUD/upheavtt.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Resources/Settings Menu/settings_menu.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Others/upheavtt.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Assets/Main Menu/mm_torch.tres" type="Texture" id=5]
-[ext_resource path="res://Resources/Others/upheavtt.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://Assets/Others/light2_sprite.png" type="Texture" id=7]
 [ext_resource path="res://Resources/Others/fade.tscn" type="PackedScene" id=8]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
+[sub_resource type="DynamicFontData" id=7]
+font_path = "res://Assets/Others/upheavtt.ttf"
+
 [sub_resource type="DynamicFont" id=2]
 size = 30
-font_data = ExtResource( 4 )
+font_data = SubResource( 7 )
 
 [sub_resource type="Theme" id=3]
 default_font = SubResource( 2 )
@@ -27,7 +30,7 @@ Button/styles/focus = SubResource( 1 )
 
 [sub_resource type="DynamicFont" id=4]
 size = 105
-font_data = ExtResource( 6 )
+font_data = ExtResource( 4 )
 
 [sub_resource type="Theme" id=5]
 default_font = SubResource( 4 )
@@ -54,6 +57,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = SubResource( 3 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 next_level_path = "res://Resources/Levels/Level 1/level1.tscn"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -61,27 +67,28 @@ layer = -1
 
 [node name="Torch" type="TextureRect" parent="CanvasLayer"]
 anchor_right = 1.0
-anchor_bottom = 1.0
 margin_left = 280.0
 margin_top = 20.0
 margin_right = -910.0
-margin_bottom = -610.0
+margin_bottom = 110.0
 rect_scale = Vector2( 8, 8 )
 texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="HBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 580.0
+margin_left = 550.0
 margin_top = 540.0
-margin_right = -580.0
-margin_bottom = -70.0
+margin_right = -577.0
+margin_bottom = 688.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Play" type="Button" parent="HBoxContainer"]
-margin_right = 120.0
+margin_right = 153.0
 margin_bottom = 34.0
 text = "PLAY"
 flat = true
@@ -91,7 +98,7 @@ __meta__ = {
 
 [node name="Levels" type="Button" parent="HBoxContainer"]
 margin_top = 38.0
-margin_right = 120.0
+margin_right = 153.0
 margin_bottom = 72.0
 disabled = true
 text = "LEVELS"
@@ -100,10 +107,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Quit" type="Button" parent="HBoxContainer"]
+[node name="Settings" type="Button" parent="HBoxContainer"]
 margin_top = 76.0
-margin_right = 120.0
+margin_right = 153.0
 margin_bottom = 110.0
+text = "SETTINGS"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Button" parent="HBoxContainer"]
+margin_top = 114.0
+margin_right = 153.0
+margin_bottom = 148.0
 text = "QUIT"
 flat = true
 __meta__ = {
@@ -112,11 +129,10 @@ __meta__ = {
 
 [node name="Title" type="Label" parent="."]
 anchor_right = 1.0
-anchor_bottom = 1.0
 margin_left = 150.0
 margin_top = 50.0
 margin_right = -145.0
-margin_bottom = -570.0
+margin_bottom = 150.0
 theme = SubResource( 5 )
 text = "CLEBER'S DUNGEON"
 align = 1
@@ -150,15 +166,19 @@ anims/Light = SubResource( 6 )
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0, 0, 0, 1 )
 
-[node name="Fade" parent="." instance=ExtResource( 8 )]
-fade_in_time = 1.0
-fade_out_time = 1.0
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
 volume_db = -15.0
 autoplay = true
 
+[node name="SettingsMenu" parent="." instance=ExtResource( 3 )]
+visible = false
+
+[node name="Fade" parent="." instance=ExtResource( 8 )]
+fade_in_time = 1.0
+fade_out_time = 1.0
+
 [connection signal="pressed" from="HBoxContainer/Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="HBoxContainer/Levels" to="." method="_on_Levels_pressed"]
+[connection signal="pressed" from="HBoxContainer/Settings" to="." method="_on_SETTINGS_pressed"]
 [connection signal="pressed" from="HBoxContainer/Quit" to="." method="_on_Quit_pressed"]

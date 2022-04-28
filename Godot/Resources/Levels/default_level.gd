@@ -47,7 +47,7 @@ func detect_move():
 		for g in ghosts:
 			g.set_physics_process(true)
 		HUD.undisplay_name()
-		HUD.init_map_score()
+		HUD.init_HUD()
 
 # Desbloqueia a saída após coleta dos cristais
 func unblock():

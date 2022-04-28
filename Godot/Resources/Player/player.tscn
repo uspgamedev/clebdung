@@ -382,6 +382,7 @@ frame = 35
 
 [node name="Camera2D" type="Camera2D" parent="."]
 light_mask = 3
+position = Vector2( 0, -12 )
 current = true
 zoom = Vector2( 0.35, 0.35 )
 smoothing_enabled = true

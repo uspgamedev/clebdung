@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Resources/HUD/HUD.gd" type="Script" id=1]
-[ext_resource path="res://Resources/Others/upheavtt.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Assets/Others/upheavtt.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Resources/HUD/power_up_slot.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Resources/HUD/score.gd" type="Script" id=4]
-[ext_resource path="res://Assets/HUD/Score_Spritesheet.png" type="Texture" id=6]
+[ext_resource path="res://Assets/HUD/score_spritesheet.png" type="Texture" id=6]
 
 [sub_resource type="DynamicFont" id=8]
 size = 48
@@ -122,12 +123,14 @@ __meta__ = {
 
 [node name="LevelName" type="RichTextLabel" parent="Control"]
 modulate = Color( 1, 1, 1, 0 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 272.0
-margin_top = 320.0
-margin_right = -272.0
-margin_bottom = -336.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -368.0
+margin_top = -16.0
+margin_right = 368.0
+margin_bottom = 48.0
 custom_fonts/normal_font = SubResource( 8 )
 bbcode_enabled = true
 __meta__ = {
@@ -135,19 +138,20 @@ __meta__ = {
 }
 
 [node name="ScoreRect" type="TextureRect" parent="Control"]
-anchor_left = 0.687
-anchor_top = 0.822
-anchor_right = 0.763
-anchor_bottom = 0.956
-margin_left = 0.639954
-margin_top = 0.159973
-margin_right = -0.639954
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -426.832
+margin_top = -119.488
+margin_right = -324.468
+margin_bottom = -16.736
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Score" type="Sprite" parent="Control/ScoreRect"]
-visible = false
+position = Vector2( -6.10352e-05, 8 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 6 )
 centered = false
@@ -169,3 +173,32 @@ anims/Score_4 = SubResource( 5 )
 anims/Score_5 = SubResource( 6 )
 
 [node name="Tween" type="Tween" parent="Control"]
+
+[node name="PowerUpSlot1" parent="Control" instance=ExtResource( 3 )]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 56.0
+margin_top = -92.0
+margin_right = 78.0
+margin_bottom = -68.0
+rect_scale = Vector2( 3, 3 )
+
+[node name="PowerUpSlot2" parent="Control" instance=ExtResource( 3 )]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 134.0
+margin_top = -92.0
+margin_right = 156.0
+margin_bottom = -68.0
+rect_scale = Vector2( 3, 3 )
+slot = 2
+
+[node name="PowerUpSlot3" parent="Control" instance=ExtResource( 3 )]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 212.0
+margin_top = -92.0
+margin_right = 234.0
+margin_bottom = -68.0
+rect_scale = Vector2( 3, 3 )
+slot = 3
