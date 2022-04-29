@@ -7,15 +7,16 @@ onready var map = get_parent()
 
 
 func _process(_delta):
-	if player_marker.position.x < 2 or map.texture.get_width() - 2 < player_marker.position.x:
+	if player_marker.position.x < 2 or map.texture.get_width() - 2 < player_marker.position.x \
+	or player_marker.position.y < 2 or map.texture.get_height() - 2 < player_marker.position.y:
 		player_marker.visible = false
 	else:
 		player_marker.visible = true
 	#Obter posição do player no minimapa e atualizar marcador
-	player_marker.position = player.position/16 + Vector2(2,0)
+	player_marker.position = player.global_position/16 + Vector2(2,0)
 	
 	#Rotacionar marcador
-	match player.direction:
+	match player.target_direction:
 		Vector2(0,-1):
 			player_marker.rotation_degrees = -90
 		Vector2(0,1):

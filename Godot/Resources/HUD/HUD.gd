@@ -20,11 +20,6 @@ func _ready():
 	bottom_elements = [score, minimap, power_up3, power_up2, power_up1]
 	for elem in bottom_elements:
 		elem.rect_position.y += 400
-	#minimap.rect_position.y += 500
-	#score.position.y += 300
-	#power_up1.rect_position.y += 200
-	#power_up2.rect_position.y += 200
-	#power_up3.rect_position.y += 200
 
 # Mostra o nome da fase
 func display_name():

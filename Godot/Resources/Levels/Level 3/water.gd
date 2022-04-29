@@ -89,12 +89,11 @@ func transition(mode, time, delay):
 	# Interpolação da velocidade do jogador
 	tween.interpolate_property(player, "speed", player.speed, \
 	player.speed - mode*40, time, Tween.EASE_IN, delay)
-	
+
 	tween.start()
 
 # Jogador entrando na água
 func _on_EnterArea2D_body_entered(_body):
-	in_water = true
 	# O delay necessário na interpolação varia de acordo com a direção
 	var delay
 	match player.target_direction:
@@ -104,9 +103,12 @@ func _on_EnterArea2D_body_entered(_body):
 			delay = 0.33
 		_:
 			delay = 0.12
-	transition(1, 0.3, delay)
+	var raycast_endpoint = player_raycast.global_position + player_raycast.get_cast_to()
+	if space_state.intersect_point(raycast_endpoint, 1, [], 2, false, true):
+		in_water = true
+		transition(1, 0.3, delay)
 
 # Jogador saiu completamente da água
-func _on_Area2D_body_exited(body):
+func _on_Area2D_body_exited(_body):
 	exiting = false
 	in_water = false

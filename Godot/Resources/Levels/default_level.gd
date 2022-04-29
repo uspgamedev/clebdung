@@ -26,7 +26,7 @@ func init(init_time, init_direction):
 	fade.fade_in()
 	# Bloqueia temporariamente input do jogador e simula caminhar
 	# à uma direção determinada
-	player.target_position = player.global_position + Vector2(32,0)
+	player.target_position = player.global_position + 32*init_direction
 	player.direction = init_direction
 	yield(get_tree().create_timer(init_time), "timeout")
 	# Bloqueia fantasmas

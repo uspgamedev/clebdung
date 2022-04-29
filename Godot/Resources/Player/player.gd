@@ -4,7 +4,6 @@ export(int) var speed = 85
 var tile_size = 32
 
 var direction = Vector2()
-var last_position = Vector2()
 var target_position = Vector2()
 var old_direction = Vector2()
 var target_direction = Vector2()
@@ -13,7 +12,6 @@ var input_enabled = false
 
 func _ready():
 	#Inicializar variáveis
-	last_position = position
 	target_position = position
 
 
@@ -42,6 +40,7 @@ func _physics_process(delta):
 		# atualiza a posição alvo de acordo com a direção
 		target_position += direction * tile_size
 	
+	
 	# Calcula a direção que o jogador deve seguir para alcançar o alvo
 	target_direction = position.direction_to(target_position).round()
 	# Caso a direção ao alvo seja não nula, lançar raycast
@@ -65,7 +64,7 @@ func set_direction():
 	if input_enabled:
 		direction.x = int(RIGHT) - int(LEFT)
 		direction.y = int(DOWN) - int(UP)
-	
+		
 	# Impedir movimento diagonal
 	if direction.x != 0 && direction.y != 0:
 		direction = Vector2(0,0)
@@ -75,7 +74,6 @@ func animation():
 	var anim_direc
 	var anim_mode
 	var animation
-	
 	match $PlayerRayCast.cast_to.normalized():
 		Vector2(0,-1):
 			anim_direc = "Up"

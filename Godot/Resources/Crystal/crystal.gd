@@ -1,36 +1,16 @@
 extends Sprite
 
 onready var root_node = find_parent("Level*")
-onready var id = root_node.get_node("CrystalsID")
 onready var score = root_node.get_node("HUD/Control/ScoreRect/Score")
 onready var player = root_node.get_node("YSort/Player")
 onready var animplayer = get_node("AnimationPlayer")
 export(Vector2) var Offset
-export(Vector2) var MapSize
-export(bool) var Fixed
-export(int) var CristalID
-var x_rand = Vector2()
-var y_rand = Vector2()
 var d
 
 var rng = RandomNumberGenerator.new()
 
 func _ready():
 	animplayer.stop()
-	# Se o cristal não é um cristal fixo, gerar posição aleatória
-	if not Fixed:
-		generate()
-		# Se o tile escolhido não for andável (chão), escolha outro:
-		while id.get_cell(x_rand,y_rand) != CristalID - 1: 
-			generate()
-		# Posição final do cristal:
-		global_position = id.map_to_world(Vector2(x_rand,y_rand)) + Offset
-
-func generate():
-	# Escolhe aleatoriamente um tile aleatório dentro dos limites predefinidos:
-	rng.randomize()
-	x_rand = int(rng.randi_range(0, MapSize.x))
-	y_rand = int(rng.randf_range(0, MapSize.y))
 
 func _on_Area2D_body_entered(body):
 	# Caso o jogador "colida" com o cristal, apague-o do mapa e incremente o score:
