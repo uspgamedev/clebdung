@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Assets/Crystal/crystal_spritesheet.png" type="Texture" id=1]
 [ext_resource path="res://Resources/Crystal/crystal.gd" type="Script" id=2]
@@ -6,6 +6,15 @@
 [ext_resource path="res://Assets/Crystal/crystal_light3.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Crystal/crystal_light2.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Crystal/crystal_light4.png" type="Texture" id=6]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 7.5, 1.09375 )
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 140.0
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 90.0
 
 [sub_resource type="Animation" id=1]
 resource_name = "Crystal"
@@ -53,31 +62,45 @@ tracks/1/keys = {
 "values": [ 0.0, 1.5 ]
 }
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 7.5, 1.09375 )
-
 [node name="Crystal" type="Sprite"]
 texture = ExtResource( 1 )
 hframes = 34
-frame = 28
 script = ExtResource( 2 )
+
+[node name="CollectionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectionArea"]
+position = Vector2( 2.5, -7.5 )
+scale = Vector2( 0.999999, 0.999999 )
+shape = SubResource( 2 )
+
+[node name="CloseArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CloseArea"]
+shape = SubResource( 4 )
+
+[node name="TooCloseArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TooCloseArea"]
+shape = SubResource( 5 )
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 0, -4 )
+texture = ExtResource( 3 )
+energy = 0.0495868
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Crystal = SubResource( 1 )
 anims/Crystal_Light = SubResource( 3 )
 
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 2.5, -7.5 )
-scale = Vector2( 0.999999, 0.999999 )
-shape = SubResource( 2 )
-
-[node name="Light2D" type="Light2D" parent="."]
-position = Vector2( 0, -4 )
-texture = ExtResource( 3 )
-energy = 0.0
-
-[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="CollectionArea" to="." method="_on_CollectionArea_body_entered"]
+[connection signal="body_entered" from="CloseArea" to="." method="_on_CloseArea_body_entered"]
+[connection signal="body_exited" from="CloseArea" to="." method="_on_CloseArea_body_exited"]
+[connection signal="body_entered" from="TooCloseArea" to="." method="_on_TooCloseArea_body_entered"]
+[connection signal="body_exited" from="TooCloseArea" to="." method="_on_TooCloseArea_body_exited"]

@@ -28,6 +28,7 @@ config/icon="res://icon.png"
 
 GlobalSettings="*res://Resources/Settings Menu/global_settings.gd"
 Save="*res://Resources/Settings Menu/save.gd"
+Globals="*res://Resources/Autoloads/Globals.gd"
 
 [display]
 

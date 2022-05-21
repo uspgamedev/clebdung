@@ -1,11 +1,13 @@
 extends StaticBody2D
 
-onready var animPlayer = get_node("AnimationPlayer")
+onready var level : LevelRoot = Globals.current_level
+onready var anim_player := get_node("AnimationPlayer")
+
 
 func _on_WinArea2D_body_entered(_body):
-	get_tree().get_root().get_node("Level1").win()
+	level.win()
 
 
 func _on_AnimArea2D_body_entered(_body):
-	if animPlayer.get_current_animation() == "Unblocked":
-		animPlayer.play("WinAnimation")
+	if anim_player.get_current_animation() == "Unblocked":
+		anim_player.play("WinAnimation")

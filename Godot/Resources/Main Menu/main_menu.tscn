@@ -66,11 +66,11 @@ next_level_path = "res://Resources/Levels/Level 1/level1.tscn"
 layer = -1
 
 [node name="Torch" type="TextureRect" parent="CanvasLayer"]
-anchor_right = 1.0
-margin_left = 280.0
-margin_top = 20.0
-margin_right = -910.0
-margin_bottom = 110.0
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -339.0
+margin_right = -163.0
+margin_bottom = 90.0
 rect_scale = Vector2( 8, 8 )
 texture = ExtResource( 5 )
 __meta__ = {
@@ -78,8 +78,9 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="VBoxContainer" parent="."]
-anchor_right = 1.0
-margin_left = 550.0
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -76.0
 margin_top = 540.0
 margin_right = -577.0
 margin_bottom = 688.0
@@ -128,8 +129,9 @@ __meta__ = {
 }
 
 [node name="Title" type="Label" parent="."]
-anchor_right = 1.0
-margin_left = 150.0
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -467.0
 margin_top = 50.0
 margin_right = -145.0
 margin_bottom = 150.0
@@ -141,18 +143,17 @@ __meta__ = {
 }
 
 [node name="LightControl" type="Control" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 620.0
-margin_top = 330.0
-margin_right = -620.0
-margin_bottom = -350.0
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -20.0
+margin_right = 20.0
+margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Light2D" type="Light2D" parent="LightControl"]
-position = Vector2( 20, 20 )
+position = Vector2( 28, 360 )
 scale = Vector2( 1.2, 0.6 )
 texture = ExtResource( 7 )
 texture_scale = 1.1
@@ -175,8 +176,6 @@ autoplay = true
 visible = false
 
 [node name="Fade" parent="." instance=ExtResource( 8 )]
-fade_in_time = 1.0
-fade_out_time = 1.0
 
 [connection signal="pressed" from="HBoxContainer/Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="HBoxContainer/Levels" to="." method="_on_Levels_pressed"]

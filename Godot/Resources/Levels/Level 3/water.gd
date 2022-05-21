@@ -1,7 +1,7 @@
 extends Polygon2D
 
 onready var root_node = find_parent("Level*")
-onready var player_mask = root_node.get_node("PlayerMask")
+onready var player_mask = root_node.get_node("YSort2/PlayerMask")
 onready var player_reflec = root_node.get_node("PlayerReflection")
 onready var player = root_node.get_node("YSort/Player")
 onready var player_raycast = player.get_node("PlayerRayCast")
@@ -93,22 +93,24 @@ func transition(mode, time, delay):
 	tween.start()
 
 # Jogador entrando na água
-func _on_EnterArea2D_body_entered(_body):
-	# O delay necessário na interpolação varia de acordo com a direção
-	var delay
-	match player.target_direction:
-		Vector2(0,1):
-			delay = 0.05
-		Vector2(0,-1):
-			delay = 0.33
-		_:
-			delay = 0.12
-	var raycast_endpoint = player_raycast.global_position + player_raycast.get_cast_to()
-	if space_state.intersect_point(raycast_endpoint, 1, [], 2, false, true):
-		in_water = true
-		transition(1, 0.3, delay)
+func _on_EnterArea2D_body_entered(body):
+	if body.get_name() == "Player":
+		# O delay necessário na interpolação varia de acordo com a direção
+		var delay
+		match player.target_direction:
+			Vector2(0,1):
+				delay = 0.05
+			Vector2(0,-1):
+				delay = 0.33
+			_:
+				delay = 0.12
+		var raycast_endpoint = player_raycast.global_position + player_raycast.get_cast_to()
+		if space_state.intersect_point(raycast_endpoint, 1, [], 2, false, true):
+			in_water = true
+			transition(1, 0.3, delay)
 
 # Jogador saiu completamente da água
-func _on_Area2D_body_exited(_body):
-	exiting = false
-	in_water = false
+func _on_Area2D_body_exited(body):
+	if body.get_name() == "Player":
+		exiting = false
+		in_water = false

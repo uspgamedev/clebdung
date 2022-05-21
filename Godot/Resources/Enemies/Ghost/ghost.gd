@@ -1,18 +1,5 @@
 extends KinematicBody2D
 
-onready var root_node = find_parent("Level*")
-onready var astar = root_node.get_node("A*")
-onready var player = root_node.get_node("YSort/Player")
-onready var animplayerL = get_node("AnimationPlayerL")
-
-onready var RC = get_node("RayCast")
-onready var RC2 = get_node("RayCast2")
-onready var RC3 = get_node("RayCast3")
-onready var RC4 = get_node("RayCast4")
-
-export(NodePath) var positionset
-export(int) var speed
-
 """
 ESTADOS:
 - Follow = Seguindo jogador incessantemente
@@ -22,21 +9,7 @@ ESTADOS:
 - Random = De 30 em 30s, escolhe uma posição aleatória entre {ran1,ran2,ran3} 
 e vai até ela (caso não esteja seguindo). Ao fim, volta a patrulhar. 
 """
-enum States { FOLLOW, DOUBT, PATROL, RANDOM}
-
-var state = States.PATROL
-var last_state
-var path = []
-var tile_size = 32
-var direction = Vector2()
-var last_position = Vector2()
-var target_position = Vector2()
-var k = 0
-var rng = RandomNumberGenerator.new()
-var in_sight = false
-# Chaos: Ao coletar todos os cristais, os fantasmas entram em modo
-# "caos" e seguem o jogador até que ele escape do cenário.
-var chaos = false
+enum States { FOLLOW, DOUBT, PATROL, RANDOM }
 
 """
 TIPOS:
@@ -49,20 +22,43 @@ R4 e R5.
 enum Types { DEFAULT, RANDOM_PATROL, ONLY_PATROL }
 export(Types) var type
 
+const TILE_SIZE := 32
+export(NodePath) var positionset
+export(int) var speed
+var state = States.PATROL
+var last_state
+var path := []
+var direction := Vector2()
+var last_position := Vector2()
+var target_position := Vector2()
+var k := 0
+var rng := RandomNumberGenerator.new()
+var in_sight := false
+var chaos := false
+onready var level : LevelRoot = Globals.current_level
+onready var astar : TileMap = level.get_astar()
+onready var player : KinematicBody2D = level.get_player()
+onready var animplayerL := get_node("AnimationPlayerL")
+onready var RC := get_node("RayCast")
+onready var RC2 := get_node("RayCast2")
+onready var RC3 := get_node("RayCast3")
+onready var RC4 := get_node("RayCast4")
+
 # Variáveis dependentes do tipo de fantasma
-var posA
-var posB
-var posC
-var ran1
-var ran2
-var ran3
-var ran4
-var ran5
+var posA : Vector2
+var posB : Vector2
+var posC : Vector2
+var ran1 : Vector2
+var ran2 : Vector2
+var ran3 : Vector2
+var ran4 : Vector2
+var ran5 : Vector2
 export(int) var delayrandom
 export(int) var radius
 
 
 func _ready():
+	add_to_group("Ghosts")
 	# Corrige a cor da luz do fantasma baseado na textura
 	var texture = get_node("GhostSprite").get_texture().get_data()
 	texture.lock()
@@ -84,12 +80,12 @@ func _ready():
 			get_node("TimerRandom/Delay").start()
 			
 			# Importa posições
-			posA = get_node(str(positionset)+"/A")
-			posB = get_node(str(positionset)+"/B")
-			posC = get_node(str(positionset)+"/C")
-			ran1 = get_node(str(positionset)+"/R1")
-			ran2 = get_node(str(positionset)+"/R2")
-			ran3 = get_node(str(positionset)+"/R3")
+			posA = get_node(str(positionset)+"/A").global_position
+			posB = get_node(str(positionset)+"/B").global_position
+			posC = get_node(str(positionset)+"/C").global_position
+			ran1 = get_node(str(positionset)+"/R1").global_position
+			ran2 = get_node(str(positionset)+"/R2").global_position
+			ran3 = get_node(str(positionset)+"/R3").global_position
 
 		Types.RANDOM_PATROL:
 			# Delete o timer de RANDOM já que não será usado
@@ -105,20 +101,20 @@ func _ready():
 			get_node("Vision").add_child(collision)
 			
 			# Importa posições			
-			ran1 = get_node(str(positionset)+"/R1")
-			ran2 = get_node(str(positionset)+"/R2")
-			ran3 = get_node(str(positionset)+"/R3")
-			ran4 = get_node(str(positionset)+"/R4")
-			ran5 = get_node(str(positionset)+"/R5")
+			ran1 = get_node(str(positionset)+"/R1").global_position
+			ran2 = get_node(str(positionset)+"/R2").global_position
+			ran3 = get_node(str(positionset)+"/R3").global_position
+			ran4 = get_node(str(positionset)+"/R4").global_position
+			ran5 = get_node(str(positionset)+"/R5").global_position
 		
 		Types.ONLY_PATROL:
 			# Delete o timer de RANDOM já que não será usado
 			get_node("TimerRandom").queue_free()
 
-			# Importa posições			
-			posA = get_node(str(positionset)+"/A")
-			posB = get_node(str(positionset)+"/B")
-			posC = get_node(str(positionset)+"/C")
+			# Importa posições
+			posA = get_node(str(positionset)+"/A").global_position
+			posB = get_node(str(positionset)+"/B").global_position
+			posC = get_node(str(positionset)+"/C").global_position
 
 
 func _process(_delta):
@@ -126,14 +122,15 @@ func _process(_delta):
 	if chaos:
 		state = States.FOLLOW
 	animation()
-	
+
+
 func _physics_process(delta):
 	# Mover com base na direção a ser seguida (tile origem -> tile destino)
 	# e checar possível colisão com o jogador
 	if move_and_collide(speed * direction * delta):
 		player.die()
 	# Atualizar a posição para o destino, caso se distancie "X" do tile origem
-	if position.distance_to(last_position) >= tile_size - speed * delta:
+	if position.distance_to(last_position) >= TILE_SIZE - speed * delta:
 		position = target_position
 	# Caso chegue ao tile destino, atualizar a direção e obter o próximo tile destino
 	if position == target_position:
@@ -142,7 +139,7 @@ func _physics_process(delta):
 		# Calcula a direção do próximo movimento
 		set_direction()
 		last_position = position
-		target_position = (position + (direction * tile_size)).round()
+		target_position = (position + (direction * TILE_SIZE)).round()
 		
 	# Se o jogador estiver dentro da área 2D
 	if in_sight:
@@ -188,27 +185,27 @@ func action():
 					# Se não estava em patrulha antes, calcular qual o ponto mais perto (A, B ou C) e
 					# selecioná-lo como início do loop.
 					if last_state != States.PATROL:
-						var A = global_position.distance_to(posA.global_position)
-						var B = global_position.distance_to(posB.global_position)
-						var C = global_position.distance_to(posC.global_position)
+						var A = global_position.distance_to(posA)
+						var B = global_position.distance_to(posB)
+						var C = global_position.distance_to(posC)
 						var dest = min(min(A,B),C)
 						match dest:
 							A:
-								_update_navigation_path(global_position, posA.global_position)
+								_update_navigation_path(global_position, posA)
 							B:
-								_update_navigation_path(global_position, posB.global_position)
+								_update_navigation_path(global_position, posB)
 							C:
-								_update_navigation_path(global_position, posC.global_position)
+								_update_navigation_path(global_position, posC)
 						last_state = States.PATROL
 					# Caso tenha alcançado o ponto A, ir ao ponto B
-					elif global_position == posA.global_position:
-						_update_navigation_path(global_position, posB.global_position)
+					elif global_position == posA:
+						_update_navigation_path(global_position, posB)
 					# Caso tenha alcançado o ponto B, ir ao ponto C
-					elif global_position == posB.global_position:
-						_update_navigation_path(global_position, posC.global_position)
+					elif global_position == posB:
+						_update_navigation_path(global_position, posC)
 					# Caso tenha alcançado o ponto C, ir ao ponto A
-					elif global_position == posC.global_position:
-						_update_navigation_path(global_position, posA.global_position)
+					elif global_position == posC:
+						_update_navigation_path(global_position, posA)
 					return
 
 				Types.RANDOM_PATROL:
@@ -220,15 +217,15 @@ func action():
 						var p = rng.randi_range(1, 5)
 						match p:
 							1:
-								_update_navigation_path(global_position, (ran1.global_position))
+								_update_navigation_path(global_position, (ran1))
 							2:
-								_update_navigation_path(global_position, (ran2.global_position))
+								_update_navigation_path(global_position, (ran2))
 							3:
-								_update_navigation_path(global_position, (ran3.global_position))
+								_update_navigation_path(global_position, (ran3))
 							4:
-								_update_navigation_path(global_position, (ran4.global_position))
+								_update_navigation_path(global_position, (ran4))
 							5:
-								_update_navigation_path(global_position, (ran5.global_position))
+								_update_navigation_path(global_position, (ran5))
 						last_state = States.PATROL
 					return
 			
@@ -239,11 +236,11 @@ func action():
 				var p = rng.randi_range(1, 3)
 				match p:
 					1:
-						_update_navigation_path(global_position, (ran1.global_position))
+						_update_navigation_path(global_position, (ran1))
 					2:
-						_update_navigation_path(global_position, (ran2.global_position))
+						_update_navigation_path(global_position, (ran2))
 					3:
-						_update_navigation_path(global_position, (ran3.global_position))
+						_update_navigation_path(global_position, (ran3))
 				last_state = States.RANDOM
 				return
 			# Caso tenha chegado ao destino aleatório, retornar à patrulha
@@ -251,8 +248,8 @@ func action():
 				last_state = state
 				state = States.PATROL
 			return
-	
-			
+
+
 func set_direction():
 	# Se ainda existir caminho, calcular a direção do próximo ponto
 	# e excluir esse ponto do caminho.
@@ -260,6 +257,7 @@ func set_direction():
 		direction = Vector2(path[0] - global_position).normalized()
 		path.remove(0)
 		
+
 
 func _update_navigation_path(start_position, end_position):
 	# Retorna um PoolVector2Array de pontos que te levam de start_position 
@@ -273,7 +271,6 @@ func _update_navigation_path(start_position, end_position):
 
 func animation():
 	# ANIMAÇÃO DO FANTASMA
-
 	# Animação movimento
 	var anim_name
 	# Seleciona animação correta com base na direção
@@ -348,7 +345,7 @@ func _on_TimerRandom_timeout():
 	last_state = state
 	state = States.RANDOM
 
-	
+
 func _on_Delay_timeout():
 	# Ao fim do delay, iniciar timer de RANDOM e entrar no próprio estado RANDOM
 	get_node("TimerRandom").start()

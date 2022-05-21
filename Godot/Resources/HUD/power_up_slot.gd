@@ -1,21 +1,21 @@
 extends TextureRect
 
-export(int) var slot = 1
-onready var root_node = find_parent("Level*")
-onready var slot_node = root_node.get_node("YSort/Player/PowerUpManager/PowerUpSlot" + str(slot))
+onready var slot_number : String = get_name().trim_prefix("PowerUpSlot")
+
 
 func _ready():
-	slot_node.connect("used_slot", self, "useSlot")
-	slot_node.connect("setted_slot", self, "setSlot")
 	set_key()
 
-func useSlot():
+
+func use_slot():
 	$PowerUp.texture = null
-	
-func setSlot(id):
-	$PowerUp.texture = load("res://Assets/HUD/PowerUps/" + id + ".png")
+
+
+func set_slot(id):
+	$PowerUp.texture = load("res://Assets/HUD/PowerUps/power_up" + id + ".png")
+
 
 func set_key():
-	for action in InputMap.get_action_list("power_up" + str(slot)):
+	for action in InputMap.get_action_list("power_up" + slot_number):
 		if action is InputEventKey:
 			$Key.text = OS.get_scancode_string(action.scancode)

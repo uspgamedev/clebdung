@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://Assets/Levels/Level 2/exit1_light.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Levels/Level 2/exit2.png" type="Texture" id=2]
@@ -6,7 +6,7 @@
 [ext_resource path="res://Resources/Levels/Level 2/tilemap_level2.tres" type="TileSet" id=5]
 [ext_resource path="res://Resources/Others/astar.tres" type="TileSet" id=6]
 [ext_resource path="res://Assets/Levels/Level 2/trap_base.png" type="Texture" id=7]
-[ext_resource path="res://Resources/HUD/HUD.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Resources/HUD/hud.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Resources/Others/astar.gd" type="Script" id=9]
 [ext_resource path="res://Resources/Crystal/crystals_custom_spawner.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Resources/Enemies/Ghost/ghost.tscn" type="PackedScene" id=11]
@@ -17,7 +17,6 @@
 [ext_resource path="res://Assets/Levels/Level 2/exit3.png" type="Texture" id=16]
 [ext_resource path="res://Resources/Others/fade.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Assets/Levels/Level 2/entry_spritesheet.png" type="Texture" id=18]
-[ext_resource path="res://Resources/Levels/Level 2/minimap_level2.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Assets/Levels/Level 2/exit1.png" type="Texture" id=20]
 [ext_resource path="res://Resources/Levels/Level 2/composition.tres" type="TileSet" id=21]
 [ext_resource path="res://Resources/Others/spawner.tscn" type="PackedScene" id=22]
@@ -286,6 +285,9 @@ tracks/5/keys = {
 [node name="Level2" type="Node2D"]
 script = ExtResource( 12 )
 next_scene_path = "res://Resources/Levels/Level 3/level3.tscn"
+init_direction = Vector2( 1, 0 )
+init_time = 2.8
+finish_direction = Vector2( 0, 1 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )
@@ -353,7 +355,6 @@ parameters = {
 [node name="Traps" type="Node2D" parent="."]
 
 [node name="Guide" parent="." instance=ExtResource( 13 )]
-exit_path = NodePath("../YSort/Exit/Position2D")
 
 [node name="Entry" type="StaticBody2D" parent="."]
 
@@ -448,15 +449,15 @@ anims/WinAnimation = SubResource( 14 )
 next/WinAnimation = "Unblocked"
 blend_times = [ "Blocked", "Unblocked", 0.5, "Unblocked", "WinAnimation", 0.5, "WinAnimation", "Unblocked", 0.5 ]
 
-[node name="Position2D" type="Position2D" parent="YSort/Exit"]
-position = Vector2( 0, -56 )
+[node name="ExitPosition2D" type="Position2D" parent="YSort/Exit"]
+position = Vector2( 0, -64 )
 
 [node name="GhostOP1" parent="YSort" groups=["Ghosts"] instance=ExtResource( 11 )]
 modulate = Color( 1, 0.517647, 0.517647, 1 )
 position = Vector2( 464, 560 )
+type = 2
 positionset = NodePath("../../Positions/OP1")
 speed = 65
-type = 2
 
 [node name="GhostSprite" parent="YSort/GhostOP1" index="0"]
 texture = ExtResource( 14 )
@@ -470,9 +471,9 @@ modulate = Color( 1, 0.513726, 0, 0.117647 )
 [node name="GhostOP2" parent="YSort" groups=["Ghosts"] instance=ExtResource( 11 )]
 modulate = Color( 1, 0.698039, 0.368627, 1 )
 position = Vector2( 592, 528 )
+type = 2
 positionset = NodePath("../../Positions/OP2")
 speed = 65
-type = 2
 
 [node name="GhostSprite" parent="YSort/GhostOP2" index="0"]
 texture = ExtResource( 14 )
@@ -486,18 +487,18 @@ modulate = Color( 1, 0.513726, 0, 0.117647 )
 [node name="GhostOP3" parent="YSort" groups=["Ghosts"] instance=ExtResource( 11 )]
 modulate = Color( 0.933333, 1, 0.819608, 1 )
 position = Vector2( 464, 464 )
+type = 2
 positionset = NodePath("../../Positions/OP3")
 speed = 63
-type = 2
 
 [node name="GhostSprite" parent="YSort/GhostOP3" index="0"]
 texture = ExtResource( 14 )
 
 [node name="GhostRP" parent="YSort" groups=["Ghosts"] instance=ExtResource( 11 )]
 position = Vector2( 592, 592 )
+type = 1
 positionset = NodePath("../../Positions/RP")
 speed = 68
-type = 1
 radius = 140
 
 [node name="GhostSprite" parent="YSort/GhostRP" index="0"]
@@ -571,12 +572,11 @@ position = Vector2( 624, 592 )
 color = Color( 0, 0, 0, 1 )
 
 [node name="HUD" parent="." instance=ExtResource( 8 )]
-minimap_scene = ExtResource( 19 )
 scene_name = "Level 2"
 
 [node name="Fade" parent="." instance=ExtResource( 17 )]
 fade_in_time = 1.0
-fade_out_time = 1.0
+fade_out_time = 0.5
 
 [node name="LevelMusic" parent="." instance=ExtResource( 26 )]
 intro_music = ExtResource( 23 )
@@ -588,7 +588,6 @@ end_music = ExtResource( 24 )
 [connection signal="body_entered" from="YSort/Exit/AnimArea2D" to="YSort/Exit" method="_on_AnimArea2D_body_entered"]
 [connection signal="body_exited" from="YSort/Exit/AnimArea2D" to="YSort/Exit" method="_on_AnimArea2D_body_exited"]
 [connection signal="animation_changed" from="YSort/Exit/AnimationPlayer" to="YSort/Exit" method="_on_AnimationPlayer_animation_changed"]
-[connection signal="animation_finished" from="YSort/Exit/AnimationPlayer" to="YSort/Exit" method="_on_AnimationPlayer_animation_finished"]
 
 [editable path="YSort/GhostOP1"]
 [editable path="YSort/GhostOP2"]
