@@ -17,9 +17,6 @@ func _on_CollectionArea_body_entered(_body):
 func _on_CloseArea_body_entered(_body):
 	_play_crystal_light_anim()
 
-# Se o jogador se distanciar completamente do cristal
-func _on_CloseArea_body_exited(_body):
-	_stop_anim()
 
 # Se a distância até o jogador for MUITO pequena
 func _on_TooCloseArea_body_entered(_body):
@@ -30,24 +27,32 @@ func _on_TooCloseArea_body_exited(_body):
 	_play_crystal_light_anim()
 
 
+# Se o jogador se distanciar completamente do cristal
+func _on_CloseArea_body_exited(_body):
+	_stop_anim()
+
+
 func _play_crystal_anim():
-	if animplayer.is_playing() and animplayer.current_animation != "Crystal":
-		# Espera terminar animação anterior, caso houver
-		yield(animplayer, "animation_finished")
-	# Animação padrão
+	# Espera terminar animação anterior, caso houver
+	if animplayer.is_playing():
+		yield(animplayer, "animation_changed")
+	# Limpa a fila de animações e toca a animação padrão
+	animplayer.clear_queue()
 	animplayer.play("Crystal")
 
 
 func _play_crystal_light_anim():
-	if animplayer.is_playing() and animplayer.current_animation != "Crystal_Light":
-		# Espera terminar animação anterior, caso houver
-		yield(animplayer, "animation_finished")
-	# Animação de dica
+	# Espera terminar animação anterior, caso houver
+	if animplayer.is_playing():
+		yield(animplayer, "animation_changed")
+	# Limpa a fila de animações e toca a animação de dica
+	animplayer.clear_queue()
 	animplayer.play("Crystal_Light")
 
 
 func _stop_anim():
-		# Parar animações
+	# Espera terminar animação anterior, caso houver
 	if animplayer.is_playing():
-		yield(animplayer, "animation_finished")
-	animplayer.stop()
+		yield(animplayer, "animation_changed")
+	# Limpa a fila de animações
+	animplayer.clear_queue()

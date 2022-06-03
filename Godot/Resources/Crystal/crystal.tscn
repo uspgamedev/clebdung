@@ -93,11 +93,13 @@ shape = SubResource( 5 )
 [node name="Light2D" type="Light2D" parent="."]
 position = Vector2( 0, -4 )
 texture = ExtResource( 3 )
-energy = 0.0495868
+energy = 0.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Crystal = SubResource( 1 )
 anims/Crystal_Light = SubResource( 3 )
+next/Crystal = "Crystal"
+next/Crystal_Light = "Crystal_Light"
 
 [connection signal="body_entered" from="CollectionArea" to="." method="_on_CollectionArea_body_entered"]
 [connection signal="body_entered" from="CloseArea" to="." method="_on_CloseArea_body_entered"]
