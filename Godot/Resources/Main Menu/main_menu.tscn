@@ -70,20 +70,15 @@ margin_right = -163.0
 margin_bottom = 90.0
 rect_scale = Vector2( 8, 8 )
 texture = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HBoxContainer" type="VBoxContainer" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -76.0
-margin_top = 540.0
-margin_right = -577.0
-margin_bottom = 688.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+anchor_bottom = 1.0
+margin_left = -72.0
+margin_top = 520.0
+margin_right = 81.0
+margin_bottom = -44.0
 
 [node name="Play" type="Button" parent="HBoxContainer"]
 margin_right = 153.0
@@ -135,9 +130,6 @@ margin_bottom = 150.0
 theme = SubResource( 5 )
 text = "CLEBER'S DUNGEON"
 align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LightControl" type="Control" parent="."]
 anchor_left = 0.5
@@ -145,9 +137,6 @@ anchor_right = 0.5
 margin_left = -20.0
 margin_right = 20.0
 margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Light2D" type="Light2D" parent="LightControl"]
 position = Vector2( 28, 360 )

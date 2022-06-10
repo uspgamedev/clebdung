@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Resources/Player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Resources/Levels/Level 3/tilemap_level3.tres" type="TileSet" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://Resources/Levels/Level 3/water_terrain.tres" type="TileSet" id=5]
 [ext_resource path="res://Assets/Player/player_spritesheet.png" type="Texture" id=6]
 [ext_resource path="res://Resources/Levels/Level 3/player_mask.gd" type="Script" id=7]
-[ext_resource path="res://Resources/Levels/Level 3/player_reflection.gd" type="Script" id=8]
 [ext_resource path="res://Assets/Levels/Level 3/player_mask.png" type="Texture" id=9]
 [ext_resource path="res://Resources/PowerUps/Collectables/collectable_power_up.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Resources/Levels/Level 3/power_up_mask.gd" type="Script" id=11]
@@ -179,7 +178,9 @@ flip_v = true
 hframes = 5
 vframes = 8
 frame = 35
-script = ExtResource( 8 )
+script = ExtResource( 7 )
+
+[node name="Tween" type="Tween" parent="PlayerReflection"]
 
 [node name="WaterPolygons" type="Node2D" parent="."]
 
@@ -363,11 +364,17 @@ __meta__ = {
 
 [node name="PowerUpMask2" type="Sprite" parent="YSort2/PlayerMask"]
 use_parent_material = true
+hframes = 5
+vframes = 8
 script = ExtResource( 11 )
 
 [node name="PowerUpMask3" type="Sprite" parent="YSort2/PlayerMask"]
 use_parent_material = true
+hframes = 5
+vframes = 8
 script = ExtResource( 11 )
+
+[node name="Tween" type="Tween" parent="YSort2/PlayerMask"]
 
 [node name="GhostOP1" parent="YSort2" instance=ExtResource( 17 )]
 position = Vector2( 528, 496 )

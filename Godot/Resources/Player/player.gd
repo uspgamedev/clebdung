@@ -111,11 +111,13 @@ trans_type : int = 0, ease_type : int = 2):
 		pass
 	# Interpolação da velocidade do jogador
 	$Tween.interpolate_property(self, "speed", speed, \
-	speed + speed_modifier, time, trans_type, ease_type, delay)
+	speed * speed_modifier, time, trans_type, ease_type, delay)
 	$Tween.start()
+	yield($Tween, "tween_completed")
+	return
 
 # Desativa o input do jogador temporariamente
-func lock_player(time):
+func lock_player(time : float):
 	input_enabled = false
 	direction = Vector2(0,0)
 	yield(get_tree().create_timer(time), "timeout")

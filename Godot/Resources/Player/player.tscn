@@ -6,7 +6,7 @@
 [ext_resource path="res://Resources/PowerUps/power_up_manager.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 7.92188 )
+extents = Vector2( 8, 7 )
 
 [sub_resource type="Animation" id=3]
 length = 6.5
@@ -423,7 +423,7 @@ enabled = true
 cast_to = Vector2( 16, 0 )
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -7.92188 )
+position = Vector2( 0, -7 )
 shape = SubResource( 1 )
 
 [node name="PowerUpManager" parent="." instance=ExtResource( 4 )]

@@ -63,23 +63,18 @@ func transition(mode, time, delay):
 			y_final = -16
 	
 	# Interpolação shader do sprite de máscara
-	$Tween.interpolate_property(player_mask.get_material(), \
-	"shader_param/mask", player_mask.get_material().get_shader_param("mask"), \
-	mask_final, time, 0, Tween.EASE_IN, delay)
+	player_mask.interpolate_shader(mask_final, time, delay)
 	
 	# Interpolação shader do sprite de reflexão
-	var refdelay = delay
-	$Tween.interpolate_property(player_reflec.get_material(), \
-	"shader_param/mask", player_reflec.get_material().get_shader_param("mask"), \
-	reflection_final, time*0.5, 0, Tween.EASE_IN, refdelay)
+	player_reflec.interpolate_shader(reflection_final, time*0.5, delay)
 	
-	# Interpolação da posição y do sprite do jogador
+	# Interpolação da posição no eixo y do sprite do jogador
 	var playerspr_y = player.get_sprite().position.y
 	$Tween.interpolate_property(player.get_sprite(), "position:y", \
 	playerspr_y, y_final, time, Tween.EASE_IN, delay)
 	
 	# Interpolação da velocidade do jogador
-	player.interpolate_speed(time, -mode*40, delay, 0, 0)
+	player.interpolate_speed(time, 0.5 if mode == 1 else 2, delay, 0, 0)
 	
 	$Tween.start()
 
@@ -92,7 +87,7 @@ func _on_EnterArea2D_body_entered(body):
 			Vector2(0,1):
 				delay = 0.05
 			Vector2(0,-1):
-				delay = 0.33
+				delay = 0.2
 			_:
 				delay = 0.12
 		var raycast_endpoint = player_raycast.global_position + player_raycast.get_cast_to()
