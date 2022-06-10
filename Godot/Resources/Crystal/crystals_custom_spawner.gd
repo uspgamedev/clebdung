@@ -7,6 +7,7 @@ func _enter_tree():
 	spawner_scene = load("res://Resources/Others/spawner.tscn")
 	for i in range(0,5):
 		_create_crystal_spawner(i)
+	queue_free()
 
 
 func _create_crystal_spawner(i):

@@ -18,11 +18,12 @@ void fragment() {
 	wave_uv_offset.x += sin(TIME * time_factor.x + (tiled_uvs.x + tiled_uvs.y) * offset_factor.x);
 	wave_uv_offset.y += cos(TIME * time_factor.y + (tiled_uvs.x + tiled_uvs.y) * offset_factor.y);
 	
-	vec4 color1 = texture(SCREEN_TEXTURE, SCREEN_UV + wave_uv_offset/600.0 , 0.0);
 	
-	vec4 color2 = texture(TEXTURE, tiled_uvs + wave_uv_offset * amplitude);
+	vec4 color1 = texture(TEXTURE, tiled_uvs + wave_uv_offset * amplitude);
+	//vec4 color2 = texture(SCREEN_TEXTURE, SCREEN_UV + wave_uv_offset/600.0 , 0.0);
 	
-	COLOR = mix(color1, color2, 0.25);
+	COLOR = color1;
+	//COLOR = mix(color1, color2, 0.8);
 }"
 
 [resource]

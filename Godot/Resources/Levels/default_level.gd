@@ -38,8 +38,8 @@ func get_power_up_manager():
 
 # Retorna a posição da saída
 func get_exit_position():
-	#return Vector2()
-	return $YSort/Exit/ExitPosition2D.global_position
+	return Vector2()
+	#return $YSort/Exit/ExitPosition2D.global_position
 
 # Retorna o id numérico do level
 func get_level_id():

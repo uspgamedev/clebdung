@@ -105,6 +105,22 @@ func die():
 	#yield(get_tree().create_timer(.5), "timeout")
 	#$PlayerCollision.disabled = false
 
+func interpolate_speed(time : float, speed_modifier : float, delay : float, \
+trans_type : int = 0, ease_type : int = 2):
+	if $Tween.is_active():
+		pass
+	# Interpolação da velocidade do jogador
+	$Tween.interpolate_property(self, "speed", speed, \
+	speed + speed_modifier, time, trans_type, ease_type, delay)
+	$Tween.start()
+
+# Desativa o input do jogador temporariamente
+func lock_player(time):
+	input_enabled = false
+	direction = Vector2(0,0)
+	yield(get_tree().create_timer(time), "timeout")
+	input_enabled = true
+
 
 func get_direction():
 	return target_direction
@@ -112,3 +128,7 @@ func get_direction():
 
 func get_sprite():
 	return $PlayerSprite
+
+
+func get_raycast():
+	return $PlayerRayCast

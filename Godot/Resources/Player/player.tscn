@@ -395,7 +395,6 @@ texture = ExtResource( 1 )
 texture_scale = 0.4
 color = Color( 0.733333, 0.54902, 0.309804, 1 )
 energy = 1.4
-mode = 2
 range_item_cull_mask = 3
 shadow_enabled = true
 shadow_item_cull_mask = 3
@@ -407,13 +406,12 @@ texture = ExtResource( 1 )
 texture_scale = 0.4
 color = Color( 0.733333, 0.54902, 0.309804, 1 )
 energy = 1.4
-mode = 2
 range_item_cull_mask = 6
 shadow_item_cull_mask = 0
 
 [node name="PlayerLight2" type="Light2D" parent="."]
 modulate = Color( 1, 1, 1, 0 )
-position = Vector2( 1, -8 )
+position = Vector2( 0, -8 )
 texture = ExtResource( 1 )
 texture_scale = 0.4
 color = Color( 0.733333, 0.54902, 0.309804, 1 )
@@ -448,3 +446,5 @@ anims/Right_Idle = SubResource( 8 )
 anims/Right_Walk = SubResource( 9 )
 anims/Up_Idle = SubResource( 10 )
 anims/Up_Walk = SubResource( 11 )
+
+[node name="Tween" type="Tween" parent="."]

@@ -57,9 +57,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = SubResource( 3 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 next_level_path = "res://Resources/Levels/Level 1/level1.tscn"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

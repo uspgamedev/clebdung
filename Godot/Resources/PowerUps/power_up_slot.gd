@@ -25,3 +25,6 @@ func set_slot(id):
 
 func is_empty():
 	return power_up_node == null
+
+func get_sprite():
+	return get_children()[0].get_node("Sprite")

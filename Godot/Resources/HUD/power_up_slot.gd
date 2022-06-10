@@ -12,7 +12,7 @@ func use_slot():
 
 
 func set_slot(id):
-	$PowerUp.texture = load("res://Assets/HUD/PowerUps/power_up" + id + ".png")
+	$PowerUp.texture = load("res://Assets/HUD/PowerUps/" + id + ".png")
 
 
 func set_key():

@@ -1,12 +1,11 @@
 extends Polygon2D
 
-onready var root_node = find_parent("Level*")
-onready var player_mask = root_node.get_node("YSort2/PlayerMask")
-onready var player_reflec = root_node.get_node("PlayerReflection")
-onready var player = root_node.get_node("YSort/Player")
-onready var player_raycast = player.get_node("PlayerRayCast")
-onready var tween = get_node("Tween")
-var space_state
+onready var level : LevelRoot = Globals.current_level
+onready var player : KinematicBody2D = level.get_player()
+onready var player_raycast : RayCast2D = player.get_raycast()
+onready var player_mask : Sprite = level.get_player_mask()
+onready var player_reflec : Sprite = level.get_player_reflection()
+var space_state : Physics2DDirectSpaceState
 var in_water = false
 var exiting = false
 
@@ -38,17 +37,11 @@ func player_exiting():
 		return true
 	return false
 
-# Desativa o input do jogador durante a transição água-terra
-func lock_player(time):
-	player.input_enabled = false
-	player.direction = Vector2(0,0)
-	yield(get_tree().create_timer(time), "timeout")
-	player.input_enabled = true
 
 # Faz a transição terra-água ou vice-versa
 func transition(mode, time, delay):
 	# Trava o jogador durante a transição
-	lock_player(time + delay)
+	player.lock_player(time + delay)
 	# Posição final da coordernada y do sprite do jogador
 	var y_final
 	# Valor final do shader do sprite de máscara
@@ -70,34 +63,32 @@ func transition(mode, time, delay):
 			y_final = -16
 	
 	# Interpolação shader do sprite de máscara
-	tween.interpolate_property(player_mask.get_material(), \
+	$Tween.interpolate_property(player_mask.get_material(), \
 	"shader_param/mask", player_mask.get_material().get_shader_param("mask"), \
 	mask_final, time, 0, Tween.EASE_IN, delay)
 	
-	
 	# Interpolação shader do sprite de reflexão
 	var refdelay = delay
-	tween.interpolate_property(player_reflec.get_material(), \
+	$Tween.interpolate_property(player_reflec.get_material(), \
 	"shader_param/mask", player_reflec.get_material().get_shader_param("mask"), \
 	reflection_final, time*0.5, 0, Tween.EASE_IN, refdelay)
 	
 	# Interpolação da posição y do sprite do jogador
-	var playerspr_y = player.get_node("PlayerSprite").position.y
-	tween.interpolate_property(player.get_node("PlayerSprite"), "position:y", \
+	var playerspr_y = player.get_sprite().position.y
+	$Tween.interpolate_property(player.get_sprite(), "position:y", \
 	playerspr_y, y_final, time, Tween.EASE_IN, delay)
 	
 	# Interpolação da velocidade do jogador
-	tween.interpolate_property(player, "speed", player.speed, \
-	player.speed - mode*40, time, Tween.EASE_IN, delay)
-
-	tween.start()
+	player.interpolate_speed(time, -mode*40, delay, 0, 0)
+	
+	$Tween.start()
 
 # Jogador entrando na água
 func _on_EnterArea2D_body_entered(body):
 	if body.get_name() == "Player":
 		# O delay necessário na interpolação varia de acordo com a direção
 		var delay
-		match player.target_direction:
+		match player.get_direction():
 			Vector2(0,1):
 				delay = 0.05
 			Vector2(0,-1):
