@@ -107,14 +107,15 @@ func die():
 
 func interpolate_speed(time : float, speed_modifier : float, delay : float, \
 trans_type : int = 0, ease_type : int = 2):
+	# Caso outra interpolação esteja em curso
 	if $Tween.is_active():
-		pass
+		$Tween.seek($Tween.tell() + $Tween.get_runtime())
+	
 	# Interpolação da velocidade do jogador
 	$Tween.interpolate_property(self, "speed", speed, \
 	speed * speed_modifier, time, trans_type, ease_type, delay)
 	$Tween.start()
 	yield($Tween, "tween_completed")
-	return
 
 # Desativa o input do jogador temporariamente
 func lock_player(time : float):
