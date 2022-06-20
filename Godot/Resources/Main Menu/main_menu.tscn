@@ -10,15 +10,15 @@
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
-[sub_resource type="DynamicFontData" id=7]
+[sub_resource type="DynamicFontData" id=2]
 font_path = "res://Assets/Others/upheavtt.ttf"
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 30
-font_data = SubResource( 7 )
+font_data = SubResource( 2 )
 
-[sub_resource type="Theme" id=3]
-default_font = SubResource( 2 )
+[sub_resource type="Theme" id=4]
+default_font = SubResource( 3 )
 Button/colors/font_color = Color( 1, 1, 1, 1 )
 Button/colors/font_color_disabled = Color( 0.607843, 0.607843, 0.607843, 0.639216 )
 Button/colors/font_color_focus = Color( 1, 1, 1, 1 )
@@ -28,14 +28,14 @@ Button/constants/hseparation = 2
 Button/fonts/font = null
 Button/styles/focus = SubResource( 1 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=5]
 size = 105
 font_data = ExtResource( 4 )
 
-[sub_resource type="Theme" id=5]
-default_font = SubResource( 4 )
+[sub_resource type="Theme" id=6]
+default_font = SubResource( 5 )
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
 length = 5.0
 loop = true
 step = 0.25
@@ -55,7 +55,7 @@ tracks/0/keys = {
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = SubResource( 3 )
+theme = SubResource( 4 )
 script = ExtResource( 1 )
 next_level_path = "res://Resources/Levels/Level 1/level1.tscn"
 
@@ -127,7 +127,7 @@ margin_left = -467.0
 margin_top = 50.0
 margin_right = -145.0
 margin_bottom = 150.0
-theme = SubResource( 5 )
+theme = SubResource( 6 )
 text = "CLEBER'S DUNGEON"
 align = 1
 
@@ -148,7 +148,7 @@ energy = 1.4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="LightControl/Light2D"]
 autoplay = "Light"
-anims/Light = SubResource( 6 )
+anims/Light = SubResource( 7 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0, 0, 0, 1 )
@@ -162,7 +162,6 @@ autoplay = true
 visible = false
 
 [node name="Fade" parent="." instance=ExtResource( 8 )]
-
 [connection signal="pressed" from="HBoxContainer/Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="HBoxContainer/Levels" to="." method="_on_Levels_pressed"]
 [connection signal="pressed" from="HBoxContainer/Settings" to="." method="_on_SETTINGS_pressed"]
