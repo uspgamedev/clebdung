@@ -6,12 +6,11 @@ onready var power_up_node : Node = null
 
 
 func use_slot():
-	var delay := 0.1
-	if !is_empty():
-		delay = power_up_node.get_duration()
-		power_up_node.use_power_up()
-		power_up_node = null
-	yield(get_tree().create_timer(delay), "timeout")
+	if is_empty():
+		yield(get_tree().create_timer(0.01), "timeout")
+		return
+	yield(power_up_node.use_power_up(), "completed")
+	power_up_node = null
 	emit_signal("used_slot")
 	return
 
@@ -25,6 +24,7 @@ func set_slot(id):
 
 func is_empty():
 	return power_up_node == null
+
 
 func get_sprite():
 	return get_children()[0].get_node("Sprite")

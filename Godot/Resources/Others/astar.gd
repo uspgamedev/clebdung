@@ -15,6 +15,7 @@ onready var astar_node = AStar.new()
 var obstacles
 onready var _half_cell_size = cell_size / 2
 
+
 func _ready():
 	# get_used_cells_by_id is a method from the TileMap node.
 	# Here the id 0 corresponds to the obstacles.
@@ -71,11 +72,14 @@ func astar_connect_walkable_cells(points_array):
 			# As we loop through all points we can set it to false.
 			astar_node.connect_points(point_index, point_relative_index, false)
 
+
 func calculate_point_index(point):
 	return point.x + map_size.x * point.y
 
+
 func is_outside_map_bounds(point):
 	return point.x < 0 or point.y < 0 or point.x >= map_size.x or point.y >= map_size.y
+
 
 func get_astar_path(world_start, world_end):
 	self.path_start_position = world_to_map(world_start)
@@ -86,6 +90,7 @@ func get_astar_path(world_start, world_end):
 		var point_world = map_to_world(Vector2(point.x, point.y)) + _half_cell_size
 		path_world.append(point_world)
 	return path_world
+
 
 func _recalculate_path():
 	var start_point_index = calculate_point_index(path_start_position)
@@ -104,6 +109,7 @@ func _set_path_start_position(value):
 	if path_end_position and path_end_position != path_start_position:
 		_recalculate_path()
 
+
 func _set_path_end_position(value):
 	if value in obstacles:
 		return
@@ -112,3 +118,23 @@ func _set_path_end_position(value):
 	path_end_position = value
 	if path_start_position != value:
 		_recalculate_path()
+
+
+func remove_walkable_cells(cells : Array, delay : float):
+	_modify_cells(cells, 1, delay)
+
+
+func insert_walkable_cells(cells : Array, delay : float):
+	_modify_cells(cells, 0, delay)
+
+
+func _modify_cells(cells : Array, type : int, delay : float):
+	if delay == 0.0:
+		for cell in cells:
+			set_cellv(cell, type)
+		_ready()
+	else:
+		for cell in cells:
+			set_cellv(cell, type)
+			_ready()
+			yield(get_tree().create_timer(delay), "timeout")

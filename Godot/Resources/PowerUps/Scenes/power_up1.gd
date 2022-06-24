@@ -12,10 +12,6 @@ func use_power_up():
 	queue_free()
 
 
-func get_duration():
-	return INTERPOLATION_DURATION
-
-
 func _process(_delta):
 	$Sprite.global_position = player_sprite.global_position
 	$Sprite.frame = player_sprite.frame

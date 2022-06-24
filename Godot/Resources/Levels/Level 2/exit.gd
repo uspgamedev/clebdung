@@ -3,6 +3,18 @@ extends Node2D
 var k := 0
 var on_stairs := false
 var on_area := false
+var remove_astar_cells := [
+	Vector2(16,18), 
+	Vector2(15,18), 
+	Vector2(17,18)
+]
+var insert_astar_cells := [
+	Vector2(15,15), 
+	Vector2(15,16), 
+	Vector2(16,15), 
+	Vector2(17,15),
+	Vector2(17,16),
+]
 onready var level : LevelRoot = Globals.current_level
 onready var astar = level.get_astar()
 onready var player = level.get_player()
@@ -16,10 +28,7 @@ func _process(_delta):
 		# O Astar é retirado "em cima da hora" e gradualmente, 
 		# para evitar bugs
 		yield(get_tree().create_timer(1.0), "timeout")
-		for x in [16,15,17]:
-			astar.set_cell(x,18,1)
-			astar._ready()
-			yield(get_tree().create_timer(0.4), "timeout")
+		astar.remove_walkable_cells(remove_astar_cells, 0.4)
 		k = 1
 	# Caso o jogador esteja andando em direção às escadas
 	# após o desbloqueio, encerrar fase
@@ -35,11 +44,7 @@ func _on_AnimArea2D_body_entered(_body):
 func _on_AnimationPlayer_animation_changed(old_name, _new_name):
 	# Ativa Astar próximo à escada após desbloqueio da saída
 	if old_name == "WinAnimation":
-		for x in range (15,18):
-			for y in range (15,17):
-				if x != 16 or y != 16:
-					astar.set_cell(x,y,0)
-		astar._ready()
+		astar.insert_walkable_cells(insert_astar_cells, 0)
 
 # (Área só funciona após desbloqueio da saída)
 func _on_StairsArea2D_body_entered(_body):

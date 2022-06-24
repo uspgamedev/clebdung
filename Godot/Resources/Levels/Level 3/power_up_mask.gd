@@ -10,7 +10,7 @@ func _ready():
 
 
 func _process(_delta):
-	if texture != null:
+	if is_instance_valid(power_up_sprite):
 		frame = power_up_sprite.frame
 
 
@@ -18,6 +18,6 @@ func use_slot():
 	texture = null
 
 
-func set_slot(_a):
+func set_slot(_arg):
 	power_up_sprite = power_up_manager.get_slot(slot_number).get_sprite()
 	texture = power_up_sprite.texture

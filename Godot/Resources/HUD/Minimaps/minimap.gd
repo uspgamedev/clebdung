@@ -1,7 +1,7 @@
 extends Control
 
 onready var player : KinematicBody2D = Globals.current_level.get_player()
-onready var player_marker := get_node("PlayerMarker")
+onready var player_marker := get_node("MinimapTileMap/PlayerMarker")
 onready var map_texture := get_node("MinimapTexture")
 onready var tile_map := get_node("MinimapTileMap")
 

@@ -10,5 +10,3 @@ script = ExtResource( 1 )
 texture = ExtResource( 2 )
 hframes = 5
 vframes = 8
-
-[node name="Tween" type="Tween" parent="."]

@@ -59,9 +59,6 @@ margin_right = 0.000244141
 margin_bottom = 0.00012207
 rect_scale = Vector2( 3.5, 3.5 )
 script = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="MinimapTexture" type="TextureRect" parent="."]
 anchor_left = 1.0
@@ -86,8 +83,8 @@ __meta__ = {
 "_edit_bone_": true
 }
 
-[node name="PlayerMarker" type="Sprite" parent="."]
-position = Vector2( -78, -44 )
+[node name="PlayerMarker" type="Sprite" parent="MinimapTileMap"]
+position = Vector2( 2, 31 )
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 3 )
 

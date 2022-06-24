@@ -90,8 +90,8 @@ __meta__ = {
 "_edit_bone_": true
 }
 
-[node name="PlayerMarker" type="Sprite" parent="."]
-position = Vector2( -95, -64 )
+[node name="PlayerMarker" type="Sprite" parent="MinimapTileMap"]
+position = Vector2( 5, 29 )
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 3 )
 
