@@ -347,10 +347,10 @@ tracks/0/keys = {
 "values": [ 1.0, 0.0 ]
 }
 
-[sub_resource type="CircleShape2D" id=11]
+[sub_resource type="CircleShape2D" id=10]
 radius = 104.307
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 5.31344, 4.60249 )
 
 [node name="Ghost" type="KinematicBody2D"]
@@ -364,8 +364,8 @@ light_mask = 4
 scale = Vector2( 0.95, 0.95 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, -16 )
-hframes = 4
 vframes = 4
+hframes = 4
 frame = 12
 
 [node name="Light2D" type="Light2D" parent="."]
@@ -411,7 +411,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Vision"]
-shape = SubResource( 11 )
+shape = SubResource( 10 )
 
 [node name="TimerRandom" type="Timer" parent="."]
 wait_time = 160.0
@@ -427,8 +427,7 @@ one_shot = true
 
 [node name="GhostCollision" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -9 )
-shape = SubResource( 10 )
-
+shape = SubResource( 11 )
 [connection signal="body_entered" from="Vision" to="." method="_on_Vision_body_entered"]
 [connection signal="body_exited" from="Vision" to="." method="_on_Vision_body_exited"]
 [connection signal="timeout" from="TimerRandom" to="." method="_on_TimerRandom_timeout"]

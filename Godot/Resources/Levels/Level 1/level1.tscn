@@ -410,48 +410,62 @@ position = Vector2( -69.48, 19.005 )
 position = Vector2( 217.591, 489.636 )
 scale = Vector2( 0.8, 0.8 )
 
-[node name="GhostD1" parent="YSort" groups=["Ghosts"] instance=ExtResource( 11 )]
+[node name="GhostD1" parent="YSort" groups=[
+"Ghosts",
+] instance=ExtResource( 11 )]
 position = Vector2( 464, 464 )
 positionset = NodePath("../../Positions/D1")
 speed = 66
 delayrandom = 30
 
-[node name="GhostOP1" parent="YSort" groups=["Ghosts"] instance=ExtResource( 11 )]
+[node name="GhostOP1" parent="YSort" groups=[
+"Ghosts",
+] instance=ExtResource( 11 )]
 modulate = Color( 0.901961, 1, 0.862745, 1 )
 position = Vector2( 496, 496 )
 type = 2
 positionset = NodePath("../../Positions/OP1")
 speed = 65
 
-[node name="GhostD2" parent="YSort" groups=["Ghosts"] instance=ExtResource( 11 )]
+[node name="GhostD2" parent="YSort" groups=[
+"Ghosts",
+] instance=ExtResource( 11 )]
 modulate = Color( 0.768627, 0.792157, 1, 1 )
 position = Vector2( 560, 464 )
 positionset = NodePath("../../Positions/D2")
 speed = 68
 delayrandom = 70
 
-[node name="GhostD3" parent="YSort" groups=["Ghosts"] instance=ExtResource( 11 )]
+[node name="GhostD3" parent="YSort" groups=[
+"Ghosts",
+] instance=ExtResource( 11 )]
 modulate = Color( 1, 0.960784, 0.619608, 1 )
 position = Vector2( 464, 560 )
 positionset = NodePath("../../Positions/D3")
 speed = 60
 delayrandom = 110
 
-[node name="GhostOP2" parent="YSort" groups=["Ghosts"] instance=ExtResource( 11 )]
+[node name="GhostOP2" parent="YSort" groups=[
+"Ghosts",
+] instance=ExtResource( 11 )]
 modulate = Color( 1, 0.811765, 0.996078, 1 )
 position = Vector2( 528, 528 )
 type = 2
 positionset = NodePath("../../Positions/OP2")
 speed = 65
 
-[node name="GhostD4" parent="YSort" groups=["Ghosts"] instance=ExtResource( 11 )]
+[node name="GhostD4" parent="YSort" groups=[
+"Ghosts",
+] instance=ExtResource( 11 )]
 modulate = Color( 1, 0.721569, 0.721569, 1 )
 position = Vector2( 560, 560 )
 positionset = NodePath("../../Positions/D4")
 speed = 70
 delayrandom = 150
 
-[node name="GhostRP" parent="YSort" groups=["Ghosts"] instance=ExtResource( 11 )]
+[node name="GhostRP" parent="YSort" groups=[
+"Ghosts",
+] instance=ExtResource( 11 )]
 modulate = Color( 1, 0.835294, 0.639216, 1 )
 position = Vector2( 528, 592 )
 type = 1
@@ -592,6 +606,7 @@ position = Vector2( 240, 1008 )
 position = Vector2( 816, 1008 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
 color = Color( 0, 0, 0, 1 )
 
 [node name="HUD" parent="." instance=ExtResource( 8 )]
@@ -605,6 +620,5 @@ fade_out_time = 1.0
 intro_music = ExtResource( 22 )
 loop_music = ExtResource( 2 )
 end_music = ExtResource( 21 )
-
 [connection signal="body_entered" from="YSort/Exit/WinArea2D" to="YSort/Exit" method="_on_WinArea2D_body_entered"]
 [connection signal="body_entered" from="YSort/Exit/AnimArea2D" to="YSort/Exit" method="_on_AnimArea2D_body_entered"]

@@ -35,11 +35,12 @@ var k := 0
 var rng := RandomNumberGenerator.new()
 var in_sight := false
 var chaos := false
+var has_to_change_to_random := false
 onready var level : LevelRoot = Globals.current_level
 onready var astar : TileMap = level.get_astar()
 onready var player : KinematicBody2D = level.get_player()
 onready var animplayerL := get_node("AnimationPlayerL")
-onready var RC := get_node("RayCast")
+onready var RC1 := get_node("RayCast")
 onready var RC2 := get_node("RayCast2")
 onready var RC3 := get_node("RayCast3")
 onready var RC4 := get_node("RayCast4")
@@ -120,7 +121,7 @@ func _ready():
 func _process(_delta):
 	# Seguir incessantemente caso esteja em estado de caos
 	if chaos:
-		state = States.FOLLOW
+		switch_state(States.FOLLOW)
 	animation()
 
 
@@ -138,24 +139,22 @@ func _physics_process(delta):
 		action()
 		# Calcula a direção do próximo movimento
 		set_direction()
-		last_position = position
-		target_position = (position + (direction * TILE_SIZE)).round()
 		
 	# Se o jogador estiver dentro da área 2D
 	if in_sight:
 		# Lançar 4 raycasts em volta do jogador e atualizar as informações de colisão
-		RC.cast_to =  player.global_position - global_position + Vector2(14,14)
-		RC2.cast_to =  player.global_position - global_position + Vector2(14,-14)
-		RC3.cast_to =  player.global_position - global_position + Vector2(-14,14)
-		RC4.cast_to =  player.global_position - global_position + Vector2(-14,-14)
-		RC.force_raycast_update()
+		var offset: int = 14
+		RC1.cast_to  = player.global_position - global_position + Vector2( offset, offset)
+		RC2.cast_to =  player.global_position - global_position + Vector2( offset,-offset)
+		RC3.cast_to =  player.global_position - global_position + Vector2(-offset, offset)
+		RC4.cast_to =  player.global_position - global_position + Vector2(-offset,-offset)
+		RC1.force_raycast_update()
 		RC2.force_raycast_update()
 		RC3.force_raycast_update()
 		RC4.force_raycast_update()
 		# Caso algum dos raycasts não colida (tem visão do jogador), seguir o jogador 
-		if !RC.is_colliding() or !RC2.is_colliding() or !RC3.is_colliding() or !RC4.is_colliding():
-			last_state = state
-			state = States.FOLLOW
+		if !RC1.is_colliding() or !RC2.is_colliding() or !RC3.is_colliding() or !RC4.is_colliding():
+			switch_state(States.FOLLOW)
 			# Caso o timer de DOUBT esteja em curso, cancelá-lo.
 			if !get_node("TimerDoubt").is_stopped():
 				get_node("TimerDoubt").stop()
@@ -164,14 +163,13 @@ func _physics_process(delta):
 func action():
 	match state:
 		States.DOUBT:
-			# Terminar caminho até o jogador. Se terminado, espera um 
-			# tempo e retorna à patrulha
-			if len(path) == 0:
-				# Toca a animação de dúvida
-				get_node("AnimationPlayer").play("Doubt")
-				# Iniciar o timer para voltar à patrulha
-				if get_node("TimerDoubt").is_stopped():   		#Impede início em loop
-					get_node("TimerDoubt").start()
+			# Toca a animação de dúvida
+			if len(path) != 0:
+				return
+			get_node("AnimationPlayer").play("Doubt")
+			# Iniciar o timer para voltar à patrulha
+			if get_node("TimerDoubt").is_stopped():   		#Impede início em loop
+				get_node("TimerDoubt").start()
 			return
 			
 		States.FOLLOW:
@@ -196,7 +194,7 @@ func action():
 								_update_navigation_path(global_position, posB)
 							C:
 								_update_navigation_path(global_position, posC)
-						last_state = States.PATROL
+						switch_state(state)
 					# Caso tenha alcançado o ponto A, ir ao ponto B
 					elif global_position == posA:
 						_update_navigation_path(global_position, posB)
@@ -226,7 +224,7 @@ func action():
 								_update_navigation_path(global_position, (ran4))
 							5:
 								_update_navigation_path(global_position, (ran5))
-						last_state = States.PATROL
+						switch_state(state)
 					return
 			
 		States.RANDOM:
@@ -241,12 +239,11 @@ func action():
 						_update_navigation_path(global_position, (ran2))
 					3:
 						_update_navigation_path(global_position, (ran3))
-				last_state = States.RANDOM
+				switch_state(state)
 				return
 			# Caso tenha chegado ao destino aleatório, retornar à patrulha
 			elif len(path) == 0:
-				last_state = state
-				state = States.PATROL
+				switch_state(States.PATROL)
 			return
 
 
@@ -255,8 +252,11 @@ func set_direction():
 	# e excluir esse ponto do caminho.
 	if len(path) > 0:
 		direction = Vector2(path[0] - global_position).normalized()
+		last_position = position
+		target_position = path[0]
 		path.remove(0)
-		
+	else:
+		direction = Vector2(0, 0)
 
 
 func _update_navigation_path(start_position, end_position):
@@ -308,6 +308,9 @@ func animation():
 		animplayerL.play("Light_Chaos")
 		return	
 
+func switch_state(new_state):
+	last_state = state
+	state = new_state
 
 func _on_Vision_body_entered(body):
 	# Jogador entrou na Area2D. Pode ser visto (in_sight)
@@ -320,15 +323,18 @@ func _on_Vision_body_exited(body):
 	if body.get_name() == "Player":
 		in_sight = false
 		if state == States.FOLLOW:
-			last_state = state
-			state = States.DOUBT
+			switch_state(States.DOUBT)
 
 
 func _on_TimerDoubt_timeout():
 	# Ao fim do timer de DOUBT, caso não houve interrupção, retornar à patrulha
 	if state == States.DOUBT:
-		last_state = state
-		state = States.PATROL
+		if has_to_change_to_random:
+			has_to_change_to_random = false
+			switch_state(States.RANDOM)
+		else:
+			switch_state(States.PATROL)
+
 
 # Chamada pelo próprio nó Score
 func f_chaos():
@@ -341,12 +347,14 @@ func _on_TimerRandom_timeout():
 		return
 	# Caso o fantasma esteja em DOUBT, aguardar o fim do timer
 	elif state == States.DOUBT:
-		yield(get_node("TimerDoubt"), "timeout")
-	last_state = state
-	state = States.RANDOM
+		has_to_change_to_random = true
+	# Mude imediatamente
+	else:
+		switch_state(States.RANDOM)
 
 
 func _on_Delay_timeout():
 	# Ao fim do delay, iniciar timer de RANDOM e entrar no próprio estado RANDOM
 	get_node("TimerRandom").start()
 	_on_TimerRandom_timeout()
+		
