@@ -162,6 +162,7 @@ autoplay = true
 visible = false
 
 [node name="Fade" parent="." instance=ExtResource( 8 )]
+
 [connection signal="pressed" from="HBoxContainer/Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="HBoxContainer/Levels" to="." method="_on_Levels_pressed"]
 [connection signal="pressed" from="HBoxContainer/Settings" to="." method="_on_SETTINGS_pressed"]
