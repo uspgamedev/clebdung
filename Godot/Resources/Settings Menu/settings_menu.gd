@@ -7,10 +7,10 @@ onready var master_slider = $SettingTabs/Audio/MarginContainer2/AudioSettings/Ma
 
 
 func _ready():
-	display_options.select(1 if Save.game_data.fullscreen_on else 0)
-	GlobalSettings.toggle_fullscreen(Save.game_data.fullscreen_on)
+	display_options.select(1 if SaveSettings.game_data.fullscreen_on else 0)
+	GlobalSettings.toggle_fullscreen(SaveSettings.game_data.fullscreen_on)
 	
-	master_slider.value = Save.game_data.master_vol
+	master_slider.value = SaveSettings.game_data.master_vol
 
 
 func _on_OptionButton_item_selected(index):

@@ -50,7 +50,10 @@ func display_name():
 	tween.start()
 
 # Inicia os elementos da HUD
-func init_HUD():
+func init_HUD(torch_counter : int):
+	
+	$Control/Torch/TorchCounter.text = "x" + str(torch_counter)
+	
 	# Configura a animação do score e minimapa
 	for i in range(0,2):
 		var elem : Control = bottom_elements[i]

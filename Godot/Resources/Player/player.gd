@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+signal die
 const TILE_SIZE: int = 32
 export(int) var speed = 85
 var target_direction = Vector2()
@@ -100,10 +101,8 @@ func animation():
 
 
 func die():
-	get_tree().reload_current_scene()
-	#$PlayerCollision.disabled = true
-	#yield(get_tree().create_timer(.5), "timeout")
-	#$PlayerCollision.disabled = false
+	emit_signal("die")
+
 
 func interpolate_speed(time : float, speed_modifier : float, delay : float, \
 trans_type : int = 0, ease_type : int = 2):

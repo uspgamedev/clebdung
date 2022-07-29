@@ -412,7 +412,6 @@ position = Vector2( 624, 400 )
 power_up = 1
 
 [node name="DashSpawner" parent="YSort" instance=ExtResource( 16 )]
-visible = false
 tile_data = PoolIntArray( 2097159, 0, 0, 2228240, 0, 0, 2490378, 0, 0 )
 spawn_scene = "res://Resources/PowerUps/Collectables/collectable_power_up.tscn"
 parent = NodePath("..")
@@ -703,6 +702,7 @@ speed = 53
 [node name="Guide" parent="." instance=ExtResource( 20 )]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
 color = Color( 0, 0, 0, 1 )
 
 [node name="HUD" parent="." instance=ExtResource( 13 )]

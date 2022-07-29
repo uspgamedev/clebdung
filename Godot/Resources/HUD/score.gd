@@ -1,6 +1,6 @@
 extends Sprite
 
-var score := 0
+var score := 4
 
 
 func update_score():

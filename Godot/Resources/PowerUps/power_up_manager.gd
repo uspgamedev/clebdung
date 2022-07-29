@@ -21,5 +21,21 @@ func connect_slot(external_slot : Node, slot_number : String):
 	slot_node.connect("setted_slot", external_slot, "set_slot")
 
 
+
 func get_slot(slot_number : String):
 	return get_node("PowerUpSlot" + slot_number)
+
+
+func set_slots(equiped_power_ups : Array):
+	for i in range(0,3):
+		slots[i].set_slot(equiped_power_ups[i])
+
+
+func get_equiped():
+	var equiped := []
+	for slot in slots:
+		if slot.power_up_node == null:
+			equiped.append("power_up0")
+		else:
+			equiped.append(slot.power_up_node.id)
+	return equiped

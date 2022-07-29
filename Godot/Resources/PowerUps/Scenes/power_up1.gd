@@ -1,5 +1,6 @@
 extends Node
 
+const id = "power_up1"
 const SPEED_BOOST: float = 3.5
 const INTERPOLATION_DURATION: float = 0.4
 onready var player: Node2D = get_node("../../../")

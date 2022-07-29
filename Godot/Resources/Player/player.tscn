@@ -376,8 +376,8 @@ script = ExtResource( 3 )
 light_mask = 4
 position = Vector2( 0, -16 )
 texture = ExtResource( 2 )
-vframes = 8
 hframes = 5
+vframes = 8
 frame = 35
 
 [node name="Camera2D" type="Camera2D" parent="."]

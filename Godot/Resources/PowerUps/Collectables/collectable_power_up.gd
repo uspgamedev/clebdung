@@ -8,7 +8,7 @@ func _ready():
 	$Sprite.texture = load("res://Assets/PowerUps/Collectables/power_up" + \
 	str(power_up) + ".png")
 	id = "power_up" + str(power_up)
-	print("")
+	add_to_group("PowerUps")
 
 
 func _on_Self_body_entered(body):

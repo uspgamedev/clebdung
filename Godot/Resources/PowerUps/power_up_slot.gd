@@ -16,6 +16,8 @@ func use_slot():
 
 
 func set_slot(id):
+	if id == "power_up0":
+		return
 	var node := load("res://Resources/PowerUps/Scenes/" + id + ".tscn")
 	power_up_node = node.instance()
 	add_child(power_up_node)
