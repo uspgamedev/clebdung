@@ -24,6 +24,7 @@ func _ready():
 	bottom_elements = [
 		$Control/ScoreRect, 
 		minimap, 
+		$Control/Torch,
 		$Control/PowerUpSlot3, 
 		$Control/PowerUpSlot2, 
 		$Control/PowerUpSlot1,
@@ -57,7 +58,7 @@ func init_HUD():
 		elem.rect_position.y, elem.rect_position.y - 400, 1.4 + i*0.5, \
 		tween.TRANS_BACK, tween.EASE_OUT)
 	# Configura a animação dos power ups
-	for i in range(2,5):
+	for i in range(2,6):
 		var elem : Control = bottom_elements[i]
 		tween.interpolate_property(elem, "rect_position:y", \
 		elem.rect_position.y, elem.rect_position.y - 400, 1.4 + (i - 2)*0.25, \
@@ -69,6 +70,10 @@ func init_HUD():
 func update_score():
 	if score.update_score():
 		level.unblock()
+		
+
+func update_torch(i : int):
+	$Control/Torch.update_torch(i)
 
 # Retira o nome da fase
 func undisplay_name():

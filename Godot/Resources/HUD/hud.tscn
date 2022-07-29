@@ -1,10 +1,12 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Resources/HUD/hud.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Others/upheavtt.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Resources/HUD/score.gd" type="Script" id=3]
 [ext_resource path="res://Resources/HUD/power_up_slot.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/HUD/score_spritesheet.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Others/dogicapixel.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://Resources/HUD/torch.gd" type="Script" id=7]
 
 [sub_resource type="DynamicFont" id=8]
 size = 48
@@ -110,6 +112,13 @@ tracks/0/keys = {
 "values": [ 30, 31, 32, 33, 34, 35 ]
 }
 
+[sub_resource type="DynamicFont" id=9]
+size = 22
+font_data = ExtResource( 6 )
+
+[sub_resource type="Theme" id=10]
+default_font = SubResource( 9 )
+
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource( 1 )
 
@@ -117,9 +126,6 @@ script = ExtResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 8
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LevelName" type="RichTextLabel" parent="Control"]
 modulate = Color( 1, 1, 1, 0 )
@@ -146,9 +152,6 @@ margin_left = -426.832
 margin_top = -119.488
 margin_right = -324.468
 margin_bottom = -16.736
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Score" type="Sprite" parent="Control/ScoreRect"]
 position = Vector2( -6.10352e-05, 8 )
@@ -172,7 +175,22 @@ anims/Score_3 = SubResource( 4 )
 anims/Score_4 = SubResource( 5 )
 anims/Score_5 = SubResource( 6 )
 
-[node name="Tween" type="Tween" parent="Control"]
+[node name="Torch" type="Control" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 7 )
+
+[node name="TorchCounter" type="Label" parent="Control/Torch"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -576.0
+margin_top = -48.0
+margin_right = -536.0
+margin_bottom = -24.0
+theme = SubResource( 10 )
+text = "x1"
 
 [node name="PowerUpSlot1" parent="Control" instance=ExtResource( 4 )]
 anchor_top = 1.0
@@ -200,3 +218,5 @@ margin_top = -92.0
 margin_right = 234.0
 margin_bottom = -68.0
 rect_scale = Vector2( 3, 3 )
+
+[node name="Tween" type="Tween" parent="Control"]

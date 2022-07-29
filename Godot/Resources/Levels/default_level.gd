@@ -7,6 +7,7 @@ export(float) var init_time
 export(Vector2) var finish_direction
 export(float) var finish_time
 var init_level := false
+var torchs : int
 onready var player := get_node("YSort/Player")
 onready var hud := get_node("HUD")
 onready var fade := get_node("Fade")
@@ -22,6 +23,7 @@ func _enter_tree():
 
 
 func _ready():
+	#torchs = load
 	init()
 
 # Retorna uma referência ao jogador
@@ -44,6 +46,16 @@ func get_exit_position():
 func get_level_id():
 	return int(get_name().trim_suffix("Level"))
 
+func collect_torch():
+	torchs += 1
+	hud.update_torch(1)
+	
+func use_torch():
+	if torchs == 0:
+		pass ## GAME OVER
+	torchs -= 1
+	hud.update_torch(-1)
+
 # Inicia a fase
 func init():
 	# Toca a transição de tela
@@ -55,8 +67,8 @@ func init():
 	yield(get_tree().create_timer(init_time), "timeout")
 	# Bloqueia fantasmas
 	ghosts = get_tree().get_nodes_in_group("Ghosts")
-	for g in ghosts:
-		g.set_physics_process(false)
+	for ghost in ghosts:
+		ghost.set_physics_process(false)
 	player.input_enabled = true
 
 
@@ -73,14 +85,17 @@ func detect_move():
 		)
 	):
 		init_level = true
-		for g in ghosts:
-			g.set_physics_process(true)
+		for ghost in ghosts:
+			ghost.set_physics_process(true)
 		hud.undisplay_name()
 		hud.init_HUD()
 		# Conecta os sinais dos cristais com o HUD
 		crystals = get_tree().get_nodes_in_group("Crystals")
 		for crystal in crystals:
 			crystal.connect("collected_crystal", hud, "update_score")
+			
+		for torch in get_tree().get_nodes_in_group("Torchs"):
+			torch.connect("collected_torch", self, "collect_torch")
 
 
 func _process(_delta):

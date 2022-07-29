@@ -352,8 +352,6 @@ autoplay = "Entry"
 anims/Entry = SubResource( 15 )
 anims/RESET = SubResource( 17 )
 
-[node name="Guide" parent="." instance=ExtResource( 20 )]
-
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Exit" type="StaticBody2D" parent="YSort"]
@@ -701,6 +699,8 @@ position = Vector2( 624, 496 )
 type = 2
 positionset = NodePath("../../Positions/OP4")
 speed = 53
+
+[node name="Guide" parent="." instance=ExtResource( 20 )]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0, 0, 0, 1 )

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Others/light_sprite.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Levels/Level 1/torch_spritesheet.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Torch/torch_spritesheet.png" type="Texture" id=2]
+[ext_resource path="res://Resources/Torch/torch.gd" type="Script" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Torch"
@@ -45,9 +46,13 @@ tracks/2/keys = {
 "values": [ 1.08, 1.15, 0.98, 1.05, 1.0 ]
 }
 
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 7.5, 1.09375 )
+
 [node name="Torch" type="Sprite"]
 texture = ExtResource( 2 )
 hframes = 6
+script = ExtResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Torch"
@@ -60,3 +65,13 @@ color = Color( 0.819608, 0.631373, 0.380392, 1 )
 energy = 1.08
 mode = 2
 range_item_cull_mask = 7
+
+[node name="CollectionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectionArea"]
+scale = Vector2( 0.999999, 0.999999 )
+shape = SubResource( 2 )
+
+[connection signal="body_entered" from="CollectionArea" to="." method="_on_CollectionArea_body_entered"]
