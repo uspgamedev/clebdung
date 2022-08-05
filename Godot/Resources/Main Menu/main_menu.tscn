@@ -57,7 +57,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = SubResource( 4 )
 script = ExtResource( 1 )
-next_level_path = "res://Resources/Levels/Level 1/level1.tscn"
+first_level_path = "res://Resources/Levels/Level 1/level1.tscn"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -80,19 +80,29 @@ margin_top = 520.0
 margin_right = 81.0
 margin_bottom = -44.0
 
-[node name="Play" type="Button" parent="HBoxContainer"]
-margin_right = 153.0
+[node name="NewGame" type="Button" parent="HBoxContainer"]
+margin_right = 155.0
 margin_bottom = 34.0
-text = "PLAY"
+text = "NEW GAME"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Continue" type="Button" parent="HBoxContainer"]
+margin_top = 38.0
+margin_right = 155.0
+margin_bottom = 72.0
+text = "CONTINUE"
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Levels" type="Button" parent="HBoxContainer"]
-margin_top = 38.0
-margin_right = 153.0
-margin_bottom = 72.0
+margin_top = 76.0
+margin_right = 155.0
+margin_bottom = 110.0
 disabled = true
 text = "LEVELS"
 flat = true
@@ -101,9 +111,9 @@ __meta__ = {
 }
 
 [node name="Settings" type="Button" parent="HBoxContainer"]
-margin_top = 76.0
-margin_right = 153.0
-margin_bottom = 110.0
+margin_top = 114.0
+margin_right = 155.0
+margin_bottom = 148.0
 text = "SETTINGS"
 flat = true
 __meta__ = {
@@ -111,9 +121,9 @@ __meta__ = {
 }
 
 [node name="Quit" type="Button" parent="HBoxContainer"]
-margin_top = 114.0
-margin_right = 153.0
-margin_bottom = 148.0
+margin_top = 152.0
+margin_right = 155.0
+margin_bottom = 186.0
 text = "QUIT"
 flat = true
 __meta__ = {
@@ -163,7 +173,8 @@ visible = false
 
 [node name="Fade" parent="." instance=ExtResource( 8 )]
 
-[connection signal="pressed" from="HBoxContainer/Play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="HBoxContainer/NewGame" to="." method="_on_NewGame_pressed"]
+[connection signal="pressed" from="HBoxContainer/Continue" to="." method="_on_Continue_pressed"]
 [connection signal="pressed" from="HBoxContainer/Levels" to="." method="_on_Levels_pressed"]
 [connection signal="pressed" from="HBoxContainer/Settings" to="." method="_on_SETTINGS_pressed"]
 [connection signal="pressed" from="HBoxContainer/Quit" to="." method="_on_Quit_pressed"]

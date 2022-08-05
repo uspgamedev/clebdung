@@ -3,6 +3,9 @@ extends Node
 const SAVE_DIR = "user://saves/"
 const SAVE_PATH = SAVE_DIR + "save.dat"
 
+func create_new_game():
+	save_game(1, 1, ["power_up0", "power_up0", "power_up0"], [Vector2(176, 496)], [])
+
 
 func load_save():
 	var file = File.new()
@@ -13,8 +16,7 @@ func load_save():
 			file.close()
 			return save_dict
 	else:
-		save_game(1, 1, ["power_up0", "power_up0", "power_up0"], \
-		[Vector2(176, 496)], [])
+		create_new_game()
 		return load_save()
 
 
