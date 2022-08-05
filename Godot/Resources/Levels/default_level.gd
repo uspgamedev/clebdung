@@ -54,7 +54,7 @@ func get_exit_position():
 
 # Retorna o id numérico do level
 func get_level_id():
-	return int(get_name().trim_suffix("Level"))
+	return level_id
 
 
 func load_basic_info():
@@ -96,6 +96,7 @@ func init():
 	player.target_position = player.global_position + 32*init_direction
 	player.direction = init_direction
 	
+	yield(get_tree().create_timer(init_time/4), "timeout")
 	# Conecta os sinais dos cristais com o HUD
 	crystals_group = get_tree().get_nodes_in_group("Crystals")
 	for crystal in crystals_group:
@@ -113,7 +114,8 @@ func init():
 	else:
 		save_current_game()
 	
-	yield(get_tree().create_timer(init_time), "timeout")
+	yield(get_tree().create_timer(init_time*3/4), "timeout")
+	
 	# Bloqueia fantasmas
 	ghosts_group = get_tree().get_nodes_in_group("Ghosts")
 	for ghost in ghosts_group:
@@ -200,9 +202,11 @@ func finish_level():
 	yield(get_tree().create_timer(3), "timeout")
 	get_tree().change_scene(next_scene_path)
 
+
 func die():
 	if torchs_counter == 0:
 		pass
+	use_torch()
 	save_current_game()
 	get_tree().reload_current_scene()
 

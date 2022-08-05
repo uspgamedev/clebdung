@@ -2,7 +2,7 @@ extends CanvasLayer
 
 onready var tween := get_node("Control/Tween")
 onready var levelname := get_node("Control/LevelName")
-onready var score := get_node("Control/ScoreRect/Score")
+onready var score := get_node("Control/ScoreRect/ScoreSprite")
 onready var level := Globals.current_level
 onready var level_id : int = level.get_level_id()
 onready var power_up_manager : Node2D = level.get_power_up_manager()
