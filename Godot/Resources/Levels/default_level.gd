@@ -1,6 +1,7 @@
 extends Node
 class_name LevelRoot
 
+const GAME_OVER_PATH = "res://Resources/Game Over/game_over.tscn"
 export(String, FILE, "*.tscn") var next_scene_path
 export(Vector2) var init_direction
 export(float) var init_time
@@ -97,6 +98,7 @@ func init():
 	player.direction = init_direction
 	
 	yield(get_tree().create_timer(init_time/4), "timeout")
+	
 	# Conecta os sinais dos cristais com o HUD
 	crystals_group = get_tree().get_nodes_in_group("Crystals")
 	for crystal in crystals_group:
@@ -121,8 +123,6 @@ func init():
 	for ghost in ghosts_group:
 		ghost.set_physics_process(false)
 	player.input_enabled = true
-	
-	
 
 
 func detect_move():
@@ -155,8 +155,6 @@ func collect_torch():
 
 
 func use_torch():
-	if torchs_counter == 0:
-		pass ## GAME OVER
 	torchs_counter -= 1
 	hud.update_torch(-1)
 
@@ -205,7 +203,9 @@ func finish_level():
 
 func die():
 	if torchs_counter == 0:
-		pass
+		SaveManager.delete_save()
+		get_tree().change_scene(GAME_OVER_PATH)
+		return
 	use_torch()
 	save_current_game()
 	get_tree().reload_current_scene()

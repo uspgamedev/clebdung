@@ -4,6 +4,8 @@ export(String, FILE, "*.tscn") var first_level_path
 onready var settings_menu = $SettingsMenu
 
 func _ready():
+	if !SaveManager.save_exists():
+		$HBoxContainer/Continue.disabled = true
 	$Fade.fade_in(1)
 
 func _on_NewGame_pressed():

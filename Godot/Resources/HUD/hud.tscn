@@ -172,9 +172,6 @@ margin_right = 368.0
 margin_bottom = 48.0
 custom_fonts/normal_font = SubResource( 8 )
 bbcode_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ScoreRect" type="TextureRect" parent="Control"]
 anchor_left = 1.0
@@ -207,7 +204,7 @@ anims/Score_3 = SubResource( 4 )
 anims/Score_4 = SubResource( 5 )
 anims/Score_5 = SubResource( 6 )
 
-[node name="Torch" type="TextureRect" parent="Control"]
+[node name="TorchRect" type="TextureRect" parent="Control"]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -218,19 +215,19 @@ margin_right = -440.0
 margin_bottom = -28.0
 script = ExtResource( 7 )
 
-[node name="TorchSprite" type="Sprite" parent="Control/Torch"]
+[node name="TorchSprite" type="Sprite" parent="Control/TorchRect"]
 position = Vector2( 27, 32 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 8 )
 hframes = 4
 frame = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Torch/TorchSprite"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/TorchRect/TorchSprite"]
 autoplay = "Torch"
 anims/RESET = SubResource( 11 )
 anims/Torch = SubResource( 12 )
 
-[node name="TorchCounter" type="Label" parent="Control/Torch"]
+[node name="TorchCounter" type="Label" parent="Control/TorchRect"]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0

@@ -24,7 +24,7 @@ func _ready():
 	bottom_elements = [
 		$Control/ScoreRect, 
 		minimap, 
-		$Control/Torch,
+		$Control/TorchRect,
 		$Control/PowerUpSlot3, 
 		$Control/PowerUpSlot2, 
 		$Control/PowerUpSlot1,
@@ -52,7 +52,7 @@ func display_name():
 # Inicia os elementos da HUD
 func init_HUD(torch_counter : int):
 	
-	$Control/Torch/TorchCounter.text = "x" + str(torch_counter)
+	$Control/TorchRect/TorchCounter.text = "x" + str(torch_counter)
 	
 	# Configura a animação do score e minimapa
 	for i in range(0,2):
@@ -76,7 +76,7 @@ func update_score():
 		
 
 func update_torch(i : int):
-	$Control/Torch.update_torch(i)
+	$Control/TorchRect.update_torch(i)
 
 # Retira o nome da fase
 func undisplay_name():

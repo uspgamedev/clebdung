@@ -3,8 +3,19 @@ extends Node
 const SAVE_DIR = "user://saves/"
 const SAVE_PATH = SAVE_DIR + "save.dat"
 
+func save_exists():
+	var file = File.new()
+	return file.file_exists(SAVE_PATH)
+
+
+func delete_save():
+	var dir = Directory.new()
+	dir.remove(SAVE_PATH)
+
+
 func create_new_game():
-	save_game(1, 1, ["power_up0", "power_up0", "power_up0"], [Vector2(176, 496)], [])
+	save_game(1, 3, ["power_up0", "power_up0", "power_up0"], \
+	[Vector2(176, 496), Vector2(560, 464), Vector2(1040, 464)], [])
 
 
 func load_save():
