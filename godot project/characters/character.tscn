@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8c3405exob70"]
+
+[ext_resource type="Script" path="res://characters/common/state_machine/state_machine.gd" id="1_jjvbx"]
+[ext_resource type="Script" path="res://characters/common/state_machine/animation_tree.gd" id="2_owknm"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_tb3ht"]
+resource_local_to_scene = true
+graph_offset = Vector2(82, -1)
+
+[node name="Character" type="CharacterBody2D"]
+collision_layer = 0
+motion_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("1_jjvbx")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_tb3ht")
+anim_player = NodePath("../AnimationPlayer")
+script = ExtResource("2_owknm")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[connection signal="child_entered_tree" from="StateMachine" to="StateMachine" method="_on_child_entered_tree"]
+[connection signal="child_exiting_tree" from="StateMachine" to="StateMachine" method="_on_child_exiting_tree"]
+[connection signal="transitioned" from="StateMachine" to="AnimationTree" method="transition_to"]
